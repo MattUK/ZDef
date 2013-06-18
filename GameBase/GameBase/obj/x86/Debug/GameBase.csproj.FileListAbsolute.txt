@@ -10,3 +10,4 @@ D:\Development\GitHub\ZDef\GameBase\GameBase\obj\x86\Debug\ResolveAssemblyRefere
 D:\Development\GitHub\ZDef\GameBase\GameBase\obj\x86\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt
 D:\Development\GitHub\ZDef\GameBase\GameBase\obj\x86\Debug\GameBase.exe
 D:\Development\GitHub\ZDef\GameBase\GameBase\obj\x86\Debug\GameBase.pdb
+D:\Development\GitHub\ZDef\GameBase\GameBase\bin\x86\Debug\Content\terrain_spritesheet.xnb

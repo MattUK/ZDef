@@ -10,6 +10,19 @@ namespace GameBase
     {
 
         private Tile[,] tiles;
+        private int mapWidth, mapHeight;
+
+        public TileMap(int width, int height)
+        {
+            this.mapWidth = width;
+            this.mapHeight = height;
+            this.tiles = new Tile[width, height];
+        }
+
+        public void createInitialTerrain()
+        {
+
+        }
 
     }
 }

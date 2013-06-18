@@ -16,18 +16,16 @@ namespace GameBase
         // =========== Content / Utilities =============
         // =============================================
         public static SpriteBatch spriteBatch;
+        public static GraphicsDeviceManager graphics;
+        static Camera2D Camera;
+        static InputHandler Input;
+        static PerlinNoise2D noiseGenerator;
 
         public static Texture2D terrainTexture;
+
+        public static int ScreenWidth = 800;
+        public static int ScreenHeight = 600;
         // =============================================
-
-        GraphicsDeviceManager graphics;
-
-        Camera2D Camera;
-        InputHandler Input;
-
-        int ScreenWidth = 800;
-        int ScreenHeight = 600;
-        Vector2 MapSize;
 
         public ZDefGame()
         {
@@ -51,6 +49,7 @@ namespace GameBase
 
             Camera = new Camera2D(new Vector2(0, 0), ScreenWidth, ScreenHeight);
             Input = new InputHandler();
+            noiseGenerator = new PerlinNoise2D(DateTime.Now.Second);
 
             base.Initialize();
         }
@@ -59,6 +58,7 @@ namespace GameBase
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
+            terrainTexture = Content.Load<Texture2D>("terrain_spritesheet");
         }
 
         protected override void Update(GameTime gameTime)
@@ -69,7 +69,7 @@ namespace GameBase
 
             base.Update(gameTime);
             Input.UpdateLastValues();
-            Camera.Constraint(MapSize);
+            Camera.Constraint(new Vector2(1000, 1000));
         }
 
         protected override void Draw(GameTime gameTime)

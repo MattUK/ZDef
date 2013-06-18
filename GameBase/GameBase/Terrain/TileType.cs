@@ -9,9 +9,9 @@ namespace GameBase.Terrain
     class TileType
     {
 
-        public const TileType GRASS = new TileType(0, 64, 64, new Vector2(0.0f, 0.0f));
-        public const TileType STONE = new TileType(1, 64, 64, new Vector2(64.0f, 0.0f));
-        public const TileType WATER = new TileType(2, 64, 64, new Vector2(128.0f, 0.0f));
+        public static TileType GRASS = new TileType(0, 64, 64, new Vector2(0.0f, 0.0f));
+        public static TileType STONE = new TileType(1, 64, 64, new Vector2(64.0f, 0.0f));
+        public static TileType WATER = new TileType(2, 64, 64, new Vector2(128.0f, 0.0f));
 
         public int tileID;
         public int tileWidth, tileHeight;
