@@ -17,6 +17,8 @@ namespace GameBase
             this.mapWidth = width;
             this.mapHeight = height;
             this.tiles = new Tile[width, height];
+
+            CreateInitialTerrain();
         }
 
         public Tile[,] GetMap()
