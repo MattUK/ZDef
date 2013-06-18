@@ -21,6 +21,8 @@ namespace GameBase
         static InputHandler Input;
         static PerlinNoise2D noiseGenerator;
 
+        static TileMap tileMap;
+
         public static Texture2D terrainTexture;
 
         public static int ScreenWidth = 800;
@@ -50,6 +52,7 @@ namespace GameBase
             Camera = new Camera2D(new Vector2(0, 0), ScreenWidth, ScreenHeight);
             Input = new InputHandler();
             noiseGenerator = new PerlinNoise2D(DateTime.Now.Second);
+            tileMap = new TileMap(100, 100);
 
             base.Initialize();
         }
@@ -76,7 +79,8 @@ namespace GameBase
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            spriteBatch.Begin();
+            spriteBatch.Begin(SpriteSortMode.Deferred, null, null, null, null, null, Camera.Transform());
+            tileMap.Draw();
             spriteBatch.End();
 
             base.Draw(gameTime);

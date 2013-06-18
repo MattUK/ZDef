@@ -8,7 +8,7 @@ namespace GameBase
     /// <summary>
     /// Custom perlin noise implementation, uses positions on a circle instead of stupid complex 3D cube line gradient things.
     /// </summary>
-    class PerlinNoise2D
+    public class PerlinNoise2D
     {
 
         private const int PERMUTATION_SIZE = 256;

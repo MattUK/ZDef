@@ -11,7 +11,7 @@ using Microsoft.Xna.Framework.Media;
 
 namespace GameBase
 {
-    class InputHandler
+    public class InputHandler
     {
         KeyboardState key;
         KeyboardState keyLast;

@@ -6,7 +6,7 @@ using GameBase.Terrain;
 
 namespace GameBase
 {
-    class TileMap
+    public class TileMap
     {
 
         private Tile[,] tiles;
@@ -19,7 +19,22 @@ namespace GameBase
             this.tiles = new Tile[width, height];
         }
 
-        public void createInitialTerrain()
+        public Tile[,] GetMap()
+        {
+            return tiles;
+        }
+
+        public int GetWidth()
+        {
+            return mapWidth;
+        }
+
+        public int GetHeight()
+        {
+            return mapHeight;
+        }
+
+        public void CreateInitialTerrain()
         {
             for (int i = 0; i < mapWidth; i++)
             {
@@ -30,18 +45,18 @@ namespace GameBase
             }
         }
 
-        public void update()
+        public void Update()
         {
 
         }
 
-        public void draw()
+        public void Draw()
         {
             for (int i = 0; i < mapWidth; i++)
             {
                 for (int j = 0; j < mapHeight; j++)
                 {
-                    tiles[i, j].draw();
+                    tiles[i, j].Draw();
                 }
             }
         }

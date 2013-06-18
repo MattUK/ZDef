@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
+using GameBase;
 
 namespace ZDay
 {
@@ -69,18 +70,18 @@ namespace ZDay
         // Holds the nodes that have already been searched.
         private List<SearchNode> closedList = new List<SearchNode>();
 
-        private Map map;
+        private TileMap map;
 
         public bool EnvironmentChanged;
 
         /// <summary>
         /// Constructor.
         /// </summary>
-        public Pathfinder(Map maap)
+        public Pathfinder(TileMap map)
         {
-            map = maap;
-            levelWidth = map.Width;
-            levelHeight = map.Height;
+            this.map = map;
+            levelWidth = map.GetWidth();
+            levelHeight = map.GetHeight();
 
             EnvironmentChanged = false;
 
@@ -108,7 +109,7 @@ namespace ZDay
         // <summary>
         /// Splits our level up into a grid of nodes.
         /// </summary>
-        private void InitializeSearchNodes(Map map)
+        private void InitializeSearchNodes(TileMap map)
         {
             searchNodes = new SearchNode[levelWidth, levelHeight];
 
@@ -123,7 +124,7 @@ namespace ZDay
                     node.Position = new Point(x, y);
 
                     // Our enemies can only walk on grass tiles.
-                    if (map.MapArray[y][x].Passable == true)
+                    if (map.GetMap()[x, y].Passable() == true)
                     {
                         node.Walkable = true;
                     }

@@ -6,7 +6,7 @@ using Microsoft.Xna.Framework;
 
 namespace GameBase
 {
-    class PixelCollider
+    public class PixelCollider
     {
         public bool CheckIntersection(Rectangle Rect1, Rectangle Rect2)
         {

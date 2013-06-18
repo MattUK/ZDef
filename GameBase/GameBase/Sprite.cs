@@ -11,7 +11,7 @@ using Microsoft.Xna.Framework.Media;
 
 namespace GameBase
 {
-    class Sprite
+    public class Sprite
     {
         public Vector2 Position;
         public Texture2D Texture;
@@ -40,7 +40,7 @@ namespace GameBase
 
             Origin = vec;
         }
-
+        
         public void UpdateBoundingBox()
         {
             TransformMatrix = Matrix.CreateTranslation(new Vector3(-Origin, 0.0f)) * Matrix.CreateRotationZ(Rotation) * Matrix.CreateTranslation(new Vector3(Position, 0.0f));

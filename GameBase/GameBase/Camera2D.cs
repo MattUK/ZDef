@@ -11,7 +11,7 @@ using Microsoft.Xna.Framework.Media;
 
 namespace GameBase
 {
-    class Camera2D
+    public class Camera2D
     {
         public Vector2 Position;
         public float Zoom;
