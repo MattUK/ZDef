@@ -109,6 +109,7 @@
   <ItemGroup>
     <Compile Include="Camera2D.cs" />
     <Compile Include="Human\Human.cs" />
+    <Compile Include="Human\SelectionHandle.cs" />
     <Compile Include="InputHandler.cs" />
     <Compile Include="Lighting.cs" />
     <Compile Include="PathFinder.cs" />
