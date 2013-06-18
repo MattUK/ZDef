@@ -21,7 +21,29 @@ namespace GameBase
 
         public void createInitialTerrain()
         {
+            for (int i = 0; i < mapWidth; i++)
+            {
+                for (int j = 0; j < mapHeight; j++)
+                {
+                    tiles[i, j] = new Tile(i, j, TileType.GRASS, 1.0f);
+                }
+            }
+        }
 
+        public void update()
+        {
+
+        }
+
+        public void draw()
+        {
+            for (int i = 0; i < mapWidth; i++)
+            {
+                for (int j = 0; j < mapHeight; j++)
+                {
+                    tiles[i, j].draw();
+                }
+            }
         }
 
     }
