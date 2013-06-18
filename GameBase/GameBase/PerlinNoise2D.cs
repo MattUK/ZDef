@@ -13,7 +13,8 @@ namespace GameBase
 
         private const int PERMUTATION_SIZE = 256;
 
-        private static float[][] gradients = new float[][] {
+        private static float[][] gradients = new float[][] 
+        {
             new float[] {(float)Math.Cos(90), (float)Math.Sin(90)},
             new float[] {(float)Math.Cos(60), (float)Math.Sin(60)},
             new float[] {(float)Math.Cos(45), (float)Math.Sin(45)},
