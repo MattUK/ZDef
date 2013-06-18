@@ -18,9 +18,10 @@ namespace GameBase
         // =============================================
         public static SpriteBatch spriteBatch;
         public static GraphicsDeviceManager graphics;
-        public static Camera2D Camera;
-        public static InputHandler Input;
+        public static Camera2D camera;
+        public static InputHandler input;
         public static PerlinNoise2D noiseGenerator;
+        public static Lighting lighting;
 
         public static TileMap tileMap;
 
@@ -50,10 +51,11 @@ namespace GameBase
             ScreenWidth = 800;
             ScreenHeight = 800;
 
-            Camera = new Camera2D(new Vector2(0, 0), ScreenWidth, ScreenHeight);
-            Input = new InputHandler();
+            camera = new Camera2D(new Vector2(0, 0), ScreenWidth, ScreenHeight);
+            input = new InputHandler();
             noiseGenerator = new PerlinNoise2D(DateTime.Now.Second);
             tileMap = new TileMap(30, 30);
+            lighting = new Lighting(1.0f);
 
             base.Initialize();
         }
@@ -67,25 +69,27 @@ namespace GameBase
 
         protected override void Update(GameTime gameTime)
         {
-            Input.UpdateFirstValues();
+            input.UpdateFirstValues();
 
-            if (Input.KeyDown(Keys.Escape))
+            if (input.KeyDown(Keys.Escape))
             {
                 Environment.Exit(0);
             }
 
-            Camera.Input(Input);
+            camera.Input(input);
+            tileMap.Update();
+            lighting.Update();
 
             base.Update(gameTime);
-            Input.UpdateLastValues();
-            Camera.Constraint(new Vector2(tileMap.GetWidth() * Tile.DEFAULT_TILE_WIDTH, tileMap.GetHeight() * Tile.DEFAULT_TILE_HEIGHT));
+            input.UpdateLastValues();
+            camera.Constraint(new Vector2(tileMap.GetWidth() * Tile.DEFAULT_TILE_WIDTH, tileMap.GetHeight() * Tile.DEFAULT_TILE_HEIGHT));
         }
 
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            spriteBatch.Begin(SpriteSortMode.Deferred, null, SamplerState.LinearWrap, null, null, null, Camera.Transform());
+            spriteBatch.Begin(SpriteSortMode.Deferred, null, SamplerState.LinearWrap, null, null, null, camera.Transform());
             tileMap.Draw();
             spriteBatch.End();
 

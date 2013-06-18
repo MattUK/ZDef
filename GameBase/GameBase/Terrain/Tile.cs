@@ -87,7 +87,10 @@ namespace GameBase.Terrain
         /// </summary>
         public void Draw()
         {
-            ZDefGame.spriteBatch.Draw(ZDefGame.terrainTexture, GetPosition(), tileType.GetSourcePositionRectangle(), Color.White * lightLevel);
+            Color drawColour = Color.White * lightLevel;
+            drawColour.A = 255;
+
+            ZDefGame.spriteBatch.Draw(ZDefGame.terrainTexture, GetPosition(), tileType.GetSourcePositionRectangle(), drawColour);
         }
 
     }
