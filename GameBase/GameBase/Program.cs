@@ -10,7 +10,7 @@ namespace GameBase
         /// </summary>
         static void Main(string[] args)
         {
-            using (Game1 game = new Game1())
+            using (ZDefGame game = new ZDefGame())
             {
                 game.Run();
             }

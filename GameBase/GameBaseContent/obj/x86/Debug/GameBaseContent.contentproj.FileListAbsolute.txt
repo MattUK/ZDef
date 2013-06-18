@@ -1,0 +1,2 @@
+C:\Users\Matt\Documents\GitHub\ZDef\GameBase\GameBaseContent\obj\x86\Debug\ResolveAssemblyReference.cache
+D:\Development\GitHub\ZDef\GameBase\GameBaseContent\obj\x86\Debug\ResolveAssemblyReference.cache

@@ -11,19 +11,25 @@ using Microsoft.Xna.Framework.Media;
 
 namespace GameBase
 {
-    public class Game1 : Microsoft.Xna.Framework.Game
+    public class ZDefGame : Microsoft.Xna.Framework.Game
     {
+        // =========== Content / Utilities =============
+        // =============================================
+        public static SpriteBatch spriteBatch;
+
+        public static Texture2D terrainTexture;
+        // =============================================
+
         GraphicsDeviceManager graphics;
-        SpriteBatch spriteBatch;
 
         Camera2D Camera;
         InputHandler Input;
 
-        int ScreenWidth;
-        int ScreenHeight;
+        int ScreenWidth = 800;
+        int ScreenHeight = 600;
         Vector2 MapSize;
 
-        public Game1()
+        public ZDefGame()
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
