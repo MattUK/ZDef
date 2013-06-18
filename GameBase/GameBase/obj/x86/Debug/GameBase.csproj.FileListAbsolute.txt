@@ -11,3 +11,10 @@ D:\Development\GitHub\ZDef\GameBase\GameBase\obj\x86\Debug\Microsoft.Xna.Framewo
 D:\Development\GitHub\ZDef\GameBase\GameBase\obj\x86\Debug\GameBase.exe
 D:\Development\GitHub\ZDef\GameBase\GameBase\obj\x86\Debug\GameBase.pdb
 D:\Development\GitHub\ZDef\GameBase\GameBase\bin\x86\Debug\Content\terrain_spritesheet.xnb
+C:\Users\Connor\Documents\GitHub\ZDef\GameBase\GameBase\bin\x86\Debug\Content\terrain_spritesheet.xnb
+C:\Users\Connor\Documents\GitHub\ZDef\GameBase\GameBase\bin\x86\Debug\GameBase.exe
+C:\Users\Connor\Documents\GitHub\ZDef\GameBase\GameBase\bin\x86\Debug\GameBase.pdb
+C:\Users\Connor\Documents\GitHub\ZDef\GameBase\GameBase\obj\x86\Debug\ResolveAssemblyReference.cache
+C:\Users\Connor\Documents\GitHub\ZDef\GameBase\GameBase\obj\x86\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt
+C:\Users\Connor\Documents\GitHub\ZDef\GameBase\GameBase\obj\x86\Debug\GameBase.exe
+C:\Users\Connor\Documents\GitHub\ZDef\GameBase\GameBase\obj\x86\Debug\GameBase.pdb
