@@ -12,6 +12,7 @@ namespace GameBase
 
         private Tile[,] tiles;
         private int mapWidth, mapHeight;
+        private Heightmap heightmap;
 
         public TileMap(int width, int height)
         {

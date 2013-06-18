@@ -21,7 +21,6 @@ namespace GameBase
         public static GraphicsDeviceManager graphics;
         public static Camera2D camera;
         public static InputHandler input;
-        public static PerlinNoise2D noiseGenerator;
         public static Lighting lighting;
         public static SelectionHandle Selection;
 
@@ -57,7 +56,6 @@ namespace GameBase
 
             camera = new Camera2D(new Vector2(0, 0), ScreenWidth, ScreenHeight);
             input = new InputHandler();
-            noiseGenerator = new PerlinNoise2D(DateTime.Now.Second);
             tileMap = new TileMap(30, 30);
             lighting = new Lighting(1.0f);
             Selection = new SelectionHandle(input);
