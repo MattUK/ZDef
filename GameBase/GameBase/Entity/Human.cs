@@ -9,14 +9,18 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 
-namespace GameBase.Human
+namespace GameBase.Entity
 {
-    class Human : Sprite
+    public class Human : Sprite
     {
+        public bool Selected;
+
         public Human(Vector2 Pos, Texture2D Tex)
         {
             Position = Pos;
             Texture = Tex;
+            Selected = false;
+            Scale = 1.0f;
         }
 
     }

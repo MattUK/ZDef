@@ -51,6 +51,15 @@ namespace GameBase
         }
 
         /// <summary>
+        /// Gets the actual position of the mouse in the game world.
+        /// </summary>
+        public Vector2 TanslatedMousePos(Camera2D Camera)
+        {
+            Vector2 Position = Vector2.Transform(MousePosition(), Matrix.Invert(Camera.Transform()));
+            return Position;
+        }
+
+        /// <summary>
         /// Returns true if the left mouse button is clicked.
         /// </summary>
         /// <returns></returns>

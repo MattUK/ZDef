@@ -9,6 +9,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 using GameBase.Terrain;
+using GameBase.Entity;
 
 namespace GameBase
 {
@@ -22,6 +23,7 @@ namespace GameBase
         public static InputHandler input;
         public static PerlinNoise2D noiseGenerator;
         public static Lighting lighting;
+        public static SelectionHandle Selection;
 
         public static TileMap tileMap;
 
@@ -29,6 +31,8 @@ namespace GameBase
 
         public static int ScreenWidth = 800;
         public static int ScreenHeight = 600;
+
+        public List<Human> HumanList;
         // =============================================
 
         public ZDefGame()
@@ -56,6 +60,8 @@ namespace GameBase
             noiseGenerator = new PerlinNoise2D(DateTime.Now.Second);
             tileMap = new TileMap(30, 30);
             lighting = new Lighting(1.0f);
+            Selection = new SelectionHandle(input);
+            HumanList = new List<Human>();
 
             base.Initialize();
         }
@@ -65,6 +71,8 @@ namespace GameBase
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
             terrainTexture = Content.Load<Texture2D>("terrain_spritesheet");
+
+            HumanList.Add(new Human(new Vector2(60, 60), terrainTexture));
         }
 
         protected override void Update(GameTime gameTime)
@@ -73,12 +81,20 @@ namespace GameBase
 
             if (input.KeyDown(Keys.Escape))
             {
-                Environment.Exit(0);
+                this.Exit();
+               // Environment.Exit(0);
+            }
+
+            if (input.KeyDown(Keys.F1))
+            {
+                throw new Exception("Lol meet");
+                // Environment.Exit(0);
             }
 
             camera.Input(input);
             tileMap.Update();
             lighting.Update();
+            Selection.Update(HumanList, camera);
 
             base.Update(gameTime);
             input.UpdateLastValues();
@@ -91,6 +107,12 @@ namespace GameBase
 
             spriteBatch.Begin(SpriteSortMode.Deferred, null, SamplerState.PointWrap, null, null, null, camera.Transform());
             tileMap.Draw();
+
+            for (int i = 0; i < HumanList.Count; i++)
+            {
+                HumanList[i].Draw(spriteBatch);
+            }
+
             spriteBatch.End();
 
             base.Draw(gameTime);
