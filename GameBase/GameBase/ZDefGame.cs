@@ -8,6 +8,7 @@ using Microsoft.Xna.Framework.GamerServices;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
+using GameBase.Terrain;
 
 namespace GameBase
 {
@@ -17,11 +18,11 @@ namespace GameBase
         // =============================================
         public static SpriteBatch spriteBatch;
         public static GraphicsDeviceManager graphics;
-        static Camera2D Camera;
-        static InputHandler Input;
-        static PerlinNoise2D noiseGenerator;
+        public static Camera2D Camera;
+        public static InputHandler Input;
+        public static PerlinNoise2D noiseGenerator;
 
-        static TileMap tileMap;
+        public static TileMap tileMap;
 
         public static Texture2D terrainTexture;
 
@@ -52,7 +53,7 @@ namespace GameBase
             Camera = new Camera2D(new Vector2(0, 0), ScreenWidth, ScreenHeight);
             Input = new InputHandler();
             noiseGenerator = new PerlinNoise2D(DateTime.Now.Second);
-            tileMap = new TileMap(100, 100);
+            tileMap = new TileMap(30, 30);
 
             base.Initialize();
         }
@@ -68,18 +69,23 @@ namespace GameBase
         {
             Input.UpdateFirstValues();
 
+            if (Input.KeyDown(Keys.Escape))
+            {
+                Environment.Exit(0);
+            }
+
             Camera.Input(Input);
 
             base.Update(gameTime);
             Input.UpdateLastValues();
-            Camera.Constraint(new Vector2(1000, 1000));
+            Camera.Constraint(new Vector2(tileMap.GetWidth() * Tile.DEFAULT_TILE_WIDTH, tileMap.GetHeight() * Tile.DEFAULT_TILE_HEIGHT));
         }
 
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            spriteBatch.Begin(SpriteSortMode.Deferred, null, null, null, null, null, Camera.Transform());
+            spriteBatch.Begin(SpriteSortMode.Deferred, null, SamplerState.LinearWrap, null, null, null, Camera.Transform());
             tileMap.Draw();
             spriteBatch.End();
 
