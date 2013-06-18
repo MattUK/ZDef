@@ -61,12 +61,12 @@ namespace GameBase
 
             if (InputHandle.ScrollIn() == true)
             {
-                Zoom += 0.15f;
+                Zoom += 0.1f;
             }
 
             if (InputHandle.ScrollOut() == true)
             {
-                Zoom -= 0.15f;
+                Zoom -= 0.1f;
             }
         }
 
@@ -91,9 +91,9 @@ namespace GameBase
                 Position.Y = Max.Y - Height / 2;
             }
 
-            if (Zoom > 4f)
+            if (Zoom > 1f)
             {
-                Zoom = 4f;
+                Zoom = 1f;
             }
             if (Zoom < 0.2500001f)
             {

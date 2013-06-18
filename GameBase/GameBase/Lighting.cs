@@ -28,6 +28,14 @@ namespace GameBase
             }
         }
 
+        public void UpdateForClockCycle(int time)
+        {
+            int modTime = time % 100; // Get the time of the actual day (0-100)
+            float incrementPerTick = (MAXIMUM_LIGHT_LEVEL - MINIMUM_LIGHT_LEVEL) / 100;
+            float calculatedLightLevel = incrementPerTick * modTime;
+            globalLightLevel = calculatedLightLevel;
+        }
+
         public void CycleLighting()
         {
             if (globalLightLevel >= MAXIMUM_LIGHT_LEVEL)

@@ -39,7 +39,7 @@ namespace GameBase
             this.IsMouseVisible = true;
             this.IsFixedTimeStep = true;
 
-            graphics.PreferMultiSampling = true;
+            graphics.PreferMultiSampling = false;
             graphics.IsFullScreen = false;
             graphics.PreferredBackBufferWidth = ScreenWidth;
             graphics.PreferredBackBufferHeight = ScreenHeight;
@@ -89,7 +89,7 @@ namespace GameBase
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            spriteBatch.Begin(SpriteSortMode.Deferred, null, SamplerState.LinearWrap, null, null, null, camera.Transform());
+            spriteBatch.Begin(SpriteSortMode.Deferred, null, SamplerState.PointWrap, null, null, null, camera.Transform());
             tileMap.Draw();
             spriteBatch.End();
 
