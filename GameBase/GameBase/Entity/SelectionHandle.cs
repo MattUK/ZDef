@@ -22,7 +22,6 @@ namespace GameBase.Entity
 
         public void Update(List<Human> HumanList, Camera2D Camera)
         {
-
             if (Input.LeftClick() == true)
             {
                 ClearSelected(HumanList);

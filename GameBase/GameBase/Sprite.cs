@@ -86,7 +86,10 @@ namespace GameBase
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(Texture, Position, null, Color.White, Rotation, Origin, Scale, SpriteEffects.None, 1.0f);
+            Colour = Color.White * ZDefGame.lighting.GetLightLevel();
+            Colour.A = 255;
+
+            spriteBatch.Draw(Texture, Position, null, Colour, Rotation, Origin, Scale, SpriteEffects.None, 1.0f);
         }
     }
 }
