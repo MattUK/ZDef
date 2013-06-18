@@ -69,7 +69,6 @@ namespace GameBase
 
         public float GetLightLevel()
         {
-            Console.WriteLine(globalLightLevel);
             return globalLightLevel;
         }
 
