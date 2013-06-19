@@ -57,6 +57,11 @@ namespace GameBase.Terrain
             return lightLevel;
         }
 
+        public Point TilePos()
+        {
+            return new Point(i, j);
+        }
+
         /// <summary>
         /// Returns the rectangle of this tile.
         /// </summary>

@@ -23,6 +23,7 @@ namespace GameBase
         public static InputHandler input;
         public static Lighting lighting;
         public static SelectionHandle Selection;
+        public static Pathfinder pathFinder;
 
         public static TileMap tileMap;
 
@@ -64,6 +65,7 @@ namespace GameBase
             lighting = new Lighting(1.0f);
             Selection = new SelectionHandle(input);
             HumanList = new List<Human>();
+            pathFinder = new Pathfinder(tileMap);
 
             base.Initialize();
         }
