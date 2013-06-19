@@ -99,6 +99,11 @@ namespace GameBase
             //    // Environment.Exit(0);
             //}
 
+            for(int i = 0; i < HumanList.Count;i++)
+            {
+                HumanList[i].Update(pathFinder, input);
+            }
+
             camera.Input(input);
             tileMap.Update();
             lighting.Update();

@@ -17,6 +17,7 @@ namespace GameBase.Entity
         public int Health; //Help me....
         public Tile CurrentTile; //Tile that holds this human.
         public Tile GoalTile;
+        Vector2 MoveGoal;
         List<Vector2> Path;
 
         public Human(Texture2D Tex, Tile ChosenTile)
@@ -28,14 +29,19 @@ namespace GameBase.Entity
             GoalTile = CurrentTile;
         }
 
-        public void Update(Pathfinder pathFinder)
+        public void Update(Pathfinder pathFinder, InputHandler Input)
         {
             if (CurrentTile != GoalTile)
             {
                 Path = pathFinder.FindPath(CurrentTile.TilePos(), GoalTile.TilePos());
+                CurrentTile = GoalTile;
             }
 
-
+            if (Path.Count != 0)
+            {
+                MoveGoal = Path[0];
+                Path.RemoveAt(0);
+            }
         }
 
         public void BuildThing()
@@ -45,7 +51,7 @@ namespace GameBase.Entity
 
         public void SetGoal(Tile tile)
         {
-
+            GoalTile = tile;
         }
 
     }

@@ -36,6 +36,7 @@ namespace GameBase.Terrain
             this.tileWidth = tileWidth;
             this.tileHeight = tileHeight;
             this.positionInSheet = positionInSheet;
+            this.passable = passable;
         }
 
         public Rectangle GetSourcePositionRectangle()
