@@ -75,7 +75,7 @@ namespace GameBase
             terrainTexture = Content.Load<Texture2D>("terrain_spritesheet");
             HumanTexture = Content.Load<Texture2D>("Human");
 
-            tileRenderTarget = new RenderTarget2D(GraphicsDevice, tileMap.GetWidth() * Tile.DEFAULT_TILE_WIDTH, tileMap.GetHeight() * Tile.DEFAULT_TILE_HEIGHT);
+            tileRenderTarget = new RenderTarget2D(GraphicsDevice, tileMap.GetWidth() * 64, tileMap.GetHeight() * 64);
 
             HumanList.Add(new Human(HumanTexture, tileMap.GetMap()[20,20]));
         }
@@ -103,7 +103,7 @@ namespace GameBase
 
             base.Update(gameTime);
             input.UpdateLastValues();
-            camera.Constraint(new Vector2(tileMap.GetWidth() * Tile.DEFAULT_TILE_WIDTH, tileMap.GetHeight() * Tile.DEFAULT_TILE_HEIGHT));
+            camera.Constraint(new Vector2(tileMap.GetWidth() * 64, tileMap.GetHeight() * 64));
         }
 
         protected override void Draw(GameTime gameTime)

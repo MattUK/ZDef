@@ -9,9 +9,6 @@ namespace GameBase.Terrain
 {
     public class Tile
     {
-        public const int DEFAULT_TILE_WIDTH = 64; // Default tile width
-        public const int DEFAULT_TILE_HEIGHT = 64; // Default tile height
-
         private int i, j; // Position of this tile in the map array
         private TileType tileType; // Tile type
         private float lightLevel;// Light level
@@ -34,7 +31,7 @@ namespace GameBase.Terrain
         /// <returns>Vector2 containing the position.</returns>
         public Vector2 GetPosition()
         {
-            return new Vector2(i * DEFAULT_TILE_WIDTH, j * DEFAULT_TILE_HEIGHT);
+            return new Vector2(i * tileType.tileWidth, j * tileType.tileHeight);
         }
 
         /// <summary>
@@ -66,7 +63,7 @@ namespace GameBase.Terrain
         /// <returns>The bounding rectangle that encompasses this tile.</returns>
         public Rectangle GetRectangle()
         {
-            return new Rectangle(i * DEFAULT_TILE_WIDTH, j * DEFAULT_TILE_HEIGHT, DEFAULT_TILE_WIDTH, DEFAULT_TILE_HEIGHT);
+            return new Rectangle(i * tileType.tileWidth, j * tileType.tileHeight, tileType.tileWidth, tileType.tileHeight);
         }
 
         /// <summary>
