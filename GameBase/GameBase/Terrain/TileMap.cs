@@ -34,6 +34,18 @@ namespace GameBase
             heightmap = new Heightmap(width, height);
 
             CreateInitialTerrain();
+            CreateInitialEntityMap();
+        }
+
+        private void CreateInitialEntityMap()
+        {
+            int hqX = mapWidth / 2, hqY = mapHeight / 2;
+            buildingTiles[hqX, hqY] = new Tile(hqX, hqY, TileType.TENT_TOPLEFT);
+            buildingTiles[hqX + 1, hqY] = new Tile(hqX + 1, hqY, TileType.TENT_TOPRIGHT);
+            buildingTiles[hqX, hqY + 1] = new Tile(hqX, hqY + 1, TileType.TENT_BOTTOMLEFT);
+            buildingTiles[hqX + 1, hqY + 1] = new Tile(hqX + 1, hqY + 1, TileType.TENT_BOTTOMRIGHT);
+
+            buildingTiles[hqX + 3, hqY] = new Tile(hqX + 3, hqY, TileType.WOODEN_WATCH_TOWER);
         }
 
         public int GetWidth()

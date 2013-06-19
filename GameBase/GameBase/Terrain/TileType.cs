@@ -19,6 +19,15 @@ namespace GameBase.Terrain
         public static TileType WOODEN_WALL_RIGHT = new TileType(52, 32, 32, new Vector2(0.0f, 64.0f), false);
         public static TileType WOODEN_WALL_TOP = new TileType(53, 32, 32, new Vector2(64.0f, 64.0f), false);
         public static TileType WOODEN_WALL_BOTTOM = new TileType(54, 32, 32, new Vector2(96.0f, 64.0f), false);
+        public static TileType WOODEN_WATCH_TOWER = new TileType(55, 32, 32, new Vector2(128.0f, 64.0f), false);
+        public static TileType DROP_PAD = new TileType(56, 32, 32, new Vector2(128.0f, 96.0f), false);
+
+        // ================ HQ ================== //
+        public static TileType TENT_TOPLEFT = new TileType(90, 32, 32, new Vector2(0.0f, 0.0f), false);
+        public static TileType TENT_TOPRIGHT = new TileType(91, 32, 32, new Vector2(32.0f, 0.0f), false);
+        public static TileType TENT_BOTTOMLEFT = new TileType(92, 32, 32, new Vector2(0.0f, 32.0f), false);
+        public static TileType TENT_BOTTOMRIGHT = new TileType(93, 32, 32, new Vector2(32.0f, 32.0f), false);
+        // ===================================== //
 
         public static TileType BORDER_LEFT = new TileType(-1, 64, 64, new Vector2(192, 128));
         public static TileType BORDER_RIGHT = new TileType(-2, 64, 64, new Vector2(0, 128));

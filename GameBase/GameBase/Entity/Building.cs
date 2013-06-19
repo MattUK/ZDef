@@ -5,9 +5,11 @@ using System.Text;
 
 namespace GameBase.Entity
 {
-    class Building : Sprite
+    public abstract class Building : Sprite
     {
         public int Health;
-        public bool Buidling;
+        public int constructionStatus;
+
+        public abstract void SpawnAt(TileMap map, int x, int y);
     }
 }
