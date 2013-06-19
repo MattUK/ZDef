@@ -1,0 +1,8 @@
+4 Classes of humans that can build barricades, watch towers and other structures maybe (bunkers and the like).
+
+The classes :
+
+Rifleman (Accurate, average health).
+Tech (Buffs manned positions).
+Engie (Builds and repairs faster).
+Heavy (Lots of health, carry MGs).
