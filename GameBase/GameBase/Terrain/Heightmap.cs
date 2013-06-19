@@ -91,6 +91,8 @@ namespace GameBase.Terrain
             // 0.9 <= x <= 1 = Stone
             float height = values[x, y];
 
+            Random rand = new Random((int)(height * 100.0f));
+
             if (height < 0.5)
             {
                 return TileType.WATER;
@@ -99,13 +101,17 @@ namespace GameBase.Terrain
             {
                 return TileType.SAND;
             }
-            else if (height >= 0.55 && height < 0.9)
-            {
-                return TileType.GRASS;
-            }
             else
             {
-                return TileType.STONE;
+                float val = height - (float)rand.NextDouble();
+                if (val > -0.1f)
+                {
+                    return TileType.GRASS;
+                }
+                else
+                {
+                    return TileType.STONE;
+                }
             }
         }
 
