@@ -14,28 +14,37 @@ namespace GameBase.Entity
     public class SelectionHandle
     {
         InputHandler Input;
+        Human SelectedHuman;
 
         public SelectionHandle(InputHandler Input)
         {
             this.Input = Input;
+            SelectedHuman = null;
         }
 
         public void Update(List<Human> HumanList, Camera2D Camera)
         {
             if (Input.LeftClick() == true)
             {
-                ClearSelected(HumanList);
+                ClearSelected();
 
                 for (int i = 0; i < HumanList.Count; i++)
                 {
                     CheckSelected(HumanList[i], Input.TanslatedMousePos(Camera), HumanList);
                 }
             }
+
+            if (SelectedHuman != null)
+            {
+                if (Input.RightClick() == true)
+                {
+                    SelectedHuman.SetGoal 
+                }
+            }
         }
 
         void CheckSelected(Human human, Vector2 MousePos, List<Human> HumanList)
         {
-
             if (human.Position.X < MousePos.X)
             {
                 if (human.Position.Y < MousePos.Y)
@@ -44,19 +53,16 @@ namespace GameBase.Entity
                     {
                         if (human.Position.Y + human.Texture.Height > MousePos.Y)
                         {
-                            human.Selected = true;
+                            SelectedHuman = human;
                         }
                     }
                 }
             }
         }
 
-        void ClearSelected(List<Human> HumanList)
+        void ClearSelected()
         {
-            for (int i = 0; i < HumanList.Count; i++)
-            {
-                HumanList[i].Selected = false;
-            }
+            SelectedHuman = null;
         }
     }
 }

@@ -14,22 +14,35 @@ namespace GameBase.Entity
 {
     public class Human : Sprite
     {
-        public bool Selected; //Is this human chosen by god?
         public int Health; //Help me....
         public Tile CurrentTile; //Tile that holds this human.
+        public Tile GoalTile;
 
         public Human(Texture2D Tex, Tile ChosenTile)
         {
             Position = ChosenTile.GetPosition();
             Texture = Tex;
-            Selected = false;
             Scale = 1.0f;
             CurrentTile = ChosenTile;
+            GoalTile = CurrentTile;
         }
 
+        public void Update()
+        {
+            if (CurrentTile != GoalTile)
+            {
+                
+            }
 
+
+        }
 
         public void BuildThing()
+        {
+
+        }
+
+        public void SetGoal(Tile tile)
         {
 
         }
