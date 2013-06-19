@@ -33,6 +33,7 @@ namespace GameBase
         public static int ScreenHeight = 600;
 
         public List<Human> HumanList;
+        Texture2D HumanTexture;
         // =============================================
 
         private RenderTarget2D tileRenderTarget;
@@ -72,10 +73,11 @@ namespace GameBase
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
             terrainTexture = Content.Load<Texture2D>("terrain_spritesheet");
+            HumanTexture = Content.Load<Texture2D>("Human");
 
             tileRenderTarget = new RenderTarget2D(GraphicsDevice, tileMap.GetWidth() * Tile.DEFAULT_TILE_WIDTH, tileMap.GetHeight() * Tile.DEFAULT_TILE_HEIGHT);
 
-            HumanList.Add(new Human(new Vector2(60, 60), terrainTexture));
+            HumanList.Add(new Human(HumanTexture, tileMap.GetMap()[20,20]));
         }
 
         protected override void Update(GameTime gameTime)

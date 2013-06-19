@@ -18,3 +18,4 @@ C:\Users\Connor\Documents\GitHub\ZDef\GameBase\GameBase\obj\x86\Debug\ResolveAss
 C:\Users\Connor\Documents\GitHub\ZDef\GameBase\GameBase\obj\x86\Debug\Microsoft.Xna.Framework.RuntimeProfile.txt
 C:\Users\Connor\Documents\GitHub\ZDef\GameBase\GameBase\obj\x86\Debug\GameBase.exe
 C:\Users\Connor\Documents\GitHub\ZDef\GameBase\GameBase\obj\x86\Debug\GameBase.pdb
+C:\Users\Connor\Documents\GitHub\ZDef\GameBase\GameBase\bin\x86\Debug\Content\Human.xnb
