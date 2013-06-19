@@ -72,7 +72,7 @@ namespace GameBase
 
             terrainTexture = Content.Load<Texture2D>("terrain_spritesheet");
 
-            tileRenderTarget = new RenderTarget2D(GraphicsDevice, 800, 600);
+            tileRenderTarget = new RenderTarget2D(GraphicsDevice, tileMap.GetWidth() * Tile.DEFAULT_TILE_WIDTH, tileMap.GetHeight() * Tile.DEFAULT_TILE_HEIGHT);
 
             HumanList.Add(new Human(new Vector2(60, 60), terrainTexture));
         }
@@ -108,7 +108,7 @@ namespace GameBase
             GraphicsDevice.SetRenderTarget(tileRenderTarget);
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            spriteBatch.Begin(SpriteSortMode.Deferred, null, SamplerState.PointClamp, null, null, null, camera.Transform());
+            spriteBatch.Begin();
             tileMap.Draw();
 
             for (int i = 0; i < HumanList.Count; i++)
@@ -119,9 +119,10 @@ namespace GameBase
             spriteBatch.End();
 
             GraphicsDevice.SetRenderTarget(null);
+            GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            spriteBatch.Begin();
-            spriteBatch.Draw(tileRenderTarget, new Rectangle(0, 0, 800, 600), Color.White);
+            spriteBatch.Begin(SpriteSortMode.Deferred, null, null, null, null, null, camera.Transform());
+            spriteBatch.Draw(tileRenderTarget, new Vector2(0, 0), Color.White);
             spriteBatch.End();
 
             base.Draw(gameTime);
