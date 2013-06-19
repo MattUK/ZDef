@@ -5,7 +5,7 @@ using System.Text;
 using Microsoft.Xna.Framework;
 using GameBase;
 
-namespace ZDay
+namespace GameBase
 {
     /// <summary>
     /// Reresents one node in the search space
@@ -80,8 +80,8 @@ namespace ZDay
         public Pathfinder(TileMap map)
         {
             this.map = map;
-            levelWidth = map.GetWidth();
-            levelHeight = map.GetHeight();
+            levelWidth = map.GetWidth() * 2;
+            levelHeight = map.GetHeight() * 2;
 
             EnvironmentChanged = false;
 
