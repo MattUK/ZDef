@@ -33,7 +33,7 @@ namespace GameBase
         public static int ScreenHeight = 600;
 
         public List<Human> HumanList;
-        Texture2D HumanTexture;
+        public static  Texture2D HumanTexture;
         // =============================================
 
         private RenderTarget2D tileRenderTarget;
@@ -99,7 +99,7 @@ namespace GameBase
             camera.Input(input);
             tileMap.Update();
             lighting.Update();
-            Selection.Update(HumanList, camera);
+            Selection.Update(HumanList, camera, tileMap);
 
             base.Update(gameTime);
             input.UpdateLastValues();

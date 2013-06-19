@@ -40,7 +40,7 @@ namespace GameBase.Entity
             {
                 if (Input.RightClick() == true)
                 {
-                    SelectedHuman.SetGoal();
+                    SelectedHuman.SetGoal(SelectedTile);
                 }
             }
         }
@@ -62,8 +62,24 @@ namespace GameBase.Entity
             }
         }
 
-        void GetSelectedTile(TileMap tileMap, Vector2 MousePos)
+        Tile GetSelectedTile(TileMap tileMap, Vector2 MousePos)
         {
+            float tileX = (MousePos.X) / 32;
+            float tileY = (MousePos.Y) / 32;
+          
+            int X = (int)Math.Ceiling(tileX - 1);
+            int Y = (int)Math.Ceiling(tileY - 1);
+
+            if (X >= 0 && Y >= 0)
+            {
+                if (X < (tileMap.GetWidth() * 2) && Y < (tileMap.GetHeight() * 2))
+                {
+                    return tileMap.GetEntityTile(X, Y);
+                }
+            }
+
+            //If no tile is returned, return null.
+            return null;
         }
 
 
