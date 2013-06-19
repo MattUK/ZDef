@@ -11,7 +11,7 @@ namespace GameBase
     public class TileMap
     {
         private Tile[,] terrainTiles;
-        private Building[,] buildingTiles;
+        private Tile[,] buildingTiles;
 
         private int mapWidth, mapHeight;
         private Heightmap heightmap;
@@ -21,16 +21,19 @@ namespace GameBase
             this.mapWidth = width;
             this.mapHeight = height;
             this.terrainTiles = new Tile[width, height];
-            //this.buildingTiles
+            this.buildingTiles = new Tile[width * 2, height * 2];
+
+            for (int i = 0; i < buildingTiles.GetLength(0); i++)
+            {
+                for (int j = 0; j < buildingTiles.GetLength(1); j++)
+                {
+                    buildingTiles[i, j] = new Tile(i, j, TileType.EMPTY_BUILDING);
+                }
+            }
 
             heightmap = new Heightmap(width, height);
 
             CreateInitialTerrain();
-        }
-
-        public Tile[,] GetMap()
-        {
-            return terrainTiles;
         }
 
         public int GetWidth()
@@ -41,6 +44,21 @@ namespace GameBase
         public int GetHeight()
         {
             return mapHeight;
+        }
+
+        public Tile GetEntityTile(int x, int y)
+        {
+            return buildingTiles[x, y];
+        }
+
+        public Tile GetTerrainTile(int x, int y)
+        {
+            return terrainTiles[(int)Math.Floor(x / 2.0f), (int)Math.Floor(y / 2.0f)];
+        }
+
+        public bool IsPassable(int x, int y)
+        {
+            return GetEntityTile(x, y).GetTileType().passable && GetTerrainTile(x, y).GetTileType().passable;
         }
 
         public void CreateInitialTerrain()

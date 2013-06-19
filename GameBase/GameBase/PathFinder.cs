@@ -124,7 +124,7 @@ namespace ZDay
                     node.Position = new Point(x, y);
 
                     // Our enemies can only walk on grass tiles.
-                    if (map.GetMap()[x, y].Passable() == true)
+                    if (map.IsPassable(x, y) == true)
                     {
                         node.Walkable = true;
                     }

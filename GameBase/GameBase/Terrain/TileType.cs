@@ -14,6 +14,8 @@ namespace GameBase.Terrain
         public static TileType WATER = new TileType(2, 64, 64, new Vector2(128.0f, 0.0f), false);
         public static TileType SAND = new TileType(3, 64, 64, new Vector2(192.0f, 0.0f));
 
+        public static TileType EMPTY_BUILDING = new TileType(50, 32, 32, new Vector2(96.0f, 96.0f));
+
         public static TileType BORDER_LEFT = new TileType(-1, 64, 64, new Vector2(192, 128));
         public static TileType BORDER_RIGHT = new TileType(-2, 64, 64, new Vector2(0, 128));
         public static TileType BORDER_TOP = new TileType(-3, 64, 64, new Vector2(128, 128));
