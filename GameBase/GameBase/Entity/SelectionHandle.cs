@@ -8,6 +8,7 @@ using Microsoft.Xna.Framework.GamerServices;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
+using GameBase.Terrain;
 
 namespace GameBase.Entity
 {
@@ -15,6 +16,7 @@ namespace GameBase.Entity
     {
         InputHandler Input;
         Human SelectedHuman;
+        Tile SelectedTile;
 
         public SelectionHandle(InputHandler Input)
         {
@@ -22,7 +24,7 @@ namespace GameBase.Entity
             SelectedHuman = null;
         }
 
-        public void Update(List<Human> HumanList, Camera2D Camera)
+        public void Update(List<Human> HumanList, Camera2D Camera, TileMap tileMap)
         {
             if (Input.LeftClick() == true)
             {
@@ -38,7 +40,7 @@ namespace GameBase.Entity
             {
                 if (Input.RightClick() == true)
                 {
-                    SelectedHuman.SetGoal 
+                    SelectedHuman.SetGoal();
                 }
             }
         }
@@ -59,6 +61,12 @@ namespace GameBase.Entity
                 }
             }
         }
+
+        void GetSelectedTile(TileMap tileMap, Vector2 MousePos)
+        {
+        }
+
+
 
         void ClearSelected()
         {
