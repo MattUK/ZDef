@@ -27,6 +27,7 @@ namespace GameBase
         public static TileMap tileMap;
 
         public static Texture2D terrainTexture;
+        public static Texture2D humanBuildingTexture;
 
         public static int ScreenWidth = 800;
         public static int ScreenHeight = 600;

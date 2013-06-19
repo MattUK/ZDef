@@ -12,7 +12,7 @@ namespace GameBase.Terrain
         public const int DEFAULT_TILE_HEIGHT = 64; // Default tile height
 
         private int i, j; // Position of this tile in the map array
-        private TileType tileType; // Tile tyep
+        private TileType tileType; // Tile type
         private float lightLevel;// Light level
 
         public bool drawTopBorder, drawBottomBorder, drawLeftBorder, drawRightBorder;

@@ -95,7 +95,11 @@ namespace GameBase.Terrain
             {
                 return TileType.WATER;
             }
-            else if (height >= 0.5 && height < 0.9)
+            else if (height >= 0.5 && height < 0.55f)
+            {
+                return TileType.SAND;
+            }
+            else if (height >= 0.55 && height < 0.9)
             {
                 return TileType.GRASS;
             }
