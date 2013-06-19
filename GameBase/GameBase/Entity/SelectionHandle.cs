@@ -26,6 +26,9 @@ namespace GameBase.Entity
 
         public void Update(List<Human> HumanList, Camera2D Camera, TileMap tileMap)
         {
+
+            SelectedTile = GetSelectedTile(tileMap, Input.TanslatedMousePos(Camera));
+
             if (Input.LeftClick() == true)
             {
                 ClearSelected();

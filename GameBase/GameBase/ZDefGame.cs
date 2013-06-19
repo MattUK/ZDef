@@ -90,11 +90,11 @@ namespace GameBase
                // Environment.Exit(0);
             }
 
-            if (input.KeyDown(Keys.F1))
-            {
-                throw new Exception("Lol meet");
-                // Environment.Exit(0);
-            }
+            //if (input.KeyDown(Keys.F1))
+            //{
+            //    throw new Exception("Lol meet");
+            //    // Environment.Exit(0);
+            //}
 
             camera.Input(input);
             tileMap.Update();
