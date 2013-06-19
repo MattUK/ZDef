@@ -121,6 +121,14 @@ namespace GameBase
                     terrainTiles[i, j].Draw();
                 }
             }
+
+            for (int i = 0; i < mapWidth * 2; i++)
+            {
+                for (int j = 0; j < mapHeight * 2; j++)
+                {
+                    buildingTiles[i, j].Draw();
+                }
+            }
         }
 
     }
