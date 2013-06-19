@@ -18,29 +18,63 @@ namespace GameBase.Entity
         public Tile CurrentTile; //Tile that holds this human.
         public Tile GoalTile;
         Vector2 MoveGoal;
+        bool NotMoving;
         List<Vector2> Path;
 
         public Human(Texture2D Tex, Tile ChosenTile)
         {
             Position = ChosenTile.GetPosition();
+            MoveGoal = Position;
             Texture = Tex;
             Scale = 1.0f;
             CurrentTile = ChosenTile;
             GoalTile = CurrentTile;
+            Path = new List<Vector2>();
         }
 
         public void Update(Pathfinder pathFinder, InputHandler Input)
         {
+            if (Input.KeyClicked(Keys.F1))
+            {
+                throw new Exception("wahkdsdsb");
+            }
+
             if (CurrentTile != GoalTile)
             {
                 Path = pathFinder.FindPath(CurrentTile.TilePos(), GoalTile.TilePos());
                 CurrentTile = GoalTile;
             }
 
-            if (Path.Count != 0)
+            if (Path.Count != 0 && NotMoving == true)
             {
                 MoveGoal = Path[0];
                 Path.RemoveAt(0);
+            }
+
+            if (MoveGoal != Position)
+            {
+                NotMoving = false;
+
+                if (Position.X > MoveGoal.X)
+                {
+                    Position.X -= 2;
+                }
+                if (Position.Y > MoveGoal.Y)
+                {
+                    Position.Y -= 2;
+                }
+                if (Position.X < MoveGoal.X)
+                {
+                    Position.X += 2;
+                }
+                if (Position.Y < MoveGoal.Y)
+                {
+                    Position.Y += 2;
+                }
+            }
+            else
+            {
+                NotMoving = true;
             }
         }
 
