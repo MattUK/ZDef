@@ -15,12 +15,16 @@ namespace GameBase.Terrain
         private TileType tileType; // Tile tyep
         private float lightLevel;// Light level
 
+        public bool drawTopBorder, drawBottomBorder, drawLeftBorder, drawRightBorder;
+
         public Tile(int i, int j, TileType type, float lightLevel = 1.0f)
         {
             this.i = i;
             this.j = j;
             this.tileType = type;
             SetLightLevel(lightLevel);
+
+            drawTopBorder = drawBottomBorder = drawLeftBorder = drawRightBorder = false;
         }
 
         /// <summary>
@@ -39,6 +43,11 @@ namespace GameBase.Terrain
         public TileType GetTileType()
         {
             return tileType;
+        }
+
+        public void SetTileType(TileType type)
+        {
+            tileType = type;
         }
 
         /// <summary>
@@ -91,6 +100,23 @@ namespace GameBase.Terrain
             drawColour.A = 255;
 
             ZDefGame.spriteBatch.Draw(ZDefGame.terrainTexture, GetPosition(), tileType.GetSourcePositionRectangle(), drawColour);
+
+            if (drawTopBorder)
+            {
+                ZDefGame.spriteBatch.Draw(ZDefGame.terrainTexture, GetPosition(), TileType.BORDER_TOP.GetSourcePositionRectangle(), drawColour);
+            }
+            if (drawBottomBorder)
+            {
+                ZDefGame.spriteBatch.Draw(ZDefGame.terrainTexture, GetPosition(), TileType.BORDER_BOTTOM.GetSourcePositionRectangle(), drawColour);
+            }
+            if (drawLeftBorder)
+            {
+                ZDefGame.spriteBatch.Draw(ZDefGame.terrainTexture, GetPosition(), TileType.BORDER_LEFT.GetSourcePositionRectangle(), drawColour);
+            }
+            if (drawRightBorder)
+            {
+                ZDefGame.spriteBatch.Draw(ZDefGame.terrainTexture, GetPosition(), TileType.BORDER_RIGHT.GetSourcePositionRectangle(), drawColour);
+            }
         }
 
     }

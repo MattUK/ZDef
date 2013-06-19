@@ -9,7 +9,6 @@ namespace GameBase
 {
     public class TileMap
     {
-
         private Tile[,] tiles;
         private int mapWidth, mapHeight;
         private Heightmap heightmap;
@@ -49,6 +48,33 @@ namespace GameBase
                     tiles[i, j] = new Tile(i, j, heightmap.GetTypeAt(i, j), 1.0f);
                 }
             }
+
+            for (int i = 0; i < mapWidth; i++)
+            {
+                for (int j = 0; j < mapHeight; j++)
+                {
+                    if (tiles[i, j].GetTileType() == TileType.WATER)
+                    {
+                        //if (i > 0 && tiles[i - 1, j].GetTileType() != TileType.WATER)
+                        //{
+                        //    tiles[i, j].drawLeftBorder = true;
+                        //}
+                        if (i < mapWidth - 1 && tiles[i + 1, j].GetTileType() != TileType.WATER)
+                        {
+                            tiles[i, j].drawRightBorder = true;
+                        }
+                        if (j > 0 && tiles[i, j - 1].GetTileType() != TileType.WATER)
+                        {
+                            tiles[i, j].drawTopBorder = true;
+                        }
+                        //if (j < mapHeight - 1 && tiles[i, j + 1].GetTileType() != TileType.WATER)
+                        //{
+                        //    tiles[i, j].drawBottomBorder = true;
+                        //}
+                    }
+                }
+            }
+
         }
 
         public void Update()
@@ -71,9 +97,6 @@ namespace GameBase
                 for (int j = 0; j < mapHeight; j++)
                 {
                     tiles[i, j].Draw();
-
-                    // TODO: Draw sea-bounding tiles.
-
                 }
             }
         }
