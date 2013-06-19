@@ -34,6 +34,8 @@ namespace GameBase
         public List<Human> HumanList;
         // =============================================
 
+        private RenderTarget2D tileRenderTarget;
+
         public ZDefGame()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -56,7 +58,7 @@ namespace GameBase
 
             camera = new Camera2D(new Vector2(0, 0), ScreenWidth, ScreenHeight);
             input = new InputHandler();
-            tileMap = new TileMap(30, 30);
+            tileMap = new TileMap(50, 50);
             lighting = new Lighting(1.0f);
             Selection = new SelectionHandle(input);
             HumanList = new List<Human>();
@@ -69,6 +71,8 @@ namespace GameBase
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
             terrainTexture = Content.Load<Texture2D>("terrain_spritesheet");
+
+            tileRenderTarget = new RenderTarget2D(GraphicsDevice, 800, 600);
 
             HumanList.Add(new Human(new Vector2(60, 60), terrainTexture));
         }
@@ -101,9 +105,10 @@ namespace GameBase
 
         protected override void Draw(GameTime gameTime)
         {
+            GraphicsDevice.SetRenderTarget(tileRenderTarget);
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            spriteBatch.Begin(SpriteSortMode.Deferred, null, SamplerState.PointWrap, null, null, null, camera.Transform());
+            spriteBatch.Begin(SpriteSortMode.Deferred, null, SamplerState.PointClamp, null, null, null, camera.Transform());
             tileMap.Draw();
 
             for (int i = 0; i < HumanList.Count; i++)
@@ -111,6 +116,12 @@ namespace GameBase
                 HumanList[i].Draw(spriteBatch);
             }
 
+            spriteBatch.End();
+
+            GraphicsDevice.SetRenderTarget(null);
+
+            spriteBatch.Begin();
+            spriteBatch.Draw(tileRenderTarget, new Rectangle(0, 0, 800, 600), Color.White);
             spriteBatch.End();
 
             base.Draw(gameTime);

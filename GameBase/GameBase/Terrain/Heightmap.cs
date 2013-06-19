@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Microsoft.Xna.Framework;
 
 namespace GameBase.Terrain
 {
@@ -19,6 +20,11 @@ namespace GameBase.Terrain
             this.height = height;
 
             noiseGenerator = new PerlinNoise2D(width * height);
+            noiseGenerator.setFrequency(1.5f);
+            noiseGenerator.setOctaveCount(1);
+
+            GenerateGradientCircle();
+            GenerateHeightmap();
         }
 
         private float[,] GenerateCircle(int circleSize)
@@ -47,17 +53,19 @@ namespace GameBase.Terrain
 
         private void GenerateGradientCircle()
         {
-            float[,] circle = GenerateCircle(width - (width / 4));
+            float[,] circle = GenerateCircle(width);
 
-            int circleX = 0, circleY = 0;
-            
-            for (int i = width / 4; i < width; i++)
+            int circleWidth =  width;
+            int circleHeight = width;
+
+            int circleX = 0;
+            int circleY = 0;
+
+            for (int i = 0; i < circleWidth; i++)
             {
-                circleX ++;
-                for (int j = height / 4; j < height; j++)
+                for (int j = 0; j < circleHeight; j++)
                 {
-                    circleY ++;
-                    values[i, j] = circle[circleX, circleY];
+                    values[circleX + i, circleY + j] = circle[i, j];
                 }
             }
         }
@@ -68,8 +76,9 @@ namespace GameBase.Terrain
             {
                 for (int j = 0; j < height; j++)
                 {
-                    float noiseValue = noiseGenerator.generateNoiseValue(i, j);
-                    noiseValue -= values[i, j];
+                    float noiseValue = noiseGenerator.generateNoiseValue((float)i / (float)width, (float)j / (float)height) + 1;
+                    noiseValue = (float)MathHelper.Clamp(noiseValue, 0.0f, 1.0f);
+                    noiseValue = noiseValue - values[i, j];
                     values[i, j] = noiseValue;
                 }
             }
@@ -94,7 +103,6 @@ namespace GameBase.Terrain
             {
                 return TileType.STONE;
             }
-
         }
 
     }
