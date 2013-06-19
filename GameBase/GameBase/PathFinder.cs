@@ -165,10 +165,10 @@ namespace GameBase
                         new Point (x, y + 1), // The node below the current node.
                         new Point (x - 1, y), // The node left of the current node.
                         new Point (x + 1, y), // The node right of the current node
-                        new Point (x + 1, y + 1),
-                        new Point (x - 1, y - 1),
-                        new Point (x + 1, y - 1),
-                        new Point (x - 1, y + 1),
+                        //new Point (x + 1, y + 1),
+                        //new Point (x - 1, y - 1),
+                        //new Point (x + 1, y - 1),
+                        //new Point (x - 1, y + 1),
                     };
 
                     // We loop through each of the possible neighbors
