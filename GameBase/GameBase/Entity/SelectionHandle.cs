@@ -50,13 +50,13 @@ namespace GameBase.Entity
 
         void CheckSelected(Human human, Vector2 MousePos, List<Human> HumanList)
         {
-            if (human.Position.X < MousePos.X)
+            if (human.Position.X < MousePos.X+16)
             {
-                if (human.Position.Y < MousePos.Y)
+                if (human.Position.Y < MousePos.Y+16)
                 {
-                    if (human.Position.X + human.Texture.Width > MousePos.X)
+                    if (human.Position.X + human.Texture.Width > MousePos.X+16)
                     {
-                        if (human.Position.Y + human.Texture.Height > MousePos.Y)
+                        if (human.Position.Y + human.Texture.Height > MousePos.Y+16)
                         {
                             SelectedHuman = human;
                         }

@@ -30,6 +30,7 @@ namespace GameBase.Entity
             CurrentTile = ChosenTile;
             GoalTile = CurrentTile;
             Path = new List<Vector2>();
+            ConstructThings();
         }
 
         public void Update(Pathfinder pathFinder, InputHandler Input)
@@ -86,6 +87,8 @@ namespace GameBase.Entity
         public void SetGoal(Tile tile)
         {
             GoalTile = tile;
+            //Path.Clear();
+            //NotMoving = true;
         }
 
     }
