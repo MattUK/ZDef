@@ -14,6 +14,7 @@ namespace GameBase.Entity
     public class Human : Sprite
     {
         public bool Selected;
+        public int Health;
 
         public Human(Vector2 Pos, Texture2D Tex)
         {
@@ -21,6 +22,11 @@ namespace GameBase.Entity
             Texture = Tex;
             Selected = false;
             Scale = 1.0f;
+        }
+
+        public void BuildThing()
+        {
+
         }
 
     }
