@@ -74,6 +74,7 @@ namespace GameBase
 
             terrainTexture = Content.Load<Texture2D>("terrain_spritesheet");
             HumanTexture = Content.Load<Texture2D>("Human");
+            humanBuildingTexture = Content.Load<Texture2D>("human_buildings");
 
             tileRenderTarget = new RenderTarget2D(GraphicsDevice, tileMap.GetWidth() * 64, tileMap.GetHeight() * 64);
 

@@ -10,6 +10,24 @@
       <Output>D:\Development\GitHub\ZDef\GameBase\GameBase\bin\x86\Debug\Content\terrain_spritesheet.xnb</Output>
       <Time>2013-06-19T16:49:58.6481727+01:00</Time>
     </Item>
+    <Item>
+      <Source>Human.png</Source>
+      <Name>Human</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>D:\Development\GitHub\ZDef\GameBase\GameBase\bin\x86\Debug\Content\Human.xnb</Output>
+      <Time>2013-06-19T16:52:17.07009+01:00</Time>
+    </Item>
+    <Item>
+      <Source>human_buildings.png</Source>
+      <Name>human_buildings</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>D:\Development\GitHub\ZDef\GameBase\GameBase\bin\x86\Debug\Content\human_buildings.xnb</Output>
+      <Time>2013-06-19T20:14:21.5973506+01:00</Time>
+    </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
       <TargetPlatform>Windows</TargetPlatform>
