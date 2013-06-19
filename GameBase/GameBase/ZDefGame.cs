@@ -56,7 +56,7 @@ namespace GameBase
 
             camera = new Camera2D(new Vector2(0, 0), ScreenWidth, ScreenHeight);
             input = new InputHandler();
-            tileMap = new TileMap(30, 30);
+            tileMap = new TileMap(50, 50);
             lighting = new Lighting(1.0f);
             Selection = new SelectionHandle(input);
             HumanList = new List<Human>();

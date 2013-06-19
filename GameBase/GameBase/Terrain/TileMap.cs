@@ -20,6 +20,8 @@ namespace GameBase
             this.mapHeight = height;
             this.tiles = new Tile[width, height];
 
+            heightmap = new Heightmap(width, height);
+
             CreateInitialTerrain();
         }
 
@@ -44,7 +46,7 @@ namespace GameBase
             {
                 for (int j = 0; j < mapHeight; j++)
                 {
-                    tiles[i, j] = new Tile(i, j, TileType.GRASS, 1.0f);
+                    tiles[i, j] = new Tile(i, j, heightmap.GetTypeAt(i, j), 1.0f);
                 }
             }
         }
@@ -69,6 +71,9 @@ namespace GameBase
                 for (int j = 0; j < mapHeight; j++)
                 {
                     tiles[i, j].Draw();
+
+                    // TODO: Draw sea-bounding tiles.
+
                 }
             }
         }
