@@ -26,6 +26,19 @@ namespace GameBase.Terrain
 
         public static TileType WOODEN_BARRICADE = new TileType(61, 32, 32, new Vector2(224.0f, 64.0f), false);
 
+        // Wooden wall stuff
+        public static TileType WALL_VERTICAL = new TileType(80, 32, 32, new Vector2(0.0f, 64.0f), false);
+        public static TileType WALL_HORIZONTAL = new TileType(81, 32, 32, new Vector2(32.0f, 64.0f), false);
+        public static TileType WALL_TOP_TO_LEFT = new TileType(82, 32, 32, new Vector2(0.0f, 96.0f), false);
+        public static TileType WALL_TOP_TO_RIGHT = new TileType(83, 32, 32, new Vector2(32.0f, 96.0f), false);
+        public static TileType WALL_RIGHT_TO_BOTTOM = new TileType(84, 32, 32, new Vector2(64.0f, 96.0f), false);
+        public static TileType WALL_LEFT_TO_BOTTOM = new TileType(85, 32, 32, new Vector2(96.0f, 96.0f), false);
+        public static TileType WALL_VERTICAL_WITH_LEFT = new TileType(86, 32, 32, new Vector2(0.0f, 128.0f), false);
+        public static TileType WALL_VERTICAL_WITH_RIGHT = new TileType(87, 32, 32, new Vector2(32.0f, 128.0f), false);
+        public static TileType WALL_HORIZONTAL_WITH_BOTTOM = new TileType(88, 32, 32, new Vector2(64.0f, 128.0f), false);
+        public static TileType WALL_HORIZONTAL_WITH_TOP = new TileType(89, 32, 32, new Vector2(96.0f, 128.0f), false);
+        public static TileType WALL_ALL_FOUR = new TileType(90, 32, 32, new Vector2(0.0f, 160.0f), false);
+
         public static TileType BORDER_LEFT = new TileType(-1, 64, 64, new Vector2(192, 128));
         public static TileType BORDER_RIGHT = new TileType(-2, 64, 64, new Vector2(0, 128));
         public static TileType BORDER_TOP = new TileType(-3, 64, 64, new Vector2(128, 128));
