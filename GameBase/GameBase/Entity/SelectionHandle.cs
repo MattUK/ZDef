@@ -31,10 +31,10 @@ namespace GameBase.Entity
             SelectedTile = GetSelectedTile(tileMap, Input.TanslatedMousePos(Camera));
 
 
-            if (Input.KeyClicked(Keys.U))
-            {
-                tileMap.ChangeWalls(SelectedTile);
-            }
+            //if (Input.KeyClicked(Keys.U))
+            //{
+            //    tileMap.ChangeWalls(SelectedTile);
+            //}
 
             if (Input.LeftClick() == true)
             {
@@ -73,9 +73,12 @@ namespace GameBase.Entity
         {
             if (Input.KeyClicked(Keys.D1))
             {
-                WoodenBarricade barricade = new WoodenBarricade(100, 100);
-                barricade.SpawnAt(ZDefGame.tileMap, SelectedTile.TilePos().X, SelectedTile.TilePos().Y);
+                Wall wall = new Wall(100, 100);
+                wall.SpawnAt(ZDefGame.tileMap, SelectedTile.TilePos().X, SelectedTile.TilePos().Y);
                 pathFinder.EnvironmentChanged = true;
+                //WoodenBarricade barricade = new WoodenBarricade(100, 100);
+                //barricade.SpawnAt(ZDefGame.tileMap, SelectedTile.TilePos().X, SelectedTile.TilePos().Y);
+                //pathFinder.EnvironmentChanged = true;
             }
         }
 

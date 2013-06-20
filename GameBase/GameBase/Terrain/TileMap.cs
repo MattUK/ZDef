@@ -97,19 +97,6 @@ namespace GameBase
             return true;
         }
 
-        public void ChangeWalls(Tile tileWall)
-        {
-            int X = tileWall.TilePos().X;
-            int Y = tileWall.TilePos().Y;
-
-            Console.WriteLine(GetBuildingAt(X, Y).GetTileType().tileID);
-
-            if (GetBuildingAt(X, Y).GetTileType().tileID == 80)
-            {
-                Console.WriteLine("This is a wall");
-            }
-        }
-
         public int GetWidth()
         {
             return mapWidth;
