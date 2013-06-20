@@ -33,12 +33,13 @@ namespace GameBase
         public static Texture2D mainMenuTexture;
 
         public static int ScreenWidth = 800;
-        public static int ScreenHeight = 600;
+        public static int ScreenHeight = 800;
 
         public List<Human> HumanList;
         public static Texture2D HumanTexture;
         public static Texture2D engieTexture;
         public static Texture2D riflemanTexture;
+        public static Utility utilityClass;
         // =============================================
 
         // ======= Draw Depths ==============
@@ -65,8 +66,6 @@ namespace GameBase
 
         protected override void Initialize()
         {
-            ScreenWidth = 800;
-            ScreenHeight = 800;
 
             camera = new Camera2D(new Vector2(0, 0), ScreenWidth, ScreenHeight);
             input = new InputHandler();
@@ -75,6 +74,7 @@ namespace GameBase
             Selection = new SelectionHandle(input);
             HumanList = new List<Human>();
             pathFinder = new Pathfinder(tileMap);
+            utilityClass = new Utility();
 
             base.Initialize();
         }
@@ -133,6 +133,7 @@ namespace GameBase
             base.Update(gameTime);
             input.UpdateLastValues();
             camera.Constraint(new Vector2(tileMap.GetWidth() * 64, tileMap.GetHeight() * 64));
+            utilityClass.TrapMouse(true, this);
         }
 
         protected override void Draw(GameTime gameTime)

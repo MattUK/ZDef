@@ -49,6 +49,23 @@ namespace GameBase
                 Position.X += 10;
             }
 
+            if (InputHandle.MousePosition().X > -5 && InputHandle.MousePosition().X < 15)
+            {
+                Position.X -= 10;
+            }
+            if (InputHandle.MousePosition().Y > -5 && InputHandle.MousePosition().Y < 15)
+            {
+                Position.Y -= 10;
+            }
+            if (InputHandle.MousePosition().Y < Height + 5 && InputHandle.MousePosition().Y > Height - 15)
+            {
+                Position.Y += 10;
+            }
+            if (InputHandle.MousePosition().X < Width + 5 && InputHandle.MousePosition().X > Width - 15)
+            {
+                Position.X += 10;
+            }
+
 
             if (InputHandle.KeyDown(Keys.Q) == true)
             {
