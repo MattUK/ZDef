@@ -34,7 +34,9 @@ namespace GameBase
         public static int ScreenHeight = 600;
 
         public List<Human> HumanList;
-        public static  Texture2D HumanTexture;
+        public static Texture2D HumanTexture;
+        public static Texture2D engieTexture;
+        public static Texture2D riflemanTexture;
         // =============================================
 
         private RenderTarget2D tileRenderTarget;
@@ -77,11 +79,13 @@ namespace GameBase
             terrainTexture = Content.Load<Texture2D>("terrain_spritesheet");
             HumanTexture = Content.Load<Texture2D>("Human");
             humanBuildingTexture = Content.Load<Texture2D>("human_buildings");
+            engieTexture = Content.Load<Texture2D>("Engineer");
+            riflemanTexture = Content.Load<Texture2D>("Rifleman");
 
             tileRenderTarget = new RenderTarget2D(GraphicsDevice, tileMap.GetWidth() * 64, tileMap.GetHeight() * 64);
 
-            HumanList.Add(new Human(HumanTexture, tileMap.GetEntityTile(41,40)));
-            HumanList.Add(new Human(HumanTexture, tileMap.GetEntityTile(45, 40)));
+            HumanList.Add(new Human(engieTexture, tileMap.GetEntityTile(41,40)));
+            HumanList.Add(new Human(riflemanTexture, tileMap.GetEntityTile(45, 40)));
         }
 
         protected override void Update(GameTime gameTime)
