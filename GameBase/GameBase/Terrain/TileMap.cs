@@ -10,6 +10,8 @@ namespace GameBase
 {
     public class TileMap
     {
+        public const bool DRAW_BORDER = true;
+
         private Tile[,] largeTiles;
         private Tile[,] smallTiles;
 
@@ -171,6 +173,17 @@ namespace GameBase
                 for (int j = 0; j < mapHeight; j++)
                 {
                     largeTiles[i, j].Draw();
+                    //if (largeTiles[i, j].GetTileType().tileID > 50)
+                    //{
+                    //    if (largeBuildings[i, j] != null)
+                    //    {
+                    //        largeBuildings[i, j].Draw(largeTiles[i, j]);
+                    //    }
+                    //}
+                    //else
+                    //{
+                    //    largeTiles[i, j].Draw();
+                    //}
                 }
             }
 
@@ -179,6 +192,21 @@ namespace GameBase
                 for (int j = 0; j < mapHeight * 2; j++)
                 {
                     smallTiles[i, j].Draw();
+                    //if (smallBuildings[i, j] != null)
+                    //{
+                    //    smallBuildings[i, j].Draw(smallTiles[i, j]);
+                    //}
+                }
+            }
+
+            if (DRAW_BORDER)
+            {
+                for (int i = 0; i < mapWidth * 2; i++)
+                {
+                    for (int j = 0; j < mapHeight * 2; j++)
+                    {
+                        ZDefGame.spriteBatch.Draw(ZDefGame.humanBuildingTexture, new Vector2(i * 32, j * 32), TileType.SMALL_BORDER.GetSourcePositionRectangle(), Color.White);
+                    }
                 }
             }
         }

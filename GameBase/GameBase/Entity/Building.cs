@@ -20,5 +20,7 @@ namespace GameBase.Entity
         public abstract TileType GetTileType();
 
         public abstract bool SpawnAt(TileMap map, int x, int y);
+
+        //public abstract void Draw(Tile tile);
     }
 }

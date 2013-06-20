@@ -22,6 +22,7 @@ namespace GameBase.Terrain
 
         // =========== Small Tiles =============
         public static TileType EMPTY_SMALL = new TileType(60, 32, 32, new Vector2(448.0f, 480.0f));
+        public static TileType SMALL_BORDER = new TileType(60, 32, 32, new Vector2(288.0f, 0.0f));
 
         public static TileType WALL_VERTICAL = new TileType(61, 32, 32, new Vector2(0.0f, 64.0f), false);
         public static TileType WALL_HORIZONTAL = new TileType(62, 32, 32, new Vector2(32.0f, 64.0f), false);
