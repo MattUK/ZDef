@@ -29,6 +29,7 @@ namespace GameBase.Entity
 
             SelectedTile = GetSelectedTile(tileMap, Input.TanslatedMousePos(Camera));
 
+
             if (Input.LeftClick() == true)
             {
                 ClearSelected();
@@ -41,6 +42,7 @@ namespace GameBase.Entity
 
             if (SelectedHuman != null)
             {
+                SelectedHuman.CurrentTile = GetSelectedTile(tileMap, SelectedHuman.Position);
                 if (Input.RightClick() == true)
                 {
                     SelectedHuman.SetGoal(SelectedTile);
@@ -65,10 +67,10 @@ namespace GameBase.Entity
             }
         }
 
-        Tile GetSelectedTile(TileMap tileMap, Vector2 MousePos)
+        Tile GetSelectedTile(TileMap tileMap, Vector2 Pos)
         {
-            float tileX = (MousePos.X) / 32;
-            float tileY = (MousePos.Y) / 32;
+            float tileX = (Pos.X) / 32;
+            float tileY = (Pos.Y) / 32;
           
             int X = (int)Math.Ceiling(tileX - 1);
             int Y = (int)Math.Ceiling(tileY - 1);

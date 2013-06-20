@@ -23,7 +23,7 @@ namespace GameBase.Entity
 
         public Human(Texture2D Tex, Tile ChosenTile)
         {
-            Position = ChosenTile.GetPosition();
+            Position = ChosenTile.GetPosition() + new Vector2(16,16);
             MoveGoal = Position;
             Texture = Tex;
             Scale = 1.0f;
@@ -87,8 +87,8 @@ namespace GameBase.Entity
         public void SetGoal(Tile tile)
         {
             GoalTile = tile;
-            //Path.Clear();
-            //NotMoving = true;
+            Path.Clear();
+            NotMoving = true;
         }
 
     }
