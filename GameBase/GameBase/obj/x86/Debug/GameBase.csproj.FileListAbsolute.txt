@@ -19,3 +19,4 @@ C:\Users\Connor\Documents\GitHub\ZDef\GameBase\GameBase\obj\x86\Debug\Microsoft.
 C:\Users\Connor\Documents\GitHub\ZDef\GameBase\GameBase\obj\x86\Debug\GameBase.exe
 C:\Users\Connor\Documents\GitHub\ZDef\GameBase\GameBase\obj\x86\Debug\GameBase.pdb
 C:\Users\Connor\Documents\GitHub\ZDef\GameBase\GameBase\bin\x86\Debug\Content\Human.xnb
+C:\Users\Connor\Documents\GitHub\ZDef\GameBase\GameBase\bin\x86\Debug\Content\human_buildings.xnb

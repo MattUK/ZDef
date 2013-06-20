@@ -111,6 +111,7 @@
     <Compile Include="Entity\Building.cs" />
     <Compile Include="Entity\Human.cs" />
     <Compile Include="Entity\SelectionHandle.cs" />
+    <Compile Include="Entity\Weapon.cs" />
     <Compile Include="Entity\WoodenBarricade.cs" />
     <Compile Include="InputHandler.cs" />
     <Compile Include="Lighting.cs" />

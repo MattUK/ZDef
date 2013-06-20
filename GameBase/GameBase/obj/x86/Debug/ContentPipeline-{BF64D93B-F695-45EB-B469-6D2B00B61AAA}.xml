@@ -8,7 +8,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>C:\Users\Connor\Documents\GitHub\ZDef\GameBase\GameBase\bin\x86\Debug\Content\terrain_spritesheet.xnb</Output>
-      <Time>2013-06-19T17:42:57.8749491+01:00</Time>
+      <Time>2013-06-19T21:00:27.8907312+01:00</Time>
     </Item>
     <Item>
       <Source>Human.png</Source>
@@ -18,6 +18,15 @@
       <Options>None</Options>
       <Output>C:\Users\Connor\Documents\GitHub\ZDef\GameBase\GameBase\bin\x86\Debug\Content\Human.xnb</Output>
       <Time>2013-06-19T17:42:57.8069452+01:00</Time>
+    </Item>
+    <Item>
+      <Source>human_buildings.png</Source>
+      <Name>human_buildings</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>C:\Users\Connor\Documents\GitHub\ZDef\GameBase\GameBase\bin\x86\Debug\Content\human_buildings.xnb</Output>
+      <Time>2013-06-20T16:05:40.4676896+01:00</Time>
     </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>

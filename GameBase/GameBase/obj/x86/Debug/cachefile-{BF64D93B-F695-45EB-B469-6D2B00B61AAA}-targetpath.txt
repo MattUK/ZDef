@@ -1,2 +1,3 @@
 Content\terrain_spritesheet.xnb
 Content\Human.xnb
+Content\human_buildings.xnb
