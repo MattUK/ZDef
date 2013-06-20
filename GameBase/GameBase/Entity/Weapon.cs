@@ -13,6 +13,7 @@ namespace GameBase.Entity
         int DelayMax;
         public Vector2 Position;
         public float Rotation;
+        Sprite Target;
 
         public Weapon(Vector2 Pos, float Rot, int delay, int Dam)
         {
@@ -25,7 +26,23 @@ namespace GameBase.Entity
 
         public void Update()
         {
+            if (Target != null && Delay == 0)
+            {
+                Fire();
+            }
 
+
+
+
+            if (Delay > 0)
+            {
+                Delay -= 1;
+            }
+        }
+
+        void Fire()
+        {
+            Console.WriteLine("A zombie has been shot!");
         }
     }
 }
