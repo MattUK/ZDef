@@ -13,6 +13,9 @@ namespace GameBase
         private Tile[,] largeTiles;
         private Tile[,] smallTiles;
 
+        private Building[,] smallBuildings;
+        private Building[,] largeBuildings;
+
         private int mapWidth, mapHeight;
         private Heightmap heightmap;
 
@@ -20,6 +23,7 @@ namespace GameBase
         {
             this.mapWidth = width;
             this.mapHeight = height;
+
             this.largeTiles = new Tile[width, height];
             this.smallTiles = new Tile[width * 2, height * 2];
 
@@ -33,7 +37,45 @@ namespace GameBase
 
             heightmap = new Heightmap(width, height);
 
+            // ==== Handle Buildings ====
+            smallBuildings = new Building[width * 2, height * 2];
+            largeBuildings = new Building[width, height];
+
             CreateInitialTerrain();
+        }
+
+        public Building GetBuildingAt(int x, int y)
+        {
+            if (!IsBuildingAt(x, y)) {
+                return null;
+            }
+
+            if (largeBuildings[(int)Math.Floor(x / 2.0f), (int)Math.Floor(y / 2.0f)] != null)
+            {
+                return largeBuildings[(int)Math.Floor(x / 2.0f), (int)Math.Floor(y / 2.0f)];
+            }
+            else if (smallBuildings[x, y] != null)
+            {
+                return smallBuildings[x, y];
+            }
+            return null;
+        }
+
+        public bool IsBuildingAt(int x, int y)
+        {
+            return ((largeBuildings[(int)Math.Floor(x / 2.0f), (int)Math.Floor(y / 2.0f)] != null) || (smallBuildings[x, y] != null));
+        }
+
+        public void CreateSmallBuildingAt(int x, int y, Building building)
+        {
+            smallBuildings[x, y] = building;
+            smallTiles[x, y] = new Tile(x, y, building.GetTileType());
+        }
+
+        public void CreateLargeBuildingAt(int smallXPosition, int smallYPosition, Building building)
+        {
+            largeBuildings[(int)Math.Floor(smallXPosition / 2.0f), (int)Math.Floor(smallYPosition / 2.0f)] = building;
+            largeTiles[(int)Math.Floor(smallXPosition / 2.0f), (int)Math.Floor(smallYPosition / 2.0f)] = new Tile((int)Math.Floor(smallXPosition / 2.0f), (int)Math.Floor(smallYPosition / 2.0f), building.GetTileType());
         }
 
         public int GetWidth()

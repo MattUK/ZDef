@@ -109,8 +109,10 @@
   <ItemGroup>
     <Compile Include="Camera2D.cs" />
     <Compile Include="Entity\Building.cs" />
+    <Compile Include="Entity\HorizontalWall.cs" />
     <Compile Include="Entity\Human.cs" />
     <Compile Include="Entity\SelectionHandle.cs" />
+    <Compile Include="Entity\VerticalWall.cs" />
     <Compile Include="InputHandler.cs" />
     <Compile Include="Lighting.cs" />
     <Compile Include="PathFinder.cs" />
