@@ -10,7 +10,7 @@ namespace GameBase
 {
     public class TileMap
     {
-        public const bool DRAW_BORDER = true;
+        public const bool DRAW_BORDER = false;
 
         private Tile[,] largeTiles;
         private Tile[,] smallTiles;
@@ -68,6 +68,9 @@ namespace GameBase
             if (x < 0 || y < 0 || x > (mapWidth * 2) - 1 || y > (mapHeight * 2) - 1)
             {
                 return false;
+            }
+            if (!IsPassable(x, y)) {
+                return true;
             }
             return ((largeBuildings[(int)Math.Floor(x / 2.0f), (int)Math.Floor(y / 2.0f)] != null) || (smallBuildings[x, y] != null));
         }
