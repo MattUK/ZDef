@@ -33,5 +33,14 @@ namespace GameBase.Entity
             }
         }
 
+        public override void Update(TileMap map, int x, int y)
+        {
+            // Wall to left and wall below = CORNER_LEFT_BOTTOM
+            // Wall to right and wall below = CORNER_RIGHT_BOTTOM
+            // Wall to left and wall above = CORNER_TOP_LEFT
+            // Wall to right and wall above = CORNER_TOP_RIGHT
+            
+        }
+
     }
 }

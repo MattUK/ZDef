@@ -65,19 +65,33 @@ namespace GameBase
 
         public bool IsBuildingAt(int x, int y)
         {
+            if (x < 0 || y < 0 || x > (mapWidth * 2) - 1 || y > (mapHeight * 2) - 1)
+            {
+                return false;
+            }
             return ((largeBuildings[(int)Math.Floor(x / 2.0f), (int)Math.Floor(y / 2.0f)] != null) || (smallBuildings[x, y] != null));
         }
 
-        public void CreateSmallBuildingAt(int x, int y, Building building)
+        public bool CreateSmallBuildingAt(int x, int y, Building building)
         {
+            if (x < 0 || y < 0 || x > (mapWidth * 2) - 1 || y > (mapHeight * 2) - 1)
+            {
+                return false;
+            }
             smallBuildings[x, y] = building;
             smallTiles[x, y] = new Tile(x, y, building.GetTileType());
+            return true;
         }
 
-        public void CreateLargeBuildingAt(int smallXPosition, int smallYPosition, Building building)
+        public bool CreateLargeBuildingAt(int smallXPosition, int smallYPosition, Building building)
         {
+            if (smallXPosition < 0 || smallYPosition < 0 || smallXPosition > (mapWidth * 2) - 1 || smallYPosition > (mapHeight * 2) - 1)
+            {
+                return false;
+            }
             largeBuildings[(int)Math.Floor(smallXPosition / 2.0f), (int)Math.Floor(smallYPosition / 2.0f)] = building;
             largeTiles[(int)Math.Floor(smallXPosition / 2.0f), (int)Math.Floor(smallYPosition / 2.0f)] = new Tile((int)Math.Floor(smallXPosition / 2.0f), (int)Math.Floor(smallYPosition / 2.0f), building.GetTileType());
+            return true;
         }
 
         public int GetWidth()
@@ -92,16 +106,28 @@ namespace GameBase
 
         public Tile GetEntityTile(int x, int y)
         {
+            if (x < 0 || y < 0 || x > (mapWidth * 2) - 1 || y > (mapHeight * 2) - 1)
+            {
+                return null;
+            }
             return smallTiles[x, y];
         }
 
         public Tile GetTerrainTile(int x, int y)
         {
+            if (x < 0 || y < 0 || x > (mapWidth * 2) - 1 || y > (mapHeight * 2) - 1)
+            {
+                return null;
+            }
             return largeTiles[(int)Math.Floor(x / 2.0f), (int)Math.Floor(y / 2.0f)];
         }
 
         public bool IsPassable(int x, int y)
         {
+            if (x < 0 || y < 0 || x > (mapWidth * 2) - 1 || y > (mapHeight * 2) - 1)
+            {
+                return false;
+            }
             return GetEntityTile(x, y).GetTileType().passable && GetTerrainTile(x, y).GetTileType().passable;
         }
 
@@ -157,11 +183,22 @@ namespace GameBase
         {
             float ambientLight = ZDefGame.lighting.GetLightLevel();
 
-            for (int i = 0; i < mapWidth; i++)
+            for (int i = 0; i < mapWidth * 2; i++)
             {
-                for (int j = 0; j < mapHeight; j++)
+                for (int j = 0; j < mapHeight * 2; j++)
                 {
-                    largeTiles[i, j].SetLightLevel(ambientLight);
+                    largeTiles[(int)Math.Floor(i / 2.0f), (int)Math.Floor(j / 2.0f)].SetLightLevel(ambientLight);
+                    smallTiles[i, j].SetLightLevel(ambientLight);
+
+                    if (largeBuildings[(int)Math.Floor(i / 2.0f), (int)Math.Floor(j / 2.0f)] != null)
+                    {
+                        largeBuildings[(int)Math.Floor(i / 2.0f), (int)Math.Floor(j / 2.0f)].Update(this, (int)Math.Floor(i / 2.0f), (int)Math.Floor(j / 2.0f));
+                    }
+
+                    if (smallBuildings[i, j] != null)
+                    {
+                        smallBuildings[i, j].Update(this, i, j);
+                    }
                 }
             }
         }

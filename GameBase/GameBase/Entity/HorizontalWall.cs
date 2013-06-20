@@ -32,5 +32,9 @@ namespace GameBase.Entity
             }
         }
 
+        public override void Update(TileMap map, int x, int y)
+        {
+        }
+
     }
 }
