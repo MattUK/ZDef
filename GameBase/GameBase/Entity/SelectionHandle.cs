@@ -71,14 +71,14 @@ namespace GameBase.Entity
 
         void WallPlacement(InputHandler Input, Pathfinder pathFinder)
         {
-            if (Input.KeyClicked(Keys.D1))
+            if (SelectedTile != null)
             {
-                Wall wall = new Wall(100, 100);
-                wall.SpawnAt(ZDefGame.tileMap, SelectedTile.TilePos().X, SelectedTile.TilePos().Y);
-                pathFinder.EnvironmentChanged = true;
-                //WoodenBarricade barricade = new WoodenBarricade(100, 100);
-                //barricade.SpawnAt(ZDefGame.tileMap, SelectedTile.TilePos().X, SelectedTile.TilePos().Y);
-                //pathFinder.EnvironmentChanged = true;
+                if (Input.KeyDown(Keys.D1))
+                {
+                    Wall wall = new Wall(100, 100);
+                    wall.SpawnAt(ZDefGame.tileMap, SelectedTile.TilePos().X, SelectedTile.TilePos().Y);
+                    pathFinder.EnvironmentChanged = true;
+                }
             }
         }
 
