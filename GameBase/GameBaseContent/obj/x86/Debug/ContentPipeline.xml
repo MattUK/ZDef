@@ -46,6 +46,15 @@
       <Output>D:\Development\GitHub\ZDef\GameBase\GameBase\bin\x86\Debug\Content\Rifleman.xnb</Output>
       <Time>2013-06-20T17:35:14.0134295+01:00</Time>
     </Item>
+    <Item>
+      <Source>main_menu_background.png</Source>
+      <Name>main_menu_background</Name>
+      <Importer>TextureImporter</Importer>
+      <Processor>TextureProcessor</Processor>
+      <Options>None</Options>
+      <Output>D:\Development\GitHub\ZDef\GameBase\GameBase\bin\x86\Debug\Content\main_menu_background.xnb</Output>
+      <Time>2013-06-20T23:05:30.8716473+01:00</Time>
+    </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>
       <TargetPlatform>Windows</TargetPlatform>

@@ -4,19 +4,14 @@ using System.Linq;
 using System.Text;
 using GameBase.Entity;
 using GameBase.GUI;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace GameBase
 {
-    class Player
+    public class Player
     {
         public const int INITIAL_RESOURCE_COUNT = 100;
         public const int INITIAL_DAY_TIME = 0;
-
-        public static Menu currentMenu;
-        public static bool playing;
-
-        public static TileMap tileMap;
-        public static List<Human> humanList;
 
         private int dayTime;
         private int lastTimeIncrement;
@@ -27,12 +22,6 @@ namespace GameBase
         {
             dayTime = INITIAL_DAY_TIME;
             resources = INITIAL_RESOURCE_COUNT;
-        }
-
-        public void SetupGame(int mapWidth, int mapHeight)
-        {
-            tileMap = new TileMap(mapWidth, mapHeight);
-            humanList = new List<Human>();
         }
 
         public void LoadFromSave(String saveName)
@@ -67,6 +56,11 @@ namespace GameBase
             {
                 dayTime++;
             }
+        }
+
+        public void Draw()
+        {
+
         }
 
     }

@@ -33,9 +33,9 @@ namespace GameBase
         public static Texture2D mainMenuTexture;
 
         public static int ScreenWidth = 800;
-        public static int ScreenHeight = 800;
+        public static int ScreenHeight = 600;
 
-        public List<Human> HumanList;
+        public static List<Human> HumanList;
         public static Texture2D HumanTexture;
         public static Texture2D engieTexture;
         public static Texture2D riflemanTexture;
@@ -88,6 +88,7 @@ namespace GameBase
             humanBuildingTexture = Content.Load<Texture2D>("human_buildings");
             engieTexture = Content.Load<Texture2D>("Engineer");
             riflemanTexture = Content.Load<Texture2D>("Rifleman");
+            mainMenuTexture = Content.Load<Texture2D>("main_menu_background");
 
             tileRenderTarget = new RenderTarget2D(GraphicsDevice, tileMap.GetWidth() * 64, tileMap.GetHeight() * 64);
 
