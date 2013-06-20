@@ -107,6 +107,32 @@ namespace GameBase
             return mapHeight;
         }
 
+        public bool SetSmallTile(int x, int y, Tile tile)
+        {
+            if (x < 0 || y < 0 || x > (mapWidth * 2) - 1 || y > (mapHeight * 2) - 1)
+            {
+                return false;
+            }
+            else
+            {
+                smallTiles[x, y] = tile;
+                return true;
+            }
+        }
+
+        public bool SetLargeTile(int x, int y, Tile tile)
+        {
+            if (x < 0 || y < 0 || x > (mapWidth * 2) - 1 || y > (mapHeight * 2) - 1)
+            {
+                return false;
+            }
+            else
+            {
+                largeTiles[(int)Math.Floor(x / 2.0f), (int)Math.Floor(y / 2.0f)] = tile;
+                return true;
+            }
+        }
+
         public Tile GetEntityTile(int x, int y)
         {
             if (x < 0 || y < 0 || x > (mapWidth * 2) - 1 || y > (mapHeight * 2) - 1)
