@@ -81,6 +81,7 @@ namespace GameBase
             tileRenderTarget = new RenderTarget2D(GraphicsDevice, tileMap.GetWidth() * 64, tileMap.GetHeight() * 64);
 
             HumanList.Add(new Human(HumanTexture, tileMap.GetEntityTile(41,40)));
+            HumanList.Add(new Human(HumanTexture, tileMap.GetEntityTile(45, 40)));
         }
 
         protected override void Update(GameTime gameTime)

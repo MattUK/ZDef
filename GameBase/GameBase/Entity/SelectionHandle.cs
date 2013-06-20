@@ -17,6 +17,7 @@ namespace GameBase.Entity
         InputHandler Input;
         Human SelectedHuman;
         Tile SelectedTile;
+        bool TileValid;
 
         public SelectionHandle(InputHandler Input)
         {
@@ -26,7 +27,7 @@ namespace GameBase.Entity
 
         public void Update(List<Human> HumanList, Camera2D Camera, TileMap tileMap, Pathfinder pathFinder)
         {
-
+            TileValid = true;
             SelectedTile = GetSelectedTile(tileMap, Input.TanslatedMousePos(Camera));
 
 
@@ -45,10 +46,26 @@ namespace GameBase.Entity
                 SelectedHuman.CurrentTile = GetSelectedTile(tileMap, SelectedHuman.Position);
                 if (Input.RightClick() == true)
                 {
-                    SelectedHuman.SetGoal(SelectedTile);
+                    for (int i = 0; i < HumanList.Count; i++)
+                    {
+                        if (SelectedTile == HumanList[i].CurrentTile)
+                        {
+                            TileValid = false;
+                        }
+                    }
+
+                    if (TileValid == true)
+                    {
+                        SelectedHuman.SetGoal(SelectedTile);
+                    }
                 }
             }
 
+            WallPlacement(Input, pathFinder);
+        }
+
+        void WallPlacement(InputHandler Input, Pathfinder pathFinder)
+        {
             if (Input.KeyClicked(Keys.D1))
             {
                 HorizontalWall wall = new HorizontalWall(100, 100);
@@ -58,6 +75,30 @@ namespace GameBase.Entity
             if (Input.KeyClicked(Keys.D2))
             {
                 VerticalWall wall = new VerticalWall(100, 100);
+                wall.SpawnAt(ZDefGame.tileMap, SelectedTile.TilePos().X, SelectedTile.TilePos().Y);
+                pathFinder.EnvironmentChanged = true;
+            }
+            if (Input.KeyClicked(Keys.D3))
+            {
+                TopLeftCornerWall wall = new TopLeftCornerWall(100, 100);
+                wall.SpawnAt(ZDefGame.tileMap, SelectedTile.TilePos().X, SelectedTile.TilePos().Y);
+                pathFinder.EnvironmentChanged = true;
+            }
+            if (Input.KeyClicked(Keys.D4))
+            {
+                TopRightCornerWall wall = new TopRightCornerWall(100, 100);
+                wall.SpawnAt(ZDefGame.tileMap, SelectedTile.TilePos().X, SelectedTile.TilePos().Y);
+                pathFinder.EnvironmentChanged = true;
+            }
+            if (Input.KeyClicked(Keys.D5))
+            {
+                LeftBottomCornerWall wall = new LeftBottomCornerWall(100, 100);
+                wall.SpawnAt(ZDefGame.tileMap, SelectedTile.TilePos().X, SelectedTile.TilePos().Y);
+                pathFinder.EnvironmentChanged = true;
+            }
+            if (Input.KeyClicked(Keys.D6))
+            {
+                RightBottomCornerWall wall = new RightBottomCornerWall(100, 100);
                 wall.SpawnAt(ZDefGame.tileMap, SelectedTile.TilePos().X, SelectedTile.TilePos().Y);
                 pathFinder.EnvironmentChanged = true;
             }
@@ -99,8 +140,6 @@ namespace GameBase.Entity
             //If no tile is returned, return null.
             return null;
         }
-
-
 
         void ClearSelected()
         {

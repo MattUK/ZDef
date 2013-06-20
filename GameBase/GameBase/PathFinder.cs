@@ -158,7 +158,7 @@ namespace GameBase
                     }
 
                     // An array of all of the possible neighbors this 
-                    // node could have. (We will ignore diagonals for now.)
+                    // node could have.
                     Point[] neighbors = new Point[]
                     {
                         new Point (x, y - 1), // The node above the current node
@@ -182,6 +182,8 @@ namespace GameBase
                         {
                             continue;
                         }
+
+
 
                         SearchNode neighbor = searchNodes[position.X, position.Y];
 
