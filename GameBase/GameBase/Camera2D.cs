@@ -91,15 +91,15 @@ namespace GameBase
                 Position.Y = Max.Y - Height / 2;
             }
 
-           // Console.WriteLine(Zoom);
+      //      Console.WriteLine(Zoom);
 
             if (Zoom > 1f)
             {
                 Zoom = 1f;
             }
-            if (Zoom < 0.2500001f)
+            if (Zoom < 0.3500001f)
             {
-                Zoom = 0.2500001f;
+                Zoom = 0.3500001f;
             }
         }
 

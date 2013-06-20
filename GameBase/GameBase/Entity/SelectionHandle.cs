@@ -31,6 +31,11 @@ namespace GameBase.Entity
             SelectedTile = GetSelectedTile(tileMap, Input.TanslatedMousePos(Camera));
 
 
+            if (Input.KeyClicked(Keys.U))
+            {
+                tileMap.ChangeWalls(SelectedTile);
+            }
+
             if (Input.LeftClick() == true)
             {
                 ClearSelected();
