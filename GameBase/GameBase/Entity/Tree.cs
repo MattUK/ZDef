@@ -46,5 +46,10 @@ namespace GameBase.Entity
             //ZDefGame.spriteBatch.Draw(ZDefGame.humanBuildingTexture, tile.GetRectangle(), tile.GetTileType().GetSourcePositionRectangle(), drawColour, 0.0f, new Vector2(), Microsoft.Xna.Framework.Graphics.SpriteEffects.None, ZDefGame.BUILDING_DRAW_DEPTH);
         }
 
+        public override bool OnUserInteract(Building.EntityInteraction interaction)
+        {
+            throw new NotImplementedException();
+        }
+
     }
 }

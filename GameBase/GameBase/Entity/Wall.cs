@@ -78,5 +78,10 @@ namespace GameBase.Entity
             tile.Draw();
         }
 
+        public override bool OnUserInteract(Building.EntityInteraction interaction)
+        {
+            throw new NotImplementedException();
+        }
+
     }
 }
