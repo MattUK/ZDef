@@ -180,7 +180,7 @@ namespace GameBase
                 }
             }
 
-            PerlinNoise2D treeNoiseGen = new PerlinNoise2D(mapWidth * mapHeight);
+            PerlinNoise2D treeNoiseGen = new PerlinNoise2D(mapWidth * mapHeight * DateTime.Now.Millisecond);
             treeNoiseGen.setOctaveCount(1);
             treeNoiseGen.setFrequency(0.1f);
 
@@ -191,7 +191,7 @@ namespace GameBase
                     float value = MathHelper.Clamp(treeNoiseGen.generateNoiseValue(i, j), 0.0f, 1.0f);
                     if (value > 0.9f)
                     {
-                        if (GetTerrainTile(i, j).GetTileType() != TileType.WATER && GetTerrainTile(i, j).GetTileType() != TileType.SAND)
+                        if (GetTerrainTile(i, j).GetTileType() != TileType.WATER && GetTerrainTile(i, j).GetTileType() != TileType.SAND && GetTerrainTile(i, j).GetTileType() != TileType.STONE)
                         {
                             CreateSmallBuildingAt(i, j, new Tree());
                         }
