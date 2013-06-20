@@ -183,7 +183,7 @@ namespace GameBase
                             continue;
                         }
 
-
+                        
 
                         SearchNode neighbor = searchNodes[position.X, position.Y];
 
