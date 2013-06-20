@@ -93,9 +93,9 @@ namespace GameBase
 
       //      Console.WriteLine(Zoom);
 
-            if (Zoom > 1f)
+            if (Zoom > 2f)
             {
-                Zoom = 1f;
+                Zoom = 2f;
             }
             if (Zoom < 0.3500001f)
             {

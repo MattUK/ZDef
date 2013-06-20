@@ -73,5 +73,10 @@ namespace GameBase.Entity
             map.SetSmallTile(x, y, new Tile(x, y, newType));
         }
 
+        public override void Draw(Tile tile)
+        {
+            tile.Draw();
+        }
+
     }
 }

@@ -39,6 +39,11 @@ namespace GameBase
         public static Texture2D riflemanTexture;
         // =============================================
 
+        // ======= Draw Depths ==============
+        public const float TERRAIN_DRAW_DEPTH = 1.0f;
+        public const float BUILDING_DRAW_DEPTH = 0.4f;
+        public const float HUMAN_DRAW_DEPTH = 0.5f;
+
         private RenderTarget2D tileRenderTarget;
 
         public ZDefGame()
@@ -84,8 +89,16 @@ namespace GameBase
 
             tileRenderTarget = new RenderTarget2D(GraphicsDevice, tileMap.GetWidth() * 64, tileMap.GetHeight() * 64);
 
-            HumanList.Add(new Human(engieTexture, tileMap.GetEntityTile(41,40)));
-            HumanList.Add(new Human(riflemanTexture, tileMap.GetEntityTile(45, 40)));
+            HumanList.Add(new Human(engieTexture, tileMap.GetEntityTile(41,41)));
+            HumanList.Add(new Human(riflemanTexture, tileMap.GetEntityTile(41, 40)));
+            HumanList.Add(new Human(riflemanTexture, tileMap.GetEntityTile(42, 40)));
+            HumanList.Add(new Human(riflemanTexture, tileMap.GetEntityTile(40, 40)));
+            HumanList.Add(new Human(riflemanTexture, tileMap.GetEntityTile(41, 39)));
+            HumanList.Add(new Human(riflemanTexture, tileMap.GetEntityTile(42, 39)));
+            HumanList.Add(new Human(riflemanTexture, tileMap.GetEntityTile(40, 39)));
+            HumanList.Add(new Human(riflemanTexture, tileMap.GetEntityTile(41, 38)));
+            HumanList.Add(new Human(riflemanTexture, tileMap.GetEntityTile(42, 38)));
+            HumanList.Add(new Human(riflemanTexture, tileMap.GetEntityTile(40, 38)));
         }
 
         protected override void Update(GameTime gameTime)
@@ -110,10 +123,9 @@ namespace GameBase
             }
 
             camera.Input(input);
-            tileMap.Update();
             lighting.Update();
             Selection.Update(HumanList, camera, tileMap, pathFinder);
-
+            tileMap.Update();
             pathFinder.Update();
 
             base.Update(gameTime);
@@ -126,7 +138,7 @@ namespace GameBase
             GraphicsDevice.SetRenderTarget(tileRenderTarget);
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            spriteBatch.Begin();
+            spriteBatch.Begin(SpriteSortMode.BackToFront, BlendState.AlphaBlend);
             tileMap.Draw();
 
             for (int i = 0; i < HumanList.Count; i++)

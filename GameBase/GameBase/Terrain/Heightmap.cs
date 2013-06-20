@@ -84,6 +84,11 @@ namespace GameBase.Terrain
             }
         }
 
+        public float GetValueAt(int x, int y)
+        {
+            return values[x, y];
+        }
+
         public TileType GetTypeAt(int x, int y)
         {
             // 0 < x < 0.5 = Water

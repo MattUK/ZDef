@@ -26,7 +26,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>D:\Development\GitHub\ZDef\GameBase\GameBase\bin\x86\Debug\Content\human_buildings.xnb</Output>
-      <Time>2013-06-20T17:18:38.807507+01:00</Time>
+      <Time>2013-06-20T19:19:28.0859004+01:00</Time>
     </Item>
     <Item>
       <Source>Engineer.png</Source>
@@ -44,7 +44,7 @@
       <Processor>TextureProcessor</Processor>
       <Options>None</Options>
       <Output>D:\Development\GitHub\ZDef\GameBase\GameBase\bin\x86\Debug\Content\Rifleman.xnb</Output>
-      <Time>2013-06-20T17:04:57.747545+01:00</Time>
+      <Time>2013-06-20T17:35:14.0134295+01:00</Time>
     </Item>
     <BuildSuccessful>true</BuildSuccessful>
     <Settings>

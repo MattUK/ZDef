@@ -89,7 +89,7 @@ namespace GameBase
             Colour = Color.White * ZDefGame.lighting.GetLightLevel();
             Colour.A = 255;
 
-            spriteBatch.Draw(Texture, Position, null, Colour, Rotation, Origin, Scale, SpriteEffects.None, 1.0f);
+            spriteBatch.Draw(Texture, Position, null, Colour, Rotation, Origin, Scale, SpriteEffects.None, ZDefGame.HUMAN_DRAW_DEPTH);
         }
     }
 }

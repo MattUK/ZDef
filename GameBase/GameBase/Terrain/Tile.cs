@@ -104,28 +104,28 @@ namespace GameBase.Terrain
 
             if (tileType.tileID < 50)
             {
-                ZDefGame.spriteBatch.Draw(ZDefGame.terrainTexture, GetPosition(), tileType.GetSourcePositionRectangle(), drawColour);
+                ZDefGame.spriteBatch.Draw(ZDefGame.terrainTexture, GetRectangle(), tileType.GetSourcePositionRectangle(), drawColour, 0.0f, new Vector2(), Microsoft.Xna.Framework.Graphics.SpriteEffects.None, ZDefGame.TERRAIN_DRAW_DEPTH);
 
                 if (drawTopBorder)
                 {
-                    ZDefGame.spriteBatch.Draw(ZDefGame.terrainTexture, GetPosition(), TileType.BORDER_TOP.GetSourcePositionRectangle(), drawColour);
+                    ZDefGame.spriteBatch.Draw(ZDefGame.terrainTexture, GetRectangle(), TileType.BORDER_TOP.GetSourcePositionRectangle(), drawColour, 0.0f, new Vector2(), Microsoft.Xna.Framework.Graphics.SpriteEffects.None, ZDefGame.TERRAIN_DRAW_DEPTH);
                 }
                 if (drawBottomBorder)
                 {
-                    ZDefGame.spriteBatch.Draw(ZDefGame.terrainTexture, GetPosition(), TileType.BORDER_BOTTOM.GetSourcePositionRectangle(), drawColour);
+                    ZDefGame.spriteBatch.Draw(ZDefGame.terrainTexture, GetRectangle(), TileType.BORDER_BOTTOM.GetSourcePositionRectangle(), drawColour, 0.0f, new Vector2(), Microsoft.Xna.Framework.Graphics.SpriteEffects.None, ZDefGame.TERRAIN_DRAW_DEPTH);
                 }
                 if (drawLeftBorder)
                 {
-                    ZDefGame.spriteBatch.Draw(ZDefGame.terrainTexture, GetPosition(), TileType.BORDER_LEFT.GetSourcePositionRectangle(), drawColour);
+                    ZDefGame.spriteBatch.Draw(ZDefGame.terrainTexture, GetRectangle(), TileType.BORDER_LEFT.GetSourcePositionRectangle(), drawColour, 0.0f, new Vector2(), Microsoft.Xna.Framework.Graphics.SpriteEffects.None, ZDefGame.TERRAIN_DRAW_DEPTH);
                 }
                 if (drawRightBorder)
                 {
-                    ZDefGame.spriteBatch.Draw(ZDefGame.terrainTexture, GetPosition(), TileType.BORDER_RIGHT.GetSourcePositionRectangle(), drawColour);
+                    ZDefGame.spriteBatch.Draw(ZDefGame.terrainTexture, GetRectangle(), TileType.BORDER_RIGHT.GetSourcePositionRectangle(), drawColour, 0.0f, new Vector2(), Microsoft.Xna.Framework.Graphics.SpriteEffects.None, ZDefGame.TERRAIN_DRAW_DEPTH);
                 }
             }
             else
             {
-                ZDefGame.spriteBatch.Draw(ZDefGame.humanBuildingTexture, GetPosition(), tileType.GetSourcePositionRectangle(), drawColour);
+                ZDefGame.spriteBatch.Draw(ZDefGame.humanBuildingTexture, GetRectangle(), tileType.GetSourcePositionRectangle(), drawColour, 0.0f, new Vector2(), Microsoft.Xna.Framework.Graphics.SpriteEffects.None, ZDefGame.BUILDING_DRAW_DEPTH);
             }
         }
 

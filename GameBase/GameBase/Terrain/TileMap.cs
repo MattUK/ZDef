@@ -180,6 +180,25 @@ namespace GameBase
                 }
             }
 
+            PerlinNoise2D treeNoiseGen = new PerlinNoise2D(mapWidth * mapHeight);
+            treeNoiseGen.setOctaveCount(1);
+            treeNoiseGen.setFrequency(0.1f);
+
+            for (int i = 0; i < mapWidth * 2; i++)
+            {
+                for (int j = 0; j < mapHeight * 2; j++)
+                {
+                    float value = MathHelper.Clamp(treeNoiseGen.generateNoiseValue(i, j), 0.0f, 1.0f);
+                    if (value > 0.9f)
+                    {
+                        if (GetTerrainTile(i, j).GetTileType() != TileType.WATER && GetTerrainTile(i, j).GetTileType() != TileType.SAND)
+                        {
+                            CreateSmallBuildingAt(i, j, new Tree());
+                        }
+                    }
+                }
+            }
+
             for (int i = 0; i < mapWidth; i++)
             {
                 for (int j = 0; j < mapHeight; j++)

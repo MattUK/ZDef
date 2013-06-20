@@ -25,6 +25,6 @@ namespace GameBase.Entity
         // map.Set<Size>Tile(x, y, new Tile(x, y, <Type>);
         public abstract void Update(TileMap map, int x, int y);
 
-        //public abstract void Draw(Tile tile);
+        public abstract void Draw(Tile tile);
     }
 }
