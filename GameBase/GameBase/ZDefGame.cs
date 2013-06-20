@@ -107,7 +107,9 @@ namespace GameBase
             camera.Input(input);
             tileMap.Update();
             lighting.Update();
-            Selection.Update(HumanList, camera, tileMap);
+            Selection.Update(HumanList, camera, tileMap, pathFinder);
+
+            pathFinder.Update();
 
             base.Update(gameTime);
             input.UpdateLastValues();

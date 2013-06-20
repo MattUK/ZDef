@@ -24,7 +24,7 @@ namespace GameBase.Entity
             SelectedHuman = null;
         }
 
-        public void Update(List<Human> HumanList, Camera2D Camera, TileMap tileMap)
+        public void Update(List<Human> HumanList, Camera2D Camera, TileMap tileMap, Pathfinder pathFinder)
         {
 
             SelectedTile = GetSelectedTile(tileMap, Input.TanslatedMousePos(Camera));
@@ -47,6 +47,19 @@ namespace GameBase.Entity
                 {
                     SelectedHuman.SetGoal(SelectedTile);
                 }
+            }
+
+            if (Input.KeyClicked(Keys.D1))
+            {
+                HorizontalWall wall = new HorizontalWall(100, 100);
+                wall.SpawnAt(ZDefGame.tileMap, SelectedTile.TilePos().X, SelectedTile.TilePos().Y);
+                pathFinder.EnvironmentChanged = true;
+            }
+            if (Input.KeyClicked(Keys.D2))
+            {
+                VerticalWall wall = new VerticalWall(100, 100);
+                wall.SpawnAt(ZDefGame.tileMap, SelectedTile.TilePos().X, SelectedTile.TilePos().Y);
+                pathFinder.EnvironmentChanged = true;
             }
         }
 
