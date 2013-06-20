@@ -115,6 +115,8 @@
     <Compile Include="Entity\Wall.cs" />
     <Compile Include="Entity\Weapon.cs" />
     <Compile Include="Entity\WoodenBarricade.cs" />
+    <Compile Include="GUI\MainMenu.cs" />
+    <Compile Include="GUI\Menu.cs" />
     <Compile Include="InputHandler.cs" />
     <Compile Include="Lighting.cs" />
     <Compile Include="PathFinder.cs" />
