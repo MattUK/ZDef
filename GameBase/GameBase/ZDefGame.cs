@@ -10,11 +10,17 @@ using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 using GameBase.Terrain;
 using GameBase.Entity;
+using GameBase.GUI;
 
 namespace GameBase
 {
     public class ZDefGame : Microsoft.Xna.Framework.Game
     {
+        // =========== Game / State Stuff ==============
+        public static Menu currentMenu;
+        public static bool playing;
+        // =============================================
+
         // =========== Content / Utilities =============
         // =============================================
         public static SpriteBatch spriteBatch;
@@ -76,6 +82,9 @@ namespace GameBase
             pathFinder = new Pathfinder(tileMap);
             utilityClass = new Utility();
 
+            currentMenu = new MainMenu(ScreenWidth, ScreenHeight);
+            playing = false;
+
             base.Initialize();
         }
 
@@ -114,50 +123,64 @@ namespace GameBase
                // Environment.Exit(0);
             }
 
-            //if (input.KeyDown(Keys.F1))
-            //{
-            //    throw new Exception("Lol meet");
-            //    // Environment.Exit(0);
-            //}
-
-            for(int i = 0; i < HumanList.Count;i++)
+            if (playing)
             {
-                HumanList[i].Update(pathFinder, input);
+                for (int i = 0; i < HumanList.Count; i++)
+                {
+                    HumanList[i].Update(pathFinder, input);
+                }
+
+                camera.Input(input);
+                lighting.Update();
+                Selection.Update(HumanList, camera, tileMap, pathFinder);
+                tileMap.Update();
+                pathFinder.Update();
+
+                camera.Constraint(new Vector2(tileMap.GetWidth() * 64, tileMap.GetHeight() * 64));
+                utilityClass.TrapMouse(true, this);
+            }
+            else
+            {
+                currentMenu.Update();
             }
 
-            camera.Input(input);
-            lighting.Update();
-            Selection.Update(HumanList, camera, tileMap, pathFinder);
-            tileMap.Update();
-            pathFinder.Update();
+            input.UpdateLastValues();
 
             base.Update(gameTime);
-            input.UpdateLastValues();
-            camera.Constraint(new Vector2(tileMap.GetWidth() * 64, tileMap.GetHeight() * 64));
-            utilityClass.TrapMouse(true, this);
         }
 
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.SetRenderTarget(tileRenderTarget);
-            GraphicsDevice.Clear(Color.CornflowerBlue);
-
-            spriteBatch.Begin(SpriteSortMode.BackToFront, BlendState.AlphaBlend);
-            tileMap.Draw();
-
-            for (int i = 0; i < HumanList.Count; i++)
+            if (playing)
             {
-                HumanList[i].Draw(spriteBatch);
+                GraphicsDevice.SetRenderTarget(tileRenderTarget);
+                GraphicsDevice.Clear(Color.CornflowerBlue);
+
+                spriteBatch.Begin(SpriteSortMode.BackToFront, BlendState.AlphaBlend);
+                tileMap.Draw();
+
+                for (int i = 0; i < HumanList.Count; i++)
+                {
+                    HumanList[i].Draw(spriteBatch);
+                }
+
+                spriteBatch.End();
+
+                GraphicsDevice.SetRenderTarget(null);
+                GraphicsDevice.Clear(Color.CornflowerBlue);
+
+                spriteBatch.Begin(SpriteSortMode.Deferred, null, null, null, null, null, camera.Transform());
+                spriteBatch.Draw(tileRenderTarget, new Vector2(0, 0), Color.White);
+                spriteBatch.End();
             }
+            else
+            {
+                GraphicsDevice.Clear(Color.CornflowerBlue);
 
-            spriteBatch.End();
-
-            GraphicsDevice.SetRenderTarget(null);
-            GraphicsDevice.Clear(Color.CornflowerBlue);
-
-            spriteBatch.Begin(SpriteSortMode.Deferred, null, null, null, null, null, camera.Transform());
-            spriteBatch.Draw(tileRenderTarget, new Vector2(0, 0), Color.White);
-            spriteBatch.End();
+                spriteBatch.Begin();
+                currentMenu.Draw();
+                spriteBatch.End();
+            }
 
             base.Draw(gameTime);
         }

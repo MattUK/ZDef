@@ -24,7 +24,10 @@ namespace GameBase.GUI
 
         public override void Update()
         {
-            
+            if (playButtonRectangle.Contains((int)ZDefGame.input.MousePosition().X, (int)ZDefGame.input.MousePosition().Y) && ZDefGame.input.LeftClick())
+            {
+                ZDefGame.playing = true;
+            }
         }
 
         public override void Draw()
