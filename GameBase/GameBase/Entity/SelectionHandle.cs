@@ -68,38 +68,8 @@ namespace GameBase.Entity
         {
             if (Input.KeyClicked(Keys.D1))
             {
-                HorizontalWall wall = new HorizontalWall(100, 100);
-                wall.SpawnAt(ZDefGame.tileMap, SelectedTile.TilePos().X, SelectedTile.TilePos().Y);
-                pathFinder.EnvironmentChanged = true;
-            }
-            if (Input.KeyClicked(Keys.D2))
-            {
-                VerticalWall wall = new VerticalWall(100, 100);
-                wall.SpawnAt(ZDefGame.tileMap, SelectedTile.TilePos().X, SelectedTile.TilePos().Y);
-                pathFinder.EnvironmentChanged = true;
-            }
-            if (Input.KeyClicked(Keys.D3))
-            {
-                TopLeftCornerWall wall = new TopLeftCornerWall(100, 100);
-                wall.SpawnAt(ZDefGame.tileMap, SelectedTile.TilePos().X, SelectedTile.TilePos().Y);
-                pathFinder.EnvironmentChanged = true;
-            }
-            if (Input.KeyClicked(Keys.D4))
-            {
-                TopRightCornerWall wall = new TopRightCornerWall(100, 100);
-                wall.SpawnAt(ZDefGame.tileMap, SelectedTile.TilePos().X, SelectedTile.TilePos().Y);
-                pathFinder.EnvironmentChanged = true;
-            }
-            if (Input.KeyClicked(Keys.D5))
-            {
-                LeftBottomCornerWall wall = new LeftBottomCornerWall(100, 100);
-                wall.SpawnAt(ZDefGame.tileMap, SelectedTile.TilePos().X, SelectedTile.TilePos().Y);
-                pathFinder.EnvironmentChanged = true;
-            }
-            if (Input.KeyClicked(Keys.D6))
-            {
-                RightBottomCornerWall wall = new RightBottomCornerWall(100, 100);
-                wall.SpawnAt(ZDefGame.tileMap, SelectedTile.TilePos().X, SelectedTile.TilePos().Y);
+                WoodenBarricade barricade = new WoodenBarricade(100, 100);
+                barricade.SpawnAt(ZDefGame.tileMap, SelectedTile.TilePos().X, SelectedTile.TilePos().Y);
                 pathFinder.EnvironmentChanged = true;
             }
         }

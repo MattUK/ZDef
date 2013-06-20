@@ -6,9 +6,9 @@ using GameBase.Terrain;
 
 namespace GameBase.Entity
 {
-    public class HorizontalWall : Building
+    class WoodenBarricade : Building
     {
-        public HorizontalWall(int health, int constructionState)
+        public WoodenBarricade(int health, int constructionState)
             : base(health, constructionState)
         {
 
@@ -16,7 +16,7 @@ namespace GameBase.Entity
 
         public override TileType GetTileType()
         {
-            return TileType.WALL_HORIZONTAL;
+            return TileType.WOODEN_BARRICADE;
         }
 
         public override bool SpawnAt(TileMap map, int x, int y)
@@ -27,14 +27,13 @@ namespace GameBase.Entity
             }
             else
             {
-                map.CreateSmallBuildingAt(x, y, this);
-                return true;
+                return map.CreateSmallBuildingAt(x, y, this);
             }
         }
 
         public override void Update(TileMap map, int x, int y)
         {
+            
         }
-
     }
 }

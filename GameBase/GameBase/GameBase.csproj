@@ -108,15 +108,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Camera2D.cs" />
-    <Compile Include="Entity\LeftBottomCornerWall.cs" />
     <Compile Include="Entity\Building.cs" />
-    <Compile Include="Entity\HorizontalWall.cs" />
     <Compile Include="Entity\Human.cs" />
-    <Compile Include="Entity\RightBottomCornerWall.cs" />
     <Compile Include="Entity\SelectionHandle.cs" />
-    <Compile Include="Entity\TopLeftCornerWall.cs" />
-    <Compile Include="Entity\TopRightCornerWall.cs" />
-    <Compile Include="Entity\VerticalWall.cs" />
+    <Compile Include="Entity\WoodenBarricade.cs" />
     <Compile Include="InputHandler.cs" />
     <Compile Include="Lighting.cs" />
     <Compile Include="PathFinder.cs" />
