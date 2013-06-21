@@ -1,3 +1,7 @@
 Content\terrain_spritesheet.xnb
 Content\Human.xnb
 Content\human_buildings.xnb
+Content\Engineer.xnb
+Content\Rifleman.xnb
+Content\main_menu_background.xnb
+Content\BulletTexture.xnb

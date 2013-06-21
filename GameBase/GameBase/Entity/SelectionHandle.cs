@@ -79,6 +79,11 @@ namespace GameBase.Entity
                     wall.SpawnAt(ZDefGame.tileMap, SelectedTile.TilePos().X, SelectedTile.TilePos().Y);
                     pathFinder.EnvironmentChanged = true;
                 }
+
+                if (Input.KeyDown(Keys.D2))
+                {
+                    ZDefGame.tileMap.ClearTile(SelectedTile.TilePos().X, SelectedTile.TilePos().Y);
+                }
             }
         }
 

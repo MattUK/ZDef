@@ -97,6 +97,12 @@ namespace GameBase
             return true;
         }
 
+        public void ClearTile(int x, int y)
+        {
+            smallBuildings[x, y].Remove();
+            smallTiles[x, y] = new Tile(x, y, TileType.EMPTY_SMALL);
+        }
+
         public int GetWidth()
         {
             return mapWidth;

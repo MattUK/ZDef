@@ -20,3 +20,7 @@ C:\Users\Connor\Documents\GitHub\ZDef\GameBase\GameBase\obj\x86\Debug\GameBase.e
 C:\Users\Connor\Documents\GitHub\ZDef\GameBase\GameBase\obj\x86\Debug\GameBase.pdb
 C:\Users\Connor\Documents\GitHub\ZDef\GameBase\GameBase\bin\x86\Debug\Content\Human.xnb
 C:\Users\Connor\Documents\GitHub\ZDef\GameBase\GameBase\bin\x86\Debug\Content\human_buildings.xnb
+C:\Users\Connor\Documents\GitHub\ZDef\GameBase\GameBase\bin\x86\Debug\Content\Engineer.xnb
+C:\Users\Connor\Documents\GitHub\ZDef\GameBase\GameBase\bin\x86\Debug\Content\Rifleman.xnb
+C:\Users\Connor\Documents\GitHub\ZDef\GameBase\GameBase\bin\x86\Debug\Content\main_menu_background.xnb
+C:\Users\Connor\Documents\GitHub\ZDef\GameBase\GameBase\bin\x86\Debug\Content\BulletTexture.xnb
