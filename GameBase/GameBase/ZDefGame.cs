@@ -48,6 +48,7 @@ namespace GameBase
         public static Texture2D engieTexture;
         public static Texture2D riflemanTexture;
         public static Texture2D bulletTexture;
+        public static Texture2D zombieTexture;
         // =============================================
 
         // ======= Draw Depths ==============
@@ -102,10 +103,11 @@ namespace GameBase
             riflemanTexture = Content.Load<Texture2D>("Rifleman");
             mainMenuTexture = Content.Load<Texture2D>("main_menu_background");
             bulletTexture = Content.Load<Texture2D>("BulletTexture");
+            zombieTexture = Content.Load<Texture2D>("Zombee");
 
             tileRenderTarget = new RenderTarget2D(GraphicsDevice, tileMap.GetWidth() * 64, tileMap.GetHeight() * 64);
 
-            ZombieList.Add(new Zombie(engieTexture, new Vector2(40,40), 0.0f));
+            ZombieList.Add(new Zombie(zombieTexture, new Vector2(40,40), 0.0f));
 
             HumanList.Add(new Human(engieTexture, tileMap.GetEntityTile(41, 41), 600, bulletTexture));
             HumanList.Add(new Human(riflemanTexture, tileMap.GetEntityTile(41, 40), 600, bulletTexture));
