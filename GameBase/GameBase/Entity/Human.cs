@@ -21,7 +21,11 @@ namespace GameBase.Entity
         bool NotMoving;
         List<Vector2> Path;
 
-        public Human(Texture2D Tex, Tile ChosenTile)
+        public Weapon weapon;
+        int ClosestDistance;
+        int DistanceMax; //Range the rifleman can fire.
+
+        public Human(Texture2D Tex, Tile ChosenTile, int WepDis, Texture2D BulTex)
         {
             Position = ChosenTile.GetPosition() + new Vector2(16,16);
             MoveGoal = Position;
@@ -30,15 +34,25 @@ namespace GameBase.Entity
             CurrentTile = ChosenTile;
             GoalTile = CurrentTile;
             Path = new List<Vector2>();
+            DistanceMax = WepDis;
+            ClosestDistance = DistanceMax;
             ConstructThings();
+
+            weapon = new Weapon(Position, Rotation, 20, 15, BulTex);
         }
 
         public void Update(Pathfinder pathFinder, InputHandler Input)
         {
-            if (Input.KeyClicked(Keys.F1))
+            FindTarget(new List<Sprite>());
+
+            if (Input.KeyClicked(Keys.R))
             {
-                throw new Exception("wahkdsdsb");
+                weapon.Fire();
+                //throw new Exception("`12");
             }
+
+            weapon.Update();
+            weapon.Position = Position;
 
             if (CurrentTile != GoalTile)
             {
@@ -82,6 +96,23 @@ namespace GameBase.Entity
         public void BuildThing()
         {
 
+        }
+
+        /// <summary>
+        /// ZombieList is a placeholder right now.
+        /// </summary>
+        void FindTarget(List<Sprite> ZombieList)
+        {
+            for (int i = 0; i < ZombieList.Count; i++)
+            {
+                if (Vector2.Distance(Position, ZombieList[i].Position) > ClosestDistance)
+                {
+                    weapon.Target = ZombieList[i];
+                    ClosestDistance = (int)Vector2.Distance(Position, ZombieList[i].Position);
+                }
+            }
+
+            ClosestDistance = DistanceMax;
         }
 
         public void SetGoal(Tile tile)

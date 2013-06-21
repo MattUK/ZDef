@@ -37,7 +37,7 @@ namespace GameBase
 
             ColArray = new Color[SpriteWidth * SpriteHeight];
             Texture.GetData(ColArray);
-
+            Scale = 1.0f;
             Origin = vec;
         }
         

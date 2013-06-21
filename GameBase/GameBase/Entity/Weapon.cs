@@ -7,37 +7,46 @@ using Microsoft.Xna.Framework.Graphics;
 
 namespace GameBase.Entity
 {
-    class Weapon
+    public class Weapon
     {
         public int Damage;
         public int Delay;
         int DelayMax;
         public Vector2 Position;
         public float Rotation;
-        Sprite Target;
+        public Sprite Target; //placeholder
         Texture2D BulletTex;
         List<Projectile> BulletList;
 
-        public Weapon(Vector2 Pos, float Rot, int delay, int Dam)
+        public Weapon(Vector2 Pos, float Rot, int delay, int Dam, Texture2D BulTex)
         {
             Position = Pos;
             Rotation = Rot;
             Delay = delay;
             DelayMax = Delay;
             Damage = Dam;
+            BulletTex = BulTex;
             BulletList = new List<Projectile>();
         }
 
         public void Update()
         {
-            if (Target != null && Delay == 0)
+            if (Target != null)
             {
-                Fire();
+                float XDis = (Position.X - Target.Position.X);
+                float YDis = (Position.Y - Target.Position.Y);
+
+                Rotation = (float)Math.Atan2(-YDis, -XDis);
+
+                if (Delay == 0)
+                {
+                    Fire();
+                }
             }
 
-            foreach (Projectile bullet in BulletList)
+            for (int i = 0; i < BulletList.Count; i++)
             {
-                bullet.Update();
+                BulletList[i].Update();
             }
 
 
@@ -47,12 +56,20 @@ namespace GameBase.Entity
             }
         }
 
-        void Fire()
+        public void Fire()
         {
             Console.WriteLine("A zombie has been shot!");
             Projectile Bullet = new Projectile(Position, Rotation, Damage, BulletTex, 5);
 
             BulletList.Add(Bullet);
+        }
+
+        public void DrawBullets(SpriteBatch spriteBatch)
+        {
+            for (int i = 0; i < BulletList.Count; i++)
+            {
+                BulletList[i].Draw(spriteBatch);
+            }
         }
     }
 }

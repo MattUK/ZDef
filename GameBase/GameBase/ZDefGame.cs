@@ -41,11 +41,12 @@ namespace GameBase
         public static int ScreenWidth = 800;
         public static int ScreenHeight = 600;
 
-        public static List<Human> HumanList;
+        public static Utility utilityClass;
+        public static List<Human> HumanList; //How dare you change this to static.
         public static Texture2D HumanTexture;
         public static Texture2D engieTexture;
         public static Texture2D riflemanTexture;
-        public static Utility utilityClass;
+        public static Texture2D bulletTexture;
         // =============================================
 
         // ======= Draw Depths ==============
@@ -98,19 +99,20 @@ namespace GameBase
             engieTexture = Content.Load<Texture2D>("Engineer");
             riflemanTexture = Content.Load<Texture2D>("Rifleman");
             mainMenuTexture = Content.Load<Texture2D>("main_menu_background");
+            bulletTexture = Content.Load<Texture2D>("BulletTexture");
 
             tileRenderTarget = new RenderTarget2D(GraphicsDevice, tileMap.GetWidth() * 64, tileMap.GetHeight() * 64);
 
-            HumanList.Add(new Human(engieTexture, tileMap.GetEntityTile(41,41)));
-            HumanList.Add(new Human(riflemanTexture, tileMap.GetEntityTile(41, 40)));
-            HumanList.Add(new Human(riflemanTexture, tileMap.GetEntityTile(42, 40)));
-            HumanList.Add(new Human(riflemanTexture, tileMap.GetEntityTile(40, 40)));
-            HumanList.Add(new Human(riflemanTexture, tileMap.GetEntityTile(41, 39)));
-            HumanList.Add(new Human(riflemanTexture, tileMap.GetEntityTile(42, 39)));
-            HumanList.Add(new Human(riflemanTexture, tileMap.GetEntityTile(40, 39)));
-            HumanList.Add(new Human(riflemanTexture, tileMap.GetEntityTile(41, 38)));
-            HumanList.Add(new Human(riflemanTexture, tileMap.GetEntityTile(42, 38)));
-            HumanList.Add(new Human(riflemanTexture, tileMap.GetEntityTile(40, 38)));
+            HumanList.Add(new Human(engieTexture, tileMap.GetEntityTile(41, 41), 600, bulletTexture));
+            HumanList.Add(new Human(riflemanTexture, tileMap.GetEntityTile(41, 40), 600, bulletTexture));
+            HumanList.Add(new Human(riflemanTexture, tileMap.GetEntityTile(42, 40), 600, bulletTexture));
+            HumanList.Add(new Human(riflemanTexture, tileMap.GetEntityTile(40, 40), 600, bulletTexture));
+            HumanList.Add(new Human(riflemanTexture, tileMap.GetEntityTile(41, 39), 600, bulletTexture));
+            HumanList.Add(new Human(riflemanTexture, tileMap.GetEntityTile(42, 39), 600, bulletTexture));
+            HumanList.Add(new Human(riflemanTexture, tileMap.GetEntityTile(40, 39), 600, bulletTexture));
+            HumanList.Add(new Human(riflemanTexture, tileMap.GetEntityTile(41, 38), 600, bulletTexture));
+            HumanList.Add(new Human(riflemanTexture, tileMap.GetEntityTile(42, 38), 600, bulletTexture));
+            HumanList.Add(new Human(riflemanTexture, tileMap.GetEntityTile(40, 38), 600, bulletTexture));
         }
 
         protected override void Update(GameTime gameTime)
@@ -162,6 +164,8 @@ namespace GameBase
                 for (int i = 0; i < HumanList.Count; i++)
                 {
                     HumanList[i].Draw(spriteBatch);
+
+                    HumanList[i].weapon.DrawBullets(spriteBatch);
                 }
 
                 spriteBatch.End();

@@ -22,7 +22,7 @@ namespace GameBase
             Active = true;
             Speed = speed;
             Damage = Dam;
-
+            ConstructThings();
         }
 
         public void Update()
