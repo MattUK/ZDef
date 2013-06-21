@@ -105,11 +105,13 @@ namespace GameBase
                 {
                     smallBuildings[x, y] = null;
                     smallTiles[x, y] = new Tile(x, y, TileType.EMPTY_SMALL);
+                    ZDefGame.pathFinder.EnvironmentChanged = true;
                 }
                 if (largeBuildings[(int)Math.Floor(x / 2.0f), (int)Math.Floor(y / 2.0f)] != null)
                 {
                     largeBuildings[(int)Math.Floor(x / 2.0f), (int)Math.Floor(y / 2.0f)] = null;
                     largeTiles[(int)Math.Floor(x / 2.0f), (int)Math.Floor(y / 2.0f)] = new Tile(x, y, TileType.EMPTY_LARGE);
+                    ZDefGame.pathFinder.EnvironmentChanged = true;
                 }
             }
         }
