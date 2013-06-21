@@ -12,8 +12,10 @@ using GameBase.Terrain;
 
 namespace GameBase.Entity
 {
-    class Zombie : Sprite
+    public class Zombie : Sprite
     {
+        Sprite Target;
+
         public Zombie(Texture2D Tex, Vector2 Pos, float Rot)
         {
             Texture = Tex;
@@ -22,8 +24,22 @@ namespace GameBase.Entity
             ConstructThings();
         }
 
-        public void Update()
+        public void Update(Sprite Target)
         {
+            if (Target != null)
+            {
+                float XDis = (Position.X - Target.Position.X);
+                float YDis = (Position.Y - Target.Position.Y);
+
+                Rotation = (float)Math.Atan2(-YDis, -XDis);
+            }
+
+            Move(0.9f);
+        }
+
+        void GetTarget(Sprite target)
+        {
+
         }
     }
 }

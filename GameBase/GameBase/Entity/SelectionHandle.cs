@@ -59,7 +59,7 @@ namespace GameBase.Entity
                         }
                     }
 
-                    if (TileValid == true)
+                    if (TileValid == true && SelectedTile != null)
                     {
                         SelectedHuman.SetGoal(SelectedTile);
                     }

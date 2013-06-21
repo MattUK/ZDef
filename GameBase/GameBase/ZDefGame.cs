@@ -43,6 +43,7 @@ namespace GameBase
 
         public static Utility utilityClass;
         public static List<Human> HumanList; //How dare you change this to static.
+        public static List<Zombie> ZombieList; //IT IS STATIC, STATIC
         public static Texture2D HumanTexture;
         public static Texture2D engieTexture;
         public static Texture2D riflemanTexture;
@@ -80,6 +81,7 @@ namespace GameBase
             lighting = new Lighting(1.0f);
             Selection = new SelectionHandle(input);
             HumanList = new List<Human>();
+            ZombieList = new List<Zombie>();
             pathFinder = new Pathfinder(tileMap);
             utilityClass = new Utility();
 
@@ -102,6 +104,8 @@ namespace GameBase
             bulletTexture = Content.Load<Texture2D>("BulletTexture");
 
             tileRenderTarget = new RenderTarget2D(GraphicsDevice, tileMap.GetWidth() * 64, tileMap.GetHeight() * 64);
+
+            ZombieList.Add(new Zombie(engieTexture, new Vector2(40,40), 0.0f));
 
             HumanList.Add(new Human(engieTexture, tileMap.GetEntityTile(41, 41), 600, bulletTexture));
             HumanList.Add(new Human(riflemanTexture, tileMap.GetEntityTile(41, 40), 600, bulletTexture));
@@ -130,6 +134,10 @@ namespace GameBase
                 for (int i = 0; i < HumanList.Count; i++)
                 {
                     HumanList[i].Update(pathFinder, input);
+                }
+                for (int i = 0; i < ZombieList.Count; i++)
+                {
+                    ZombieList[i].Update(HumanList[0]);
                 }
 
                 camera.Input(input);
@@ -166,6 +174,12 @@ namespace GameBase
                     HumanList[i].Draw(spriteBatch);
 
                     HumanList[i].weapon.DrawBullets(spriteBatch);
+                }
+
+                for (int i = 0; i < ZombieList.Count; i++)
+                {
+                    ZombieList[i].Draw(spriteBatch);
+
                 }
 
                 spriteBatch.End();
