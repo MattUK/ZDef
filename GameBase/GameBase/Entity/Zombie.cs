@@ -16,10 +16,10 @@ namespace GameBase.Entity
     {
         Sprite Target;
 
-        public Zombie(Texture2D Tex, Vector2 Pos, float Rot)
+        public Zombie(Texture2D Tex, Tile ChosenTile, float Rot)
         {
             Texture = Tex;
-            Position = Pos;
+            Position = ChosenTile.GetPosition() + new Vector2(16, 16);
             Rotation = Rot;
             ConstructThings();
         }

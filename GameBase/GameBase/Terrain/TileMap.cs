@@ -210,10 +210,11 @@ namespace GameBase
                     float value = MathHelper.Clamp(treeNoiseGen.generateNoiseValue(i, j), 0.0f, 1.0f);
                     if (value > 0.9f)
                     {
+                        //Why not just check if the tile is a grass tile?
                         if (GetTerrainTile(i, j).GetTileType() != TileType.WATER && GetTerrainTile(i, j).GetTileType() != TileType.SAND && GetTerrainTile(i, j).GetTileType() != TileType.STONE)
                         {
                             Tree tree = new Tree();
-                            tree.OnUserInteract(new Building.EntityInteraction(Building.EntityInteraction.Interaction.DESTROYING, null, 100));
+                            tree.OnUserInteract(new Building.EntityInteraction(Building.EntityInteraction.Interaction.DESTROYING, null, 0));
                             CreateSmallBuildingAt(i, j, tree);
                         }
                     }

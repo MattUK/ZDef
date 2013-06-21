@@ -9,10 +9,10 @@ namespace GameBase.Entity
 {
     class Tree : Building
     {
-        public Tree()
-            : base (100, 100)
+        public Tree() : base (100, 100)
         {
-
+            Health = 50;
+            Dead = false;
         }
 
         public override TileType GetTileType()
@@ -34,15 +34,19 @@ namespace GameBase.Entity
 
         public override void Update(TileMap map, int x, int y)
         {
+            Console.WriteLine(Dead);
+
             if (Health <= 0)
             {
                 Dead = true;
             }
-            if (Dead)
+            if (Dead == true)
             {
+                Console.WriteLine(Health);
                 map.SetSmallTile(x, y, new Tile(x, y, TileType.TREE_STUMP));
             }
         }
+
 
         public override void Draw(Tile tile)
         {

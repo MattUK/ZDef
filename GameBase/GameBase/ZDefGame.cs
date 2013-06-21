@@ -107,9 +107,9 @@ namespace GameBase
 
             tileRenderTarget = new RenderTarget2D(GraphicsDevice, tileMap.GetWidth() * 64, tileMap.GetHeight() * 64);
 
-            ZombieList.Add(new Zombie(zombieTexture, new Vector2(40,40), 0.0f));
+            ZombieList.Add(new Zombie(zombieTexture, tileMap.GetEntityTile(31, 30), 0.0f));
 
-            HumanList.Add(new Human(engieTexture, tileMap.GetEntityTile(41, 41), 600, bulletTexture));
+            HumanList.Add(new Human(engieTexture, tileMap.GetEntityTile(41, 40), 600, bulletTexture));
             HumanList.Add(new Human(riflemanTexture, tileMap.GetEntityTile(41, 40), 600, bulletTexture));
             HumanList.Add(new Human(riflemanTexture, tileMap.GetEntityTile(42, 40), 600, bulletTexture));
             HumanList.Add(new Human(riflemanTexture, tileMap.GetEntityTile(40, 40), 600, bulletTexture));
