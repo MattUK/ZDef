@@ -30,7 +30,6 @@ namespace GameBase.Entity
             Position = ChosenTile.GetPosition() + new Vector2(16,16);
             MoveGoal = Position;
             Texture = Tex;
-            Scale = 1.0f;
             CurrentTile = ChosenTile;
             GoalTile = CurrentTile;
             Path = new List<Vector2>();
