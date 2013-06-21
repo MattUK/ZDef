@@ -82,7 +82,7 @@ namespace GameBase.Entity
 
                 if (Input.KeyDown(Keys.D2))
                 {
-                    ZDefGame.tileMap.ClearTile(SelectedTile.TilePos().X, SelectedTile.TilePos().Y);
+                    ZDefGame.tileMap.ClearBuilding(SelectedTile.TilePos().X, SelectedTile.TilePos().Y);
                 }
             }
         }

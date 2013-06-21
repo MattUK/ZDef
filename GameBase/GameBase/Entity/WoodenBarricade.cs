@@ -33,7 +33,7 @@ namespace GameBase.Entity
 
         public override void Update(TileMap map, int x, int y)
         {
-            
+            base.Update(map, x, y);            
         }
 
         public override void Draw(Tile tile)

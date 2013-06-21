@@ -71,6 +71,8 @@ namespace GameBase.Entity
             if (wallLeft && wallRight && wallAbove && wallBelow) newType = TileType.WALL_ALL_FOUR;
 
             map.SetSmallTile(x, y, new Tile(x, y, newType));
+
+            //base.Update(map, x, y);
         }
 
         public override void Draw(Tile tile)

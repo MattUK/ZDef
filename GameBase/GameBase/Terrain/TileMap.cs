@@ -97,10 +97,21 @@ namespace GameBase
             return true;
         }
 
-        public void ClearTile(int x, int y)
+        public void ClearBuilding(int x, int y)
         {
-            smallBuildings[x, y].Remove();
-            smallTiles[x, y] = new Tile(x, y, TileType.EMPTY_SMALL);
+            if (IsBuildingAt(x, y))
+            {
+                if (smallBuildings[x, y] != null)
+                {
+                    smallBuildings[x, y] = null;
+                    smallTiles[x, y] = new Tile(x, y, TileType.EMPTY_SMALL);
+                }
+                if (largeBuildings[(int)Math.Floor(x / 2.0f), (int)Math.Floor(y / 2.0f)] != null)
+                {
+                    largeBuildings[(int)Math.Floor(x / 2.0f), (int)Math.Floor(y / 2.0f)] = null;
+                    largeTiles[(int)Math.Floor(x / 2.0f), (int)Math.Floor(y / 2.0f)] = new Tile(x, y, TileType.EMPTY_LARGE);
+                }
+            }
         }
 
         public int GetWidth()
