@@ -212,7 +212,9 @@ namespace GameBase
                     {
                         if (GetTerrainTile(i, j).GetTileType() != TileType.WATER && GetTerrainTile(i, j).GetTileType() != TileType.SAND && GetTerrainTile(i, j).GetTileType() != TileType.STONE)
                         {
-                            CreateSmallBuildingAt(i, j, new Tree());
+                            Tree tree = new Tree();
+                            tree.OnUserInteract(new Building.EntityInteraction(Building.EntityInteraction.Interaction.DESTROYING, null, 100));
+                            CreateSmallBuildingAt(i, j, tree);
                         }
                     }
                 }

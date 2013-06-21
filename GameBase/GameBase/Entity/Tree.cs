@@ -9,7 +9,6 @@ namespace GameBase.Entity
 {
     class Tree : Building
     {
-
         public Tree()
             : base (100, 100)
         {
@@ -35,7 +34,14 @@ namespace GameBase.Entity
 
         public override void Update(TileMap map, int x, int y)
         {
-            base.Update(map, x, y);
+            if (Health <= 0)
+            {
+                Dead = true;
+            }
+            if (Dead)
+            {
+                map.SetSmallTile(x, y, new Tile(x, y, TileType.TREE_STUMP));
+            }
         }
 
         public override void Draw(Tile tile)
@@ -48,7 +54,12 @@ namespace GameBase.Entity
 
         public override bool OnUserInteract(Building.EntityInteraction interaction)
         {
-            throw new NotImplementedException();
+            if (interaction.interaction == EntityInteraction.Interaction.DESTROYING)
+            {
+                Health -= interaction.modifier;
+                return true;
+            }
+            return false;
         }
 
     }

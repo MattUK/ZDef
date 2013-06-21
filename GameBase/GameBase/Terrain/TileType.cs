@@ -26,7 +26,7 @@ namespace GameBase.Terrain
 
         public static TileType WOODEN_BARRICADE = new TileType(61, 32, 32, new Vector2(224.0f, 64.0f), false);
         public static TileType TREE = new TileType(62, 32, 32, new Vector2(288.0f, 32.0f));
-        public static TileType TREE_STUMP = new TileType(63, 32, 32, new Vector2(288.0f, 64.0f));
+        public static TileType TREE_STUMP = new TileType(63, 32, 32, new Vector2(320.0f, 32.0f));
 
         // Wooden wall stuff
         public static TileType WALL_VERTICAL = new TileType(80, 32, 32, new Vector2(0.0f, 64.0f), false);
