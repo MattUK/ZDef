@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace GameBase.Entity
 {
@@ -14,6 +15,8 @@ namespace GameBase.Entity
         public Vector2 Position;
         public float Rotation;
         Sprite Target;
+        Texture2D BulletTex;
+        List<Projectile> BulletList;
 
         public Weapon(Vector2 Pos, float Rot, int delay, int Dam)
         {
@@ -22,6 +25,7 @@ namespace GameBase.Entity
             Delay = delay;
             DelayMax = Delay;
             Damage = Dam;
+            BulletList = new List<Projectile>();
         }
 
         public void Update()
@@ -31,7 +35,10 @@ namespace GameBase.Entity
                 Fire();
             }
 
-
+            foreach (Projectile bullet in BulletList)
+            {
+                bullet.Update();
+            }
 
 
             if (Delay > 0)
@@ -43,6 +50,9 @@ namespace GameBase.Entity
         void Fire()
         {
             Console.WriteLine("A zombie has been shot!");
+            Projectile Bullet = new Projectile(Position, Rotation, Damage, BulletTex, 5);
+
+            BulletList.Add(Bullet);
         }
     }
 }

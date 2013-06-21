@@ -14,9 +14,23 @@ namespace GameBase
         public int Damage;
         public bool Active;
 
+        public Projectile(Vector2 Pos, float Rot, int Dam, Texture2D Tex, int speed)
+        {
+            Position = Pos;
+            Rotation = Rot;
+            Texture = Tex;
+            Active = true;
+            Speed = speed;
+            Damage = Dam;
+
+        }
+
         public void Update()
         {
-            Move(Speed);
+            if (Active == true)
+            {
+                Move(Speed);
+            }
         }
     }
 }

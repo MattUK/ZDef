@@ -86,6 +86,7 @@ namespace GameBase.Entity
 
         public void SetGoal(Tile tile)
         {
+            
             GoalTile = tile;
             Path.Clear();
             NotMoving = true;
