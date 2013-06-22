@@ -41,7 +41,10 @@ namespace GameBase.Entity
                 if (Delay == 0)
                 {
                     Fire();
+                    Delay = DelayMax;
                 }
+
+
             }
 
             for (int i = 0; i < BulletList.Count; i++)

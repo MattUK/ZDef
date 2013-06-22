@@ -27,7 +27,7 @@ namespace GameBase.Entity
 
         public Human(Texture2D Tex, Tile ChosenTile, int WepDis, Texture2D BulTex)
         {
-            Position = ChosenTile.GetPosition() + new Vector2(16,16);
+            Position = ChosenTile.GetPosition() + new Vector2(16, 16);
             MoveGoal = Position;
             Texture = Tex;
             CurrentTile = ChosenTile;
@@ -40,11 +40,11 @@ namespace GameBase.Entity
             weapon = new Weapon(Position, Rotation, 20, 15, BulTex);
         }
 
-        public void Update(Pathfinder pathFinder, InputHandler Input, SelectionHandle Select, TileMap tileMap)
+        public void Update(Pathfinder pathFinder, InputHandler Input, SelectionHandle Select, TileMap tileMap, List<Zombie> ZombieList)
         {
             CurrentTile = Select.GetSelectedTile(tileMap, Position);
 
-            FindTarget(new List<Sprite>());
+            FindTarget(ZombieList);
 
             if (Input.KeyClicked(Keys.R))
             {
@@ -92,7 +92,16 @@ namespace GameBase.Entity
             {
                 NotMoving = true;
             }
+
+            if (weapon.Target != null)
+            {
+                if (Vector2.Distance(Position, weapon.Target.Position) > DistanceMax)
+                {
+                    weapon.Target = null;
+                }
+            }
         }
+
 
         public void BuildThing()
         {
@@ -102,11 +111,11 @@ namespace GameBase.Entity
         /// <summary>
         /// ZombieList is a placeholder right now.
         /// </summary>
-        void FindTarget(List<Sprite> ZombieList)
+        void FindTarget(List<Zombie> ZombieList)
         {
             for (int i = 0; i < ZombieList.Count; i++)
             {
-                if (Vector2.Distance(Position, ZombieList[i].Position) > ClosestDistance)
+                if (Vector2.Distance(Position, ZombieList[i].Position) <= ClosestDistance)
                 {
                     weapon.Target = ZombieList[i];
                     ClosestDistance = (int)Vector2.Distance(Position, ZombieList[i].Position);
@@ -118,7 +127,7 @@ namespace GameBase.Entity
 
         public void SetGoal(Tile tile)
         {
-            
+
             GoalTile = tile;
             Path.Clear();
             NotMoving = true;

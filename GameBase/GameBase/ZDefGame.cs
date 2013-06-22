@@ -109,16 +109,8 @@ namespace GameBase
 
             ZombieList.Add(new Zombie(zombieTexture, tileMap.GetEntityTile(20, 12)));
 
-            HumanList.Add(new Human(engieTexture, tileMap.GetEntityTile(41, 40), 600, bulletTexture));
-            HumanList.Add(new Human(riflemanTexture, tileMap.GetEntityTile(41, 40), 600, bulletTexture));
-            HumanList.Add(new Human(riflemanTexture, tileMap.GetEntityTile(42, 40), 600, bulletTexture));
-            HumanList.Add(new Human(riflemanTexture, tileMap.GetEntityTile(40, 40), 600, bulletTexture));
-            HumanList.Add(new Human(riflemanTexture, tileMap.GetEntityTile(41, 39), 600, bulletTexture));
-            HumanList.Add(new Human(riflemanTexture, tileMap.GetEntityTile(42, 39), 600, bulletTexture));
-            HumanList.Add(new Human(riflemanTexture, tileMap.GetEntityTile(40, 39), 600, bulletTexture));
-            HumanList.Add(new Human(riflemanTexture, tileMap.GetEntityTile(41, 38), 600, bulletTexture));
-            HumanList.Add(new Human(riflemanTexture, tileMap.GetEntityTile(42, 38), 600, bulletTexture));
-            HumanList.Add(new Human(riflemanTexture, tileMap.GetEntityTile(40, 38), 600, bulletTexture));
+            HumanList.Add(new Human(engieTexture, tileMap.GetEntityTile(41, 40), 200, bulletTexture));
+            HumanList.Add(new Human(riflemanTexture, tileMap.GetEntityTile(41, 40), 400, bulletTexture));
         }
 
         protected override void Update(GameTime gameTime)
@@ -137,7 +129,7 @@ namespace GameBase
 
                 for (int i = 0; i < HumanList.Count; i++)
                 {
-                    HumanList[i].Update(pathFinder, input, Selection, tileMap);
+                    HumanList[i].Update(pathFinder, input, Selection, tileMap, ZombieList);
                 }
                 for (int i = 0; i < ZombieList.Count; i++)
                 {
