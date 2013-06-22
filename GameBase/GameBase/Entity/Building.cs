@@ -44,6 +44,8 @@ namespace GameBase.Entity
 
         public abstract bool SpawnAt(TileMap map, int x, int y);
 
+        public abstract String GetName();
+
         // To change tile type, do:
         // map.Set<Size>Tile(x, y, new Tile(x, y, <Type>);
         public virtual void Update(TileMap map, int x, int y)

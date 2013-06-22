@@ -32,6 +32,11 @@ namespace GameBase.Entity
             }
         }
 
+        public override string GetName()
+        {
+            return "WALL";
+        }
+
         public override void Update(TileMap map, int x, int y)
         {
             bool wallAbove = false;
@@ -70,9 +75,10 @@ namespace GameBase.Entity
             if (wallLeft && wallRight && wallAbove && !wallBelow) newType = TileType.WALL_HORIZONTAL_WITH_TOP;
             if (wallLeft && wallRight && wallAbove && wallBelow) newType = TileType.WALL_ALL_FOUR;
 
-            map.SetSmallTile(x, y, new Tile(x, y, newType));
+            Tile currentTile = map.GetEntityTile(x, y);
+            currentTile.SetTileType(newType);
 
-            //base.Update(map, x, y);
+            map.SetSmallTile(x, y, currentTile);
         }
 
         public override void Draw(Tile tile)

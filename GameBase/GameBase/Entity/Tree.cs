@@ -32,6 +32,11 @@ namespace GameBase.Entity
             }
         }
 
+        public override string GetName()
+        {
+            return "TREE";
+        }
+
         public override void Update(TileMap map, int x, int y)
         {
             //Console.WriteLine(Dead);
@@ -50,10 +55,10 @@ namespace GameBase.Entity
 
         public override void Draw(Tile tile)
         {
-            tile.Draw();
-            //Color drawColour = Color.White * ZDefGame.lighting.GetLightLevel();
-            //drawColour.A = 255;
-            //ZDefGame.spriteBatch.Draw(ZDefGame.humanBuildingTexture, tile.GetRectangle(), tile.GetTileType().GetSourcePositionRectangle(), drawColour, 0.0f, new Vector2(), Microsoft.Xna.Framework.Graphics.SpriteEffects.None, ZDefGame.BUILDING_DRAW_DEPTH);
+            //tile.Draw();
+            Color drawColour = Color.White * ZDefGame.lighting.GetLightLevel();
+            drawColour.A = 255;
+            ZDefGame.spriteBatch.Draw(ZDefGame.humanBuildingTexture, tile.GetRectangle(), tile.GetTileType().GetSourcePositionRectangle(), drawColour, 0.0f, new Vector2(), Microsoft.Xna.Framework.Graphics.SpriteEffects.None, ZDefGame.BUILDING_DRAW_DEPTH);
         }
 
         public override bool OnUserInteract(Building.EntityInteraction interaction)

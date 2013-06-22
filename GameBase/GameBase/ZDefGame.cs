@@ -30,6 +30,7 @@ namespace GameBase
         public static Lighting lighting;
         public static SelectionHandle Selection;
         public static Pathfinder pathFinder;
+        public static Pathfinder zombiePathfinder;
 
         public static TileMap tileMap;
 
@@ -49,6 +50,9 @@ namespace GameBase
         public static Texture2D riflemanTexture;
         public static Texture2D bulletTexture;
         public static Texture2D zombieTexture;
+        public static Texture2D lightTexture;
+
+        public static SpriteFont spriteFont;
         // =============================================
 
         // ======= Draw Depths ==============
@@ -87,6 +91,7 @@ namespace GameBase
             HumanList = new List<Human>();
             ZombieList = new List<Zombie>();
             pathFinder = new Pathfinder(tileMap);
+            zombiePathfinder = new Pathfinder(tileMap, true);
             utilityClass = new Utility();
 
             currentMenu = new MainMenu(ScreenWidth, ScreenHeight);
@@ -107,6 +112,9 @@ namespace GameBase
             mainMenuTexture = Content.Load<Texture2D>("main_menu_background");
             bulletTexture = Content.Load<Texture2D>("BulletTexture");
             zombieTexture = Content.Load<Texture2D>("Zombee");
+            lightTexture = Content.Load<Texture2D>("light");
+
+            spriteFont = Content.Load<SpriteFont>("font");
 
             tileRenderTarget = new RenderTarget2D(GraphicsDevice, tileMap.GetWidth() * 64, tileMap.GetHeight() * 64);
 
@@ -136,22 +144,13 @@ namespace GameBase
                 }
                 for (int i = 0; i < ZombieList.Count; i++)
                 {
-                    ZombieList[i].Update(HumanList, pathFinder, Selection, tileMap);
+                    ZombieList[i].Update(HumanList, zombiePathfinder, Selection, tileMap);
                 }
 
                 if (input.KeyClicked(Keys.Z))
                 {
                     ZombieList.Add(new Zombie(zombieTexture, Selection.GetSelectedTile(tileMap, input.TanslatedMousePos(camera))));
                 }
-
-                if (LastUpdateFPS + 1000 < Environment.TickCount)
-                {
-                    fps = fpsCount;
-                    fpsCount = 0;
-                    LastUpdateFPS = Environment.TickCount;
-                }
-
-                fpsCount++;
 
                 camera.Input(input);
                 lighting.Update();
@@ -201,9 +200,23 @@ namespace GameBase
                 GraphicsDevice.Clear(Color.CornflowerBlue);
 
                 spriteBatch.Begin(SpriteSortMode.Deferred, null, null, null, null, null, camera.Transform());
-                //Console.WriteLine(fps);
                 spriteBatch.Draw(tileRenderTarget, new Vector2(0, 0), Color.White);
                 spriteBatch.End();
+
+                spriteBatch.Begin();
+                spriteBatch.DrawString(spriteFont, "FPS = " + fps, new Vector2(10.0f, 10.0f), Color.White);
+                spriteBatch.DrawString(spriteFont, "Mouse Pos = " + input.TanslatedMousePos(camera), new Vector2(10.0f, 30.0f), Color.White);
+                spriteBatch.DrawString(spriteFont, "Lights = " + tileMap.GetLightCount(), new Vector2(10.0f, 50.0f), Color.White);
+                spriteBatch.End();
+
+                if (LastUpdateFPS + 1000 < Environment.TickCount)
+                {
+                    fps = fpsCount;
+                    fpsCount = 0;
+                    LastUpdateFPS = Environment.TickCount;
+                }
+
+                fpsCount++;
             }
             else
             {

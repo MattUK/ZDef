@@ -31,10 +31,10 @@ namespace GameBase.Entity
             SelectedTile = GetSelectedTile(tileMap, Input.TanslatedMousePos(Camera));
 
 
-            //if (Input.KeyClicked(Keys.U))
-            //{
-            //    tileMap.ChangeWalls(SelectedTile);
-            //}
+            if (Input.KeyClicked(Keys.U))
+            {
+                tileMap.AddLight((int)SelectedTile.TilePos().X, (int)SelectedTile.TilePos().Y);
+            }
 
             if (Input.LeftClick() == true)
             {

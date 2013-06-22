@@ -19,6 +19,11 @@ namespace GameBase.Entity
             return TileType.WOODEN_BARRICADE;
         }
 
+        public override string GetName()
+        {
+            return "WOODEN BARRICADE";
+        }
+
         public override bool SpawnAt(TileMap map, int x, int y)
         {
             if (map.IsBuildingAt(x, y))

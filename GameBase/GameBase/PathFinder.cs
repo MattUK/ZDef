@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
 using GameBase;
+using GameBase.Terrain;
 
 namespace GameBase
 {
@@ -71,6 +72,7 @@ namespace GameBase
         private List<SearchNode> closedList = new List<SearchNode>();
 
         private TileMap map;
+        private bool zombies;
 
         public bool EnvironmentChanged;
 
@@ -84,6 +86,8 @@ namespace GameBase
             levelHeight = map.GetHeight() * 2;
 
             EnvironmentChanged = false;
+
+            zombies = forZombies;
 
             InitializeSearchNodes(map);
         }
@@ -124,14 +128,29 @@ namespace GameBase
                     node.Position = new Point(x, y);
 
                     // Our enemies can only walk on grass tiles.
-                    if (map.IsPassable(x, y) == true)
+                    if (zombies)
                     {
-                        node.Walkable = true;
+                        if (map.GetTerrainTile(x, y).GetTileType() == TileType.STONE || map.GetTerrainTile(x, y).GetTileType() == TileType.WATER)
+                        {
+                            node.Walkable = false;
+                        }
+                        else
+                        {
+                            node.Walkable = true;
+                        }
                     }
                     else
                     {
-                        node.Walkable = false;
+                        if (map.IsPassable(x, y) == true)
+                        {
+                            node.Walkable = true;
+                        }
+                        else
+                        {
+                            node.Walkable = false;
+                        }
                     }
+
                     // We only want to store nodes
                     // that can be walked on.
                     if (node.Walkable == true)

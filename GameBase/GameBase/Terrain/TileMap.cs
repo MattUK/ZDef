@@ -1,4 +1,6 @@
-﻿using System;
+﻿//#define SEIZURE_MODE
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,7 +12,7 @@ namespace GameBase
 {
     public class TileMap
     {
-        public const bool DRAW_BORDER = false;
+        public const bool DRAW_BORDER = true;
 
         private Tile[,] largeTiles;
         private Tile[,] smallTiles;
@@ -20,6 +22,8 @@ namespace GameBase
 
         private int mapWidth, mapHeight;
         private Heightmap heightmap;
+
+        private List<Vector2> lights;
 
         public TileMap(int width, int height)
         {
@@ -38,6 +42,8 @@ namespace GameBase
             }
 
             heightmap = new Heightmap(width, height);
+
+            lights = new List<Vector2>();
 
             // ==== Handle Buildings ====
             smallBuildings = new Building[width * 2, height * 2];
@@ -249,16 +255,52 @@ namespace GameBase
 
         }
 
+        public void AddLight(int x, int y)
+        {
+            lights.Add(new Vector2(x, y));
+        }
+
+        public int GetLightCount()
+        {
+            return lights.Count;
+        }
+
         public void Update()
         {
-            float ambientLight = ZDefGame.lighting.GetLightLevel();
+            float ambientLightLarge = ZDefGame.lighting.GetLightLevel();
+            float ambientLightSmall = ZDefGame.lighting.GetLightLevel();
+
+#if SEIZURE_MODE
+            Random rand = new Random();
+#endif
 
             for (int i = 0; i < mapWidth * 2; i++)
             {
                 for (int j = 0; j < mapHeight * 2; j++)
                 {
-                    largeTiles[(int)Math.Floor(i / 2.0f), (int)Math.Floor(j / 2.0f)].SetLightLevel(ambientLight);
-                    smallTiles[i, j].SetLightLevel(ambientLight);
+                    ambientLightSmall = ZDefGame.lighting.GetLightLevel();
+                    ambientLightLarge = ZDefGame.lighting.GetLightLevel();
+
+#if SEIZURE_MODE
+                    ambientLightLarge *= (float)rand.NextDouble();
+                    ambientLightSmall *= (float)rand.NextDouble();
+#else
+                    for(int k = 0; k < lights.Count; k++)
+                    {
+                        // Light area around the light
+                        Vector2 lightPosition = lights[k];
+                        Vector2 tilePosition = new Vector2((int)Math.Floor(i / 2.0f), (int)Math.Floor(j / 2.0f));
+
+                        if (tilePosition.X + 1 == lightPosition.X && tilePosition.Y == lightPosition.Y)
+                        {
+                            //ambientLightLarge = 1.0f;
+                            ambientLightSmall = 1.0f;
+                        }
+                    }
+#endif
+
+                    largeTiles[(int)Math.Floor(i / 2.0f), (int)Math.Floor(j / 2.0f)].SetLightLevel(ambientLightLarge);
+                    smallTiles[i, j].SetLightLevel(ambientLightSmall);
 
                     if (largeBuildings[(int)Math.Floor(i / 2.0f), (int)Math.Floor(j / 2.0f)] != null)
                     {
@@ -279,18 +321,18 @@ namespace GameBase
             {
                 for (int j = 0; j < mapHeight; j++)
                 {
-                    largeTiles[i, j].Draw();
-                    //if (largeTiles[i, j].GetTileType().tileID > 50)
-                    //{
-                    //    if (largeBuildings[i, j] != null)
-                    //    {
-                    //        largeBuildings[i, j].Draw(largeTiles[i, j]);
-                    //    }
-                    //}
-                    //else
-                    //{
-                    //    largeTiles[i, j].Draw();
-                    //}
+                    //largeTiles[i, j].Draw();
+                    if (largeTiles[i, j].GetTileType().tileID > 50)
+                    {
+                        if (largeBuildings[i, j] != null)
+                        {
+                            largeBuildings[i, j].Draw(largeTiles[i, j]);
+                        }
+                    }
+                    else
+                    {
+                        largeTiles[i, j].Draw();
+                    }
                 }
             }
 
@@ -316,6 +358,11 @@ namespace GameBase
                     }
                 }
             }
+
+            //foreach (Vector2 light in lights)
+            //{
+            //    ZDefGame.spriteBatch.Draw(ZDefGame.lightTexture, new Vector2((light.X * 32) - (128 / 2), (light.Y * 32) - (128 / 2)), Color.White);
+            //}
         }
 
     }
