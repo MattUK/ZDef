@@ -40,8 +40,10 @@ namespace GameBase.Entity
             weapon = new Weapon(Position, Rotation, 20, 15, BulTex);
         }
 
-        public void Update(Pathfinder pathFinder, InputHandler Input)
+        public void Update(Pathfinder pathFinder, InputHandler Input, SelectionHandle Select, TileMap tileMap)
         {
+            CurrentTile = Select.GetSelectedTile(tileMap, Position);
+
             FindTarget(new List<Sprite>());
 
             if (Input.KeyClicked(Keys.R))
@@ -56,7 +58,7 @@ namespace GameBase.Entity
             if (CurrentTile != GoalTile)
             {
                 Path = pathFinder.FindPath(CurrentTile.TilePos(), GoalTile.TilePos());
-                CurrentTile = GoalTile;
+                //CurrentTile = GoalTile;
             }
 
             if (Path.Count != 0 && NotMoving == true)

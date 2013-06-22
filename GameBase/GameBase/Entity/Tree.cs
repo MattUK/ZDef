@@ -34,7 +34,7 @@ namespace GameBase.Entity
 
         public override void Update(TileMap map, int x, int y)
         {
-            Console.WriteLine(Dead);
+            //Console.WriteLine(Dead);
 
             if (Health <= 0)
             {
@@ -42,7 +42,7 @@ namespace GameBase.Entity
             }
             if (Dead == true)
             {
-                Console.WriteLine(Health);
+               // Console.WriteLine(Health);
                 map.SetSmallTile(x, y, new Tile(x, y, TileType.TREE_STUMP));
             }
         }

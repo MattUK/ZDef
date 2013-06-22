@@ -14,32 +14,99 @@ namespace GameBase.Entity
 {
     public class Zombie : Sprite
     {
-        Sprite Target;
+        Human Target;
+        int ClosestDistance;
+        int DistanceMax; //Search range is essentially entire map
+        Tile CurrentTile;
+        Tile GoalTile;
+        List<Vector2> Path;
+        bool NotMoving;
+        Vector2 MoveGoal;
 
-        public Zombie(Texture2D Tex, Tile ChosenTile, float Rot)
+        public Zombie(Texture2D Tex, Tile ChosenTile)
         {
             Texture = Tex;
             Position = ChosenTile.GetPosition() + new Vector2(16, 16);
-            Rotation = Rot;
             ConstructThings();
+            ClosestDistance = 10000;
+            DistanceMax = ClosestDistance;
+            CurrentTile = ChosenTile;
+            Path = new List<Vector2>();
+            NotMoving = true;
+            MoveGoal = Position;
         }
 
-        public void Update(Sprite Target)
+        public void Update(List<Human> HumanList, Pathfinder pathFinder, SelectionHandle Select, TileMap tileMap)
         {
+            CurrentTile = Select.GetSelectedTile(tileMap, Position);
+
             if (Target != null)
             {
-                float XDis = (Position.X - Target.Position.X);
-                float YDis = (Position.Y - Target.Position.Y);
-
-                Rotation = (float)Math.Atan2(-YDis, -XDis);
+                Path = pathFinder.FindPath(CurrentTile.TilePos(), Target.CurrentTile.TilePos());
+               
+                if (Path.Count == 0)
+                {
+                    Target = null;
+                }
             }
 
-            Move(0.9f);
+
+            if (Path.Count != 0 && NotMoving == true)
+            {
+                MoveGoal = Path[0];
+                Path.RemoveAt(0);
+            }
+
+            if (MoveGoal != Position)
+            {
+                NotMoving = false;
+
+                if (Position.X > MoveGoal.X)
+                {
+                    Position.X -= 2;
+                }
+                if (Position.Y > MoveGoal.Y)
+                {
+                    Position.Y -= 2;
+                }
+                if (Position.X < MoveGoal.X)
+                {
+                    Position.X += 2;
+                }
+                if (Position.Y < MoveGoal.Y)
+                {
+                    Position.Y += 2;
+                }
+            }
+            else
+            {
+                NotMoving = true;
+            }
+
+            //if (Target != null)
+            //{
+            //    throw new Exception("");
+            //}
+
+            if (Target == null)
+            {
+                GetTarget(HumanList);
+            }
         }
 
-        void GetTarget(Sprite target)
+        void GetTarget(List<Human> HumanList)
         {
 
+            for (int i = 0; i < HumanList.Count; i++)
+            {
+                if (Vector2.Distance(Position, HumanList[i].Position) < ClosestDistance)
+                {
+                    Target = HumanList[i];
+                    ClosestDistance = (int)Vector2.Distance(Position, HumanList[i].Position);
+                }
+            }
+
+            ClosestDistance = DistanceMax;
         }
     }
 }

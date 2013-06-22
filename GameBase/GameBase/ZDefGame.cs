@@ -107,7 +107,7 @@ namespace GameBase
 
             tileRenderTarget = new RenderTarget2D(GraphicsDevice, tileMap.GetWidth() * 64, tileMap.GetHeight() * 64);
 
-            ZombieList.Add(new Zombie(zombieTexture, tileMap.GetEntityTile(31, 30), 0.0f));
+            ZombieList.Add(new Zombie(zombieTexture, tileMap.GetEntityTile(20, 12)));
 
             HumanList.Add(new Human(engieTexture, tileMap.GetEntityTile(41, 40), 600, bulletTexture));
             HumanList.Add(new Human(riflemanTexture, tileMap.GetEntityTile(41, 40), 600, bulletTexture));
@@ -133,13 +133,20 @@ namespace GameBase
 
             if (playing)
             {
+               // Console.WriteLine("Playing");
+
                 for (int i = 0; i < HumanList.Count; i++)
                 {
-                    HumanList[i].Update(pathFinder, input);
+                    HumanList[i].Update(pathFinder, input, Selection, tileMap);
                 }
                 for (int i = 0; i < ZombieList.Count; i++)
                 {
-                    ZombieList[i].Update(HumanList[0]);
+                    ZombieList[i].Update(HumanList, pathFinder, Selection, tileMap);
+                }
+
+                if (input.KeyClicked(Keys.Z))
+                {
+                    ZombieList.Add(new Zombie(zombieTexture, Selection.GetSelectedTile(tileMap, input.TanslatedMousePos(camera))));
                 }
 
                 camera.Input(input);

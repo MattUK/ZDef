@@ -48,7 +48,6 @@ namespace GameBase.Entity
 
             if (SelectedHuman != null)
             {
-                SelectedHuman.CurrentTile = GetSelectedTile(tileMap, SelectedHuman.Position);
                 if (Input.RightClick() == true)
                 {
                     for (int i = 0; i < HumanList.Count; i++)
@@ -104,7 +103,7 @@ namespace GameBase.Entity
             }
         }
 
-        Tile GetSelectedTile(TileMap tileMap, Vector2 Pos)
+        public Tile GetSelectedTile(TileMap tileMap, Vector2 Pos)
         {
             float tileX = (Pos.X) / 32;
             float tileY = (Pos.Y) / 32;
