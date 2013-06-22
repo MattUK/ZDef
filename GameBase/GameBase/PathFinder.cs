@@ -77,7 +77,7 @@ namespace GameBase
         /// <summary>
         /// Constructor.
         /// </summary>
-        public Pathfinder(TileMap map)
+        public Pathfinder(TileMap map, bool forZombies = false)
         {
             this.map = map;
             levelWidth = map.GetWidth() * 2;

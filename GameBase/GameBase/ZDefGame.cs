@@ -58,6 +58,9 @@ namespace GameBase
 
         private RenderTarget2D tileRenderTarget;
 
+        private long LastUpdateFPS;
+        private int fps, fpsCount;
+
         public ZDefGame()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -141,6 +144,15 @@ namespace GameBase
                     ZombieList.Add(new Zombie(zombieTexture, Selection.GetSelectedTile(tileMap, input.TanslatedMousePos(camera))));
                 }
 
+                if (LastUpdateFPS + 1000 < Environment.TickCount)
+                {
+                    fps = fpsCount;
+                    fpsCount = 0;
+                    LastUpdateFPS = Environment.TickCount;
+                }
+
+                fpsCount++;
+
                 camera.Input(input);
                 lighting.Update();
                 Selection.Update(HumanList, camera, tileMap, pathFinder);
@@ -148,7 +160,7 @@ namespace GameBase
                 pathFinder.Update();
 
                 camera.Constraint(new Vector2(tileMap.GetWidth() * 64, tileMap.GetHeight() * 64));
-                utilityClass.TrapMouse(true, this);
+                //utilityClass.TrapMouse(true, this);
             }
             else
             {
@@ -189,6 +201,7 @@ namespace GameBase
                 GraphicsDevice.Clear(Color.CornflowerBlue);
 
                 spriteBatch.Begin(SpriteSortMode.Deferred, null, null, null, null, null, camera.Transform());
+                //Console.WriteLine(fps);
                 spriteBatch.Draw(tileRenderTarget, new Vector2(0, 0), Color.White);
                 spriteBatch.End();
             }
