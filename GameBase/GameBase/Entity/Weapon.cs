@@ -16,7 +16,7 @@ namespace GameBase.Entity
         public float Rotation;
         public Sprite Target; //placeholder
         Texture2D BulletTex;
-        List<Projectile> BulletList;
+        //List<Projectile> BulletList;
 
         public Weapon(Vector2 Pos, float Rot, int delay, int Dam, Texture2D BulTex)
         {
@@ -26,7 +26,7 @@ namespace GameBase.Entity
             DelayMax = Delay;
             Damage = Dam;
             BulletTex = BulTex;
-            BulletList = new List<Projectile>();
+           // BulletList = new List<Projectile>();
         }
 
         public void Update()
@@ -47,10 +47,10 @@ namespace GameBase.Entity
 
             }
 
-            for (int i = 0; i < BulletList.Count; i++)
-            {
-                BulletList[i].Update();
-            }
+            //for (int i = 0; i < BulletList.Count; i++)
+            //{
+            //    BulletList[i].Update();
+            //}
 
 
             if (Delay > 0)
@@ -62,16 +62,8 @@ namespace GameBase.Entity
         public void Fire()
         {
             Projectile Bullet = new Projectile(Position, Rotation, Damage, BulletTex, 5);
-
-            BulletList.Add(Bullet);
-        }
-
-        public void DrawBullets(SpriteBatch spriteBatch)
-        {
-            for (int i = 0; i < BulletList.Count; i++)
-            {
-                BulletList[i].Draw(spriteBatch);
-            }
+            ZDefGame.BulletList.Add(Bullet);
+            //BulletList.Add(Bullet);
         }
     }
 }

@@ -23,6 +23,8 @@ namespace GameBase.Entity
         bool NotMoving;
         Vector2 MoveGoal;
 
+        public int Health = 125;
+
         List<Vector2> shadowList;
         bool hidden;
 
@@ -132,6 +134,7 @@ namespace GameBase.Entity
 
             // if (Target == null)
             //  {
+
             GetTarget(HumanList);
             // }
         }

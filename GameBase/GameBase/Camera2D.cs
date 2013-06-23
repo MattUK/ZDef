@@ -91,22 +91,29 @@ namespace GameBase
         {
             //Constrains the camera to the provided values, ensures it cannot move off screen.
 
-            if (Position.X - Width / 2 < 0)
-            {
-                Position.X = Width / 2;
-            }
-            if (Position.Y - Height / 2 < 0)
-            {
-                Position.Y = Height / 2;
-            }
-            if (Position.X + Width / 2 > Max.X)
-            {
-                Position.X = Max.X - Width / 2;
-            }
-            if (Position.Y + Height / 2 > Max.Y)
-            {
-                Position.Y = Max.Y - Height / 2;
-            }
+            Vector2 CamMin = Vector2.Transform(Vector2.Zero, Matrix.Invert(Transform()));
+            Vector2 CamSize = new Vector2(Width, Height) / Zoom;
+            Vector2 limitMin = new Vector2(0, 0);
+            Vector2 limitMax = new Vector2(Max.X, Max.Y);
+            Vector2 PosOffset = Position - CamMin;
+            Position = Vector2.Clamp(CamMin, limitMin, limitMax - CamSize) + PosOffset;
+
+            //if (Position.X - Vector2.Transform(new Vector2((Width / 2), 0), ZoomTransform()).X < 0)
+            //{
+            //    Position.X = Vector2.Transform(new Vector2((Width / 2), 0), ZoomTransform()).X;
+            //}
+            //if (Position.Y - (Height / 2) < 0)
+            //{
+            //    Position.Y = (Height / 2);
+            //}
+            //if (Position.X + (Width / 2) > Max.X)
+            //{
+            //    Position.X = Max.X - (Width / 2);
+            //}
+            //if (Position.Y + (Height / 2) > Max.Y)
+            //{
+            //    Position.Y = Max.Y - (Height / 2);
+            //}
 
             if (Zoom > 2f)
             {
@@ -127,6 +134,12 @@ namespace GameBase
             Matrix.CreateTranslation(new Vector3(Width / 2, Height / 2, 0));
 
             return Transformation;
+        }
+
+        Matrix ZoomTransform()
+        {
+            Matrix transformation = Matrix.CreateScale(new Vector3(Zoom, Zoom, 1));
+            return transformation;
         }
     }
 }

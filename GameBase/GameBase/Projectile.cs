@@ -8,7 +8,7 @@ using Microsoft.Xna.Framework.Media;
 
 namespace GameBase
 {
-    class Projectile : Sprite
+    public class Projectile : Sprite
     {
         public int Speed;
         public int Damage;

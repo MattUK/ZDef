@@ -104,6 +104,8 @@ namespace GameBase.Entity
                     weapon.Target = null;
                 }
             }
+
+            weapon.Target = null;
         }
 
 

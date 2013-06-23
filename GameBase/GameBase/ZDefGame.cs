@@ -45,6 +45,7 @@ namespace GameBase
         public static Utility utilityClass;
         public static List<Human> HumanList; //How dare you change this to static.
         public static List<Zombie> ZombieList; //IT IS STATIC, STATIC
+        public static List<Projectile> BulletList;
         public static Texture2D HumanTexture;
         public static Texture2D engieTexture;
         public static Texture2D riflemanTexture;
@@ -89,6 +90,7 @@ namespace GameBase
             Selection = new SelectionHandle(input);
             HumanList = new List<Human>();
             ZombieList = new List<Zombie>();
+            BulletList = new List<Projectile>();
             pathFinder = new Pathfinder(tileMap);
             zombiePathfinder = new Pathfinder(tileMap, true);
             utilityClass = new Utility();
@@ -145,7 +147,7 @@ namespace GameBase
             if (input.KeyDown(Keys.Escape))
             {
                 this.Exit();
-               // Environment.Exit(0);
+                // Environment.Exit(0);
             }
 
             if (playing)
@@ -154,9 +156,37 @@ namespace GameBase
                 {
                     HumanList[i].Update(pathFinder, input, Selection, tileMap, ZombieList);
                 }
-                for (int i = 0; i < ZombieList.Count; i++)
+                for (int i = ZombieList.Count; i-- > 0; )
                 {
                     ZombieList[i].Update(HumanList, zombiePathfinder, Selection, tileMap);
+
+                    if (ZombieList[i].Dead == false)
+                    {
+                        for (int j = BulletList.Count; j-- > 0; )
+                        {
+
+                            if (Vector2.Distance(BulletList[j].Position, ZombieList[i].Position) < 17)
+                            {
+                                BulletList.RemoveAt(j);
+                                ZombieList[i].Health -=25;
+
+                                if (ZombieList[i].Health <= 0)
+                                {
+                                    ZombieList[i].Dead = true;
+                                }
+                            }
+
+                        }
+                    }
+                    else
+                    {
+                        ZombieList.RemoveAt(i);
+                    }
+                }
+
+                for (int i = 0; i < BulletList.Count; i++)
+                {
+                    BulletList[i].Update();
                 }
 
 
@@ -185,7 +215,7 @@ namespace GameBase
             if (playing)
             {
                 GraphicsDevice.SetRenderTarget(tileRenderTarget);
-                GraphicsDevice.Clear(Color.CornflowerBlue);
+                GraphicsDevice.Clear(Color.Black);
 
                 spriteBatch.Begin(SpriteSortMode.BackToFront, BlendState.AlphaBlend);
                 tileMap.Draw();
@@ -193,20 +223,22 @@ namespace GameBase
                 for (int i = 0; i < HumanList.Count; i++)
                 {
                     HumanList[i].Draw(spriteBatch);
-
-                    HumanList[i].weapon.DrawBullets(spriteBatch);
                 }
 
                 for (int i = 0; i < ZombieList.Count; i++)
                 {
                     ZombieList[i].Draw(spriteBatch);
+                }
 
+                for (int i = 0; i < BulletList.Count; i++)
+                {
+                    BulletList[i].Draw(spriteBatch);
                 }
 
                 spriteBatch.End();
 
                 GraphicsDevice.SetRenderTarget(null);
-                GraphicsDevice.Clear(Color.CornflowerBlue);
+                GraphicsDevice.Clear(Color.Black);
 
                 spriteBatch.Begin(SpriteSortMode.Deferred, null, null, null, null, null, camera.Transform());
                 spriteBatch.Draw(tileRenderTarget, new Vector2(0, 0), Color.White);
@@ -229,7 +261,7 @@ namespace GameBase
             }
             else
             {
-                GraphicsDevice.Clear(Color.CornflowerBlue);
+                GraphicsDevice.Clear(Color.Black);
 
                 spriteBatch.Begin();
                 currentMenu.Draw();
