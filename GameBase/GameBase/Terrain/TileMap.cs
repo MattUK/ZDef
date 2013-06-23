@@ -263,6 +263,11 @@ namespace GameBase
                     if (largeBuildings[(int)Math.Floor(i / 2.0f), (int)Math.Floor(j / 2.0f)] != null)
                     {
                         largeBuildings[(int)Math.Floor(i / 2.0f), (int)Math.Floor(j / 2.0f)].Update(this, (int)Math.Floor(i / 2.0f), (int)Math.Floor(j / 2.0f));
+
+                        if (largeBuildings[(int)Math.Floor(i / 2.0f), (int)Math.Floor(j / 2.0f)].Dead)
+                        {
+                            ClearBuilding(i, j);
+                        }
                     }
 
                     if (smallBuildings[i, j] != null)
@@ -277,6 +282,10 @@ namespace GameBase
                         else
                         {
                             smallBuildings[i, j].Update(this, i, j);
+                        }
+                        if (smallBuildings[i, j].Dead)
+                        {
+                            ClearBuilding(i, j);
                         }
                     }
                 }

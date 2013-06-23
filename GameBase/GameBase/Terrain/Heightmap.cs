@@ -21,8 +21,6 @@ namespace GameBase.Terrain
 
             noiseGenerator = new PerlinNoise2D(width * height * DateTime.Now.Millisecond);
 
-            Console.WriteLine(width * height * DateTime.Now.Millisecond);
-
             noiseGenerator.setFrequency(1.5f);
             noiseGenerator.setOctaveCount(1);
 

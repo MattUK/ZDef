@@ -120,7 +120,8 @@ namespace GameBase.Entity
                 {
                     if (building.GetName() == "WALL")
                     {
-                        building.OnUserInteract(new GameBase.Entity.Building.EntityInteraction(Building.EntityInteraction.Interaction.DESTROYING, this, 1)); 
+                        building.OnUserInteract(new GameBase.Entity.Building.EntityInteraction(Building.EntityInteraction.Interaction.DESTROYING, this, 1));
+                        Colliding = true;
                     }
                 }
                 else

@@ -86,6 +86,12 @@ namespace GameBase.Entity
             if (interaction.interaction == EntityInteraction.Interaction.DESTROYING)
             {
                 Health -= interaction.modifier;
+
+                if (Health <= 0)
+                {
+                    Dead = true;
+                }
+
                 return true;
             }
             else if (interaction.interaction == EntityInteraction.Interaction.BUILDING)

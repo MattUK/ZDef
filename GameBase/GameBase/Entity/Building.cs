@@ -49,18 +49,7 @@ namespace GameBase.Entity
 
         // To change tile type, do:
         // map.Set<Size>Tile(x, y, new Tile(x, y, <Type>);
-        public virtual void Update(TileMap map, int x, int y)
-        {
-            if (Health <= 0)
-            {
-                Dead = true;
-            }
-
-            if (Dead)
-            {
-                map.ClearBuilding(x, y);
-            }
-        }
+        public abstract void Update(TileMap map, int x, int y);
 
         public virtual void Draw(Tile tile, int smallTileX, int smallTileY)
         {

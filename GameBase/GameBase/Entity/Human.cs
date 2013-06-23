@@ -148,7 +148,7 @@ namespace GameBase.Entity
 
                 float currentDistance = Vector2.Distance(lightPos, humanPos);
 
-                if (currentDistance <= 7.0f && currentDistance > 1.0f)
+                if (currentDistance <= 4.0f && currentDistance > 1.0f)
                 {
                     shadowList.Add(lightPos);
                 }
@@ -159,9 +159,11 @@ namespace GameBase.Entity
                 }
             }
 
+            int shadowCount = 0;
 
             foreach (Vector2 v in shadowList)
             {
+                shadowCount++;
                 float shadowAlpha = MathHelper.Lerp(1, 0, ZDefGame.lightMap.GetLightLevel() - 0.3f);
 
                 if (ZDefGame.lightMap.GetLightLevel() > 0.7f)
@@ -173,6 +175,11 @@ namespace GameBase.Entity
                 Color shadowColour = new Color(1.0f, 1.0f, 1.0f, shadowAlpha);
 
                 spriteBatch.Draw(ZDefGame.shadowTexture, Position, null, shadowColour, shadRotation, new Vector2(0.0f, 16.0f), 1.0f, SpriteEffects.None, ZDefGame.HUMAN_DRAW_DEPTH + 0.1f);
+
+                if (shadowCount == 5)
+                {
+                    break;
+                }
             }
 
             spriteBatch.Draw(Texture, Position, null, ZDefGame.lightMap.GetLightColour((int)CurrentTile.TilePos().X, (int)CurrentTile.TilePos().Y), Rotation, Origin, Scale, SpriteEffects.None, ZDefGame.HUMAN_DRAW_DEPTH);
