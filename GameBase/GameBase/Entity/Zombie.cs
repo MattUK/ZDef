@@ -118,10 +118,10 @@ namespace GameBase.Entity
                 }
             }
 
-            if (Target == null)
-            {
+           // if (Target == null)
+          //  {
                 GetTarget(HumanList);
-            }
+           // }
         }
 
         void GetTarget(List<Human> HumanList)

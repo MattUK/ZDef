@@ -77,6 +77,7 @@ namespace GameBase.Entity
                     Wall wall = new Wall(100, 100);
                     wall.SpawnAt(ZDefGame.tileMap, SelectedTile.TilePos().X, SelectedTile.TilePos().Y);
                     pathFinder.EnvironmentChanged = true;
+                    ZDefGame.tileMap.WallChanged = true;
                 }
 
                 if (Input.KeyDown(Keys.D2))

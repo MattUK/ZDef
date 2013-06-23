@@ -22,6 +22,7 @@ namespace GameBase
 
         private int mapWidth, mapHeight;
         private Heightmap heightmap;
+        public bool WallChanged;
 
         public TileMap(int width, int height)
         {
@@ -44,6 +45,8 @@ namespace GameBase
             // ==== Handle Buildings ====
             smallBuildings = new Building[width * 2, height * 2];
             largeBuildings = new Building[width, height];
+
+            WallChanged = false;
 
             CreateInitialTerrain();
         }
@@ -264,10 +267,21 @@ namespace GameBase
 
                     if (smallBuildings[i, j] != null)
                     {
-                        smallBuildings[i, j].Update(this, i, j);
+                        if (WallChanged == false)
+                        {
+                            if (smallBuildings[i, j].GetTileType().tileID != 80)
+                            {
+                                smallBuildings[i, j].Update(this, i, j);
+                            }
+                        }
+                        else
+                        {
+                            smallBuildings[i, j].Update(this, i, j);
+                        }
                     }
                 }
             }
+            WallChanged = false;
         }
 
         public void Draw()

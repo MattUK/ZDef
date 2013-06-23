@@ -130,7 +130,7 @@ namespace GameBase
                     // Our enemies can only walk on grass tiles.
                     if (zombies)
                     {
-                        if (map.GetTerrainTile(x, y).GetTileType() == TileType.STONE || map.GetTerrainTile(x, y).GetTileType() == TileType.WATER)
+                        if (map.GetTerrainTile(x, y).GetTileType() == TileType.STONE)// || map.GetTerrainTile(x, y).GetTileType() == TileType.WATER)
                         {
                             node.Walkable = false;
                         }
