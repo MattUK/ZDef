@@ -20,6 +20,9 @@ namespace GameBase.Terrain
         private float defaultLightValue;
         private bool lightDecreasing;
 
+        private int TimerMax = 15;
+        private int Timer = 0;
+
         public LightMap(int width, int height, float defaultLightValue)
         {
             lightValues = new float[width, height];
@@ -98,7 +101,22 @@ namespace GameBase.Terrain
             {
                 CycleLighting();
             }
+
+            // UpdateForClockCycle(System.DateTime.Now.Millisecond / 100);
+
+            if (Timer == 0)
+            {
+                CycleLighting();
+                Timer = TimerMax;
+            }
+
+            if (Timer > 0)
+            {
+                Timer--;
+            }
         }
+
+
 
         public void UpdateForClockCycle(int time)
         {

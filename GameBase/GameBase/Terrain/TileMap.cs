@@ -12,7 +12,7 @@ namespace GameBase
 {
     public class TileMap
     {
-        public const bool DRAW_BORDER = true;
+        public const bool DRAW_BORDER = false;
 
         private Tile[,] largeTiles;
         private Tile[,] smallTiles;
