@@ -23,6 +23,8 @@ namespace GameBase.Entity
         bool NotMoving;
         Vector2 MoveGoal;
 
+        bool Colliding;
+
         public Zombie(Texture2D Tex, Tile ChosenTile)
         {
             Texture = Tex;
@@ -34,6 +36,7 @@ namespace GameBase.Entity
             Path = new List<Vector2>();
             NotMoving = true;
             MoveGoal = Position;
+            Colliding = false;
         }
 
         public void Update(List<Human> HumanList, Pathfinder pathFinder, SelectionHandle Select, TileMap tileMap)
@@ -61,21 +64,24 @@ namespace GameBase.Entity
             {
                 NotMoving = false;
 
-                if (Position.X > MoveGoal.X)
+                if (Colliding == false)
                 {
-                    Position.X -= 0.5f;
-                }
-                if (Position.Y > MoveGoal.Y)
-                {
-                    Position.Y -= 0.5f;
-                }
-                if (Position.X < MoveGoal.X)
-                {
-                    Position.X += 0.5f;
-                }
-                if (Position.Y < MoveGoal.Y)
-                {
-                    Position.Y += 0.5f;
+                    if (Position.X > MoveGoal.X)
+                    {
+                        Position.X -= 0.5f;
+                    }
+                    if (Position.Y > MoveGoal.Y)
+                    {
+                        Position.Y -= 0.5f;
+                    }
+                    if (Position.X < MoveGoal.X)
+                    {
+                        Position.X += 0.5f;
+                    }
+                    if (Position.Y < MoveGoal.Y)
+                    {
+                        Position.Y += 0.5f;
+                    }
                 }
             }
             else
@@ -87,6 +93,30 @@ namespace GameBase.Entity
             //{
             //    throw new Exception("");
             //}
+
+            if (CurrentTile != null)
+            {
+                Building building = tileMap.GetBuildingAt(CurrentTile.TilePos().X, CurrentTile.TilePos().Y);
+
+                if (building != null)
+                {
+                    if (building.GetTileType().tileID == 80)
+                    {
+                        Colliding = true;
+                        building.Health -= 1;
+
+                        if (building.Health == 0)
+                        {
+                            tileMap.ClearBuilding(CurrentTile.TilePos().X, (CurrentTile.TilePos().Y));
+                        }
+                    
+                    }
+                }
+                else
+                {
+                    Colliding = false;
+                }
+            }
 
             if (Target == null)
             {
