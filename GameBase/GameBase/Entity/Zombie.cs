@@ -23,6 +23,8 @@ namespace GameBase.Entity
         bool NotMoving;
         Vector2 MoveGoal;
 
+
+
         bool Colliding;
 
         public Zombie(Texture2D Tex, Tile ChosenTile)
@@ -46,7 +48,7 @@ namespace GameBase.Entity
             if (Target != null)
             {
                 Path = pathFinder.FindPath(CurrentTile.TilePos(), Target.CurrentTile.TilePos());
-               
+
                 if (Path.Count == 0)
                 {
                     Target = null;
@@ -98,6 +100,17 @@ namespace GameBase.Entity
             {
                 Building building = tileMap.GetBuildingAt(CurrentTile.TilePos().X, CurrentTile.TilePos().Y);
 
+                //throw new Exception("w");
+
+                if (ZDefGame.tileMap.GetTerrainTile(CurrentTile.TilePos().X, CurrentTile.TilePos().Y).GetTileType() == TileType.WATER)
+                {
+                    Colour.A = 50;
+                }
+                else
+                {
+                    Colour = Color.White;
+                }
+
                 if (building != null)
                 {
                     if (building.GetTileType().tileID == 80)
@@ -109,7 +122,7 @@ namespace GameBase.Entity
                         {
                             tileMap.ClearBuilding(CurrentTile.TilePos().X, (CurrentTile.TilePos().Y));
                         }
-                    
+
                     }
                 }
                 else
@@ -118,10 +131,10 @@ namespace GameBase.Entity
                 }
             }
 
-           // if (Target == null)
-          //  {
-                GetTarget(HumanList);
-           // }
+            // if (Target == null)
+            //  {
+            GetTarget(HumanList);
+            // }
         }
 
         void GetTarget(List<Human> HumanList)
@@ -141,7 +154,9 @@ namespace GameBase.Entity
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(Texture, Position, null, ZDefGame.lightMap.GetLightColour((int)CurrentTile.TilePos().X, (int)CurrentTile.TilePos().Y), Rotation, Origin, Scale, SpriteEffects.None, ZDefGame.HUMAN_DRAW_DEPTH);
+            //Disabled the lighting to test "underwater"bies.
+            spriteBatch.Draw(Texture, Position, null, Colour, Rotation, Origin, Scale, SpriteEffects.None, ZDefGame.HUMAN_DRAW_DEPTH);
+            // spriteBatch.Draw(Texture, Position, null,Colour ZDefGame.lightMap.GetLightColour((int)CurrentTile.TilePos().X, (int)CurrentTile.TilePos().Y), Rotation, Origin, Scale, SpriteEffects.None, ZDefGame.HUMAN_DRAW_DEPTH);
         }
     }
 }

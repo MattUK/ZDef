@@ -154,7 +154,7 @@ namespace GameBase
 
                 camera.Input(input);
                 Selection.Update(HumanList, camera, tileMap, pathFinder);
-                lightMap.Update();
+               // lightMap.Update();
                 tileMap.Update();
                 pathFinder.Update();
 

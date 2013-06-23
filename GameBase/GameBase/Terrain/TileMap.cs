@@ -321,7 +321,7 @@ namespace GameBase
                 }
             }
 
-            if (DRAW_BORDER)
+            if (DRAW_BORDER == true)
             {
                 for (int i = 0; i < mapWidth * 2; i++)
                 {
