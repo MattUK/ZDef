@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
+using System.Threading.Tasks;
 
 namespace GameBase.Terrain
 {
@@ -42,6 +43,11 @@ namespace GameBase.Terrain
             }
         }
 
+        public Vector2 GetLight(int index)
+        {
+            return lights[index];
+        }
+        
         public int GetLightCount()
         {
             return lights.Count;
@@ -93,6 +99,17 @@ namespace GameBase.Terrain
         public float GetLightLevel()
         {
             return defaultLightValue;
+        }
+
+        public float GetLightLevel(int smallX, int smallY)
+        {
+            float value = lightValues[(int)Math.Floor(smallX / 2.0f), (int)Math.Floor(smallY / 2.0f)];
+            if (value == -1 || defaultLightValue > value)
+            {
+                value = defaultLightValue;
+            }
+
+            return value;
         }
 
         public void Update()

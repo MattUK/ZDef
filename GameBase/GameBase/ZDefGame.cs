@@ -50,7 +50,7 @@ namespace GameBase
         public static Texture2D riflemanTexture;
         public static Texture2D bulletTexture;
         public static Texture2D zombieTexture;
-        public static Texture2D lightTexture;
+        public static Texture2D shadowTexture;
 
         public static SpriteFont spriteFont;
         // =============================================
@@ -112,7 +112,7 @@ namespace GameBase
             mainMenuTexture = Content.Load<Texture2D>("main_menu_background");
             bulletTexture = Content.Load<Texture2D>("BulletTexture");
             zombieTexture = Content.Load<Texture2D>("Zombee");
-            lightTexture = Content.Load<Texture2D>("light");
+            shadowTexture = Content.Load<Texture2D>("shadow");
 
             spriteFont = Content.Load<SpriteFont>("font");
 

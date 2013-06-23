@@ -23,8 +23,8 @@ namespace GameBase.Entity
         bool NotMoving;
         Vector2 MoveGoal;
 
-
-
+        List<Vector2> shadowList;
+        bool hidden;
 
         bool Colliding;
 
@@ -40,6 +40,8 @@ namespace GameBase.Entity
             NotMoving = true;
             MoveGoal = Position;
             Colliding = false;
+
+            shadowList = new List<Vector2>();
         }
 
         public void Update(List<Human> HumanList, Pathfinder pathFinder, SelectionHandle Select, TileMap tileMap)
@@ -106,10 +108,12 @@ namespace GameBase.Entity
                 if (ZDefGame.tileMap.GetTerrainTile(CurrentTile.TilePos().X, CurrentTile.TilePos().Y).GetTileType() == TileType.WATER)
                 {
                     Colour.A = 50;
+                    hidden = true;
                 }
                 else
                 {
                     Colour = ZDefGame.lightMap.GetLightColour(CurrentTile.TilePos().X, CurrentTile.TilePos().Y);
+                    hidden = false;
                 }
 
                 if (building != null)
@@ -148,6 +152,46 @@ namespace GameBase.Entity
 
         public override void Draw(SpriteBatch spriteBatch)
         {
+            shadowList.Clear();
+
+            Vector2 zombiePos = new Vector2((int)Math.Floor(CurrentTile.TilePos().X / 2.0f), (int)Math.Floor(CurrentTile.TilePos().Y / 2.0f));
+
+            if (!hidden)
+            {
+                for (int i = 0; i < ZDefGame.lightMap.GetLightCount(); i++)
+                {
+                    Vector2 lightPos = ZDefGame.lightMap.GetLight(i);
+
+                    float currentDistance = Vector2.Distance(lightPos, zombiePos);
+
+                    if (currentDistance <= 7.0f && currentDistance > 1.0f)
+                    {
+                        shadowList.Add(lightPos);
+                    }
+                    else if (currentDistance <= 1.0f)
+                    {
+                        shadowList.Clear();
+                        break;
+                    }
+                }
+
+
+                foreach (Vector2 v in shadowList)
+                {
+                    float shadowAlpha = MathHelper.Lerp(1, 0, ZDefGame.lightMap.GetLightLevel() - 0.3f);
+
+                    if (ZDefGame.lightMap.GetLightLevel() > 0.7f)
+                    {
+                        shadowAlpha /= 2.0f;
+                    }
+
+                    float shadRotation = (float)Math.Atan2(zombiePos.Y - v.Y, zombiePos.X - v.X);
+                    Color shadowColour = new Color(1.0f, 1.0f, 1.0f, shadowAlpha);
+
+                    spriteBatch.Draw(ZDefGame.shadowTexture, Position, null, shadowColour, shadRotation, new Vector2(0.0f, 16.0f), 1.0f, SpriteEffects.None, ZDefGame.HUMAN_DRAW_DEPTH + 0.1f);
+                }
+            }
+
             //Disabled the lighting to test "underwater"bies.
             spriteBatch.Draw(Texture, Position, null, Colour, Rotation, Origin, Scale, SpriteEffects.None, ZDefGame.HUMAN_DRAW_DEPTH);
         }
