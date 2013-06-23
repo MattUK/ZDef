@@ -133,5 +133,10 @@ namespace GameBase.Entity
             NotMoving = true;
         }
 
+        public override void Draw(SpriteBatch spriteBatch)
+        {
+            spriteBatch.Draw(Texture, Position, null, ZDefGame.lightMap.GetLightColour((int)CurrentTile.TilePos().X, (int)CurrentTile.TilePos().Y), Rotation, Origin, Scale, SpriteEffects.None, ZDefGame.HUMAN_DRAW_DEPTH);
+        }
+
     }
 }

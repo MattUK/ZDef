@@ -1,4 +1,4 @@
-﻿//#define SEIZURE_MODE
+﻿#define SEIZURE_MODE
 
 using System;
 using System.Collections.Generic;
@@ -23,8 +23,6 @@ namespace GameBase
         private int mapWidth, mapHeight;
         private Heightmap heightmap;
 
-        private List<Vector2> lights;
-
         public TileMap(int width, int height)
         {
             this.mapWidth = width;
@@ -42,8 +40,6 @@ namespace GameBase
             }
 
             heightmap = new Heightmap(width, height);
-
-            lights = new List<Vector2>();
 
             // ==== Handle Buildings ====
             smallBuildings = new Building[width * 2, height * 2];
@@ -201,7 +197,7 @@ namespace GameBase
             {
                 for (int j = 0; j < mapHeight; j++)
                 {
-                    largeTiles[i, j] = new Tile(i, j, heightmap.GetTypeAt(i, j), 1.0f);
+                    largeTiles[i, j] = new Tile(i, j, heightmap.GetTypeAt(i, j));
                 }
             }
 
@@ -255,53 +251,12 @@ namespace GameBase
 
         }
 
-        public void AddLight(int x, int y)
-        {
-            lights.Add(new Vector2(x, y));
-        }
-
-        public int GetLightCount()
-        {
-            return lights.Count;
-        }
-
         public void Update()
         {
-            float ambientLightLarge = ZDefGame.lighting.GetLightLevel();
-            float ambientLightSmall = ZDefGame.lighting.GetLightLevel();
-
-#if SEIZURE_MODE
-            Random rand = new Random();
-#endif
-
             for (int i = 0; i < mapWidth * 2; i++)
             {
                 for (int j = 0; j < mapHeight * 2; j++)
                 {
-                    ambientLightSmall = ZDefGame.lighting.GetLightLevel();
-                    ambientLightLarge = ZDefGame.lighting.GetLightLevel();
-
-#if SEIZURE_MODE
-                    ambientLightLarge *= (float)rand.NextDouble();
-                    ambientLightSmall *= (float)rand.NextDouble();
-#else
-                    for(int k = 0; k < lights.Count; k++)
-                    {
-                        // Light area around the light
-                        Vector2 lightPosition = lights[k];
-                        Vector2 tilePosition = new Vector2((int)Math.Floor(i / 2.0f), (int)Math.Floor(j / 2.0f));
-
-                        if (tilePosition.X + 1 == lightPosition.X && tilePosition.Y == lightPosition.Y)
-                        {
-                            //ambientLightLarge = 1.0f;
-                            ambientLightSmall = 1.0f;
-                        }
-                    }
-#endif
-
-                    largeTiles[(int)Math.Floor(i / 2.0f), (int)Math.Floor(j / 2.0f)].SetLightLevel(ambientLightLarge);
-                    smallTiles[i, j].SetLightLevel(ambientLightSmall);
-
                     if (largeBuildings[(int)Math.Floor(i / 2.0f), (int)Math.Floor(j / 2.0f)] != null)
                     {
                         largeBuildings[(int)Math.Floor(i / 2.0f), (int)Math.Floor(j / 2.0f)].Update(this, (int)Math.Floor(i / 2.0f), (int)Math.Floor(j / 2.0f));
@@ -317,34 +272,38 @@ namespace GameBase
 
         public void Draw()
         {
-            for (int i = 0; i < mapWidth; i++)
-            {
-                for (int j = 0; j < mapHeight; j++)
-                {
-                    //largeTiles[i, j].Draw();
-                    if (largeTiles[i, j].GetTileType().tileID > 50)
-                    {
-                        if (largeBuildings[i, j] != null)
-                        {
-                            largeBuildings[i, j].Draw(largeTiles[i, j]);
-                        }
-                    }
-                    else
-                    {
-                        largeTiles[i, j].Draw();
-                    }
-                }
-            }
-
             for (int i = 0; i < mapWidth * 2; i++)
             {
                 for (int j = 0; j < mapHeight * 2; j++)
                 {
-                    smallTiles[i, j].Draw();
-                    //if (smallBuildings[i, j] != null)
-                    //{
-                    //    smallBuildings[i, j].Draw(smallTiles[i, j]);
-                    //}
+                    // Large tiles
+                    int transformedLargeX = (int)Math.Floor(i / 2.0f);
+                    int transformedLargeY = (int)Math.Floor(j / 2.0f);
+
+                    if (largeTiles[transformedLargeX, transformedLargeY].GetTileType().tileID > 50)
+                    {
+                        if (largeBuildings[transformedLargeX, transformedLargeY] != null)
+                        {
+                            largeBuildings[transformedLargeX, transformedLargeY].Draw(largeTiles[transformedLargeX, transformedLargeY], i, j);
+                        }
+                    }
+                    else
+                    {
+                        largeTiles[transformedLargeX, transformedLargeY].Draw(i, j);
+                    }
+
+                    // Small tiles
+                    if (smallTiles[i, j].GetTileType().tileID > 50)
+                    {
+                        if (smallBuildings[i, j] != null)
+                        {
+                            smallBuildings[i, j].Draw(smallTiles[i, j], i, j);
+                        }
+                    }
+                    else
+                    {
+                        smallTiles[i, j].Draw(i, j);
+                    }
                 }
             }
 

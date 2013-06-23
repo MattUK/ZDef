@@ -27,12 +27,12 @@ namespace GameBase
         public static GraphicsDeviceManager graphics;
         public static Camera2D camera;
         public static InputHandler input;
-        public static Lighting lighting;
         public static SelectionHandle Selection;
         public static Pathfinder pathFinder;
         public static Pathfinder zombiePathfinder;
 
         public static TileMap tileMap;
+        public static LightMap lightMap;
 
         public static Texture2D terrainTexture;
         public static Texture2D humanBuildingTexture;
@@ -86,13 +86,13 @@ namespace GameBase
             camera = new Camera2D(new Vector2(0, 0), ScreenWidth, ScreenHeight);
             input = new InputHandler();
             tileMap = new TileMap(50, 50);
-            lighting = new Lighting(1.0f);
             Selection = new SelectionHandle(input);
             HumanList = new List<Human>();
             ZombieList = new List<Zombie>();
             pathFinder = new Pathfinder(tileMap);
             zombiePathfinder = new Pathfinder(tileMap, true);
             utilityClass = new Utility();
+            lightMap = new LightMap(tileMap.GetWidth(), tileMap.GetHeight(), 1.0f);
 
             currentMenu = new MainMenu(ScreenWidth, ScreenHeight);
             playing = false;
@@ -153,8 +153,8 @@ namespace GameBase
                 }
 
                 camera.Input(input);
-                lighting.Update();
                 Selection.Update(HumanList, camera, tileMap, pathFinder);
+                lightMap.Update();
                 tileMap.Update();
                 pathFinder.Update();
 
@@ -206,7 +206,7 @@ namespace GameBase
                 spriteBatch.Begin();
                 spriteBatch.DrawString(spriteFont, "FPS = " + fps, new Vector2(10.0f, 10.0f), Color.White);
                 spriteBatch.DrawString(spriteFont, "Mouse Pos = " + input.TanslatedMousePos(camera), new Vector2(10.0f, 30.0f), Color.White);
-                spriteBatch.DrawString(spriteFont, "Lights = " + tileMap.GetLightCount(), new Vector2(10.0f, 50.0f), Color.White);
+                spriteBatch.DrawString(spriteFont, "Lights = " + lightMap.GetLightCount(), new Vector2(10.0f, 50.0f), Color.White);
                 spriteBatch.End();
 
                 if (LastUpdateFPS + 1000 < Environment.TickCount)

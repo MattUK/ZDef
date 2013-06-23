@@ -81,11 +81,6 @@ namespace GameBase.Entity
             map.SetSmallTile(x, y, currentTile);
         }
 
-        public override void Draw(Tile tile)
-        {
-            tile.Draw();
-        }
-
         public override bool OnUserInteract(Building.EntityInteraction interaction)
         {
             throw new NotImplementedException();

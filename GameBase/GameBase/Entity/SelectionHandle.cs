@@ -33,7 +33,7 @@ namespace GameBase.Entity
 
             if (Input.KeyClicked(Keys.U))
             {
-                tileMap.AddLight((int)SelectedTile.TilePos().X, (int)SelectedTile.TilePos().Y);
+                ZDefGame.lightMap.AddPointLight((int)SelectedTile.TilePos().X, (int)SelectedTile.TilePos().Y, 1.0f);
             }
 
             if (Input.LeftClick() == true)

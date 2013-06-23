@@ -41,11 +41,6 @@ namespace GameBase.Entity
             base.Update(map, x, y);            
         }
 
-        public override void Draw(Tile tile)
-        {
-            tile.Draw();
-        }
-
         public override bool OnUserInteract(Building.EntityInteraction interaction)
         {
             throw new NotImplementedException();

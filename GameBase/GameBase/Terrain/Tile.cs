@@ -11,16 +11,14 @@ namespace GameBase.Terrain
     {
         private int i, j; // Position of this tile in the map array
         private TileType tileType; // Tile type
-        private float lightLevel;// Light level
 
         public bool drawTopBorder, drawBottomBorder, drawLeftBorder, drawRightBorder;
 
-        public Tile(int i, int j, TileType type, float lightLevel = 1.0f)
+        public Tile(int i, int j, TileType type)
         {
             this.i = i;
             this.j = j;
             this.tileType = type;
-            SetLightLevel(lightLevel);
 
             drawTopBorder = drawBottomBorder = drawLeftBorder = drawRightBorder = false;
         }
@@ -48,15 +46,6 @@ namespace GameBase.Terrain
             tileType = type;
         }
 
-        /// <summary>
-        /// Returns the light level of this tile, from 0 to 1.
-        /// </summary>
-        /// <returns>The light level.</returns>
-        public float GetLightLevel()
-        {
-            return lightLevel;
-        }
-
         public Point TilePos()
         {
             return new Point(i, j);
@@ -69,16 +58,6 @@ namespace GameBase.Terrain
         public Rectangle GetRectangle()
         {
             return new Rectangle(i * tileType.tileWidth, j * tileType.tileHeight, tileType.tileWidth, tileType.tileHeight);
-        }
-
-        /// <summary>
-        /// Sets the light level (from 0 to 1).
-        /// </summary>
-        /// <param name="lightLevel">The new light level of this tile.</param>
-        public void SetLightLevel(float lightLevel)
-        {
-            lightLevel = MathHelper.Clamp(lightLevel, 0.0f, 1.0f);
-            this.lightLevel = lightLevel;
         }
 
         public bool Passable()
@@ -97,10 +76,9 @@ namespace GameBase.Terrain
         /// <summary>
         /// Draws this tile at its position on the world map.
         /// </summary>
-        public void Draw()
+        public void Draw(int smallTileX, int smallTileY)
         {
-            Color drawColour = Color.White * lightLevel;
-            drawColour.A = 255;
+            Color drawColour = ZDefGame.lightMap.GetLightColour(smallTileX, smallTileY);
 
             if (tileType.tileID < 50)
             {

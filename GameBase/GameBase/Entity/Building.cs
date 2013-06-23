@@ -61,7 +61,10 @@ namespace GameBase.Entity
             }
         }
 
-        public abstract void Draw(Tile tile);
+        public virtual void Draw(Tile tile, int smallTileX, int smallTileY)
+        {
+            tile.Draw(smallTileX, smallTileY);
+        }
 
         public abstract bool OnUserInteract(EntityInteraction interaction);
     }
