@@ -63,19 +63,19 @@ namespace GameBase.Entity
 
                 if (Position.X > MoveGoal.X)
                 {
-                    Position.X -= 2;
+                    Position.X -= 0.5f;
                 }
                 if (Position.Y > MoveGoal.Y)
                 {
-                    Position.Y -= 2;
+                    Position.Y -= 0.5f;
                 }
                 if (Position.X < MoveGoal.X)
                 {
-                    Position.X += 2;
+                    Position.X += 0.5f;
                 }
                 if (Position.Y < MoveGoal.Y)
                 {
-                    Position.Y += 2;
+                    Position.Y += 0.5f;
                 }
             }
             else
