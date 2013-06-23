@@ -30,6 +30,21 @@ namespace GameBase.Entity
             TileValid = true;
             SelectedTile = GetSelectedTile(tileMap, Input.TanslatedMousePos(Camera));
 
+            if (SelectedTile != null)
+            {
+                if (Input.KeyClicked(Keys.Z))
+                {
+                    ZDefGame.SpawnZombie(SelectedTile.TilePos().X, SelectedTile.TilePos().Y);
+                }
+                if (Input.KeyClicked(Keys.X))
+                {
+                    ZDefGame.SpawnRifleman(SelectedTile.TilePos().X, SelectedTile.TilePos().Y);
+                }
+                if (Input.KeyClicked(Keys.C))
+                {
+                    ZDefGame.SpawnEngineer(SelectedTile.TilePos().X, SelectedTile.TilePos().Y);
+                }
+            }
 
             if (Input.KeyClicked(Keys.U))
             {

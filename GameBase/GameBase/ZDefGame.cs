@@ -120,8 +120,22 @@ namespace GameBase
 
             ZombieList.Add(new Zombie(zombieTexture, tileMap.GetEntityTile(20, 12)));
 
-            HumanList.Add(new Human(engieTexture, tileMap.GetEntityTile(41, 40), 200, bulletTexture));
-            HumanList.Add(new Human(riflemanTexture, tileMap.GetEntityTile(41, 40), 400, bulletTexture));
+           
+        }
+
+        public static void SpawnEngineer(int i, int j)
+        {
+            HumanList.Add(new Human(engieTexture, tileMap.GetEntityTile(i, j), 200, bulletTexture));
+        }
+
+        public static void SpawnRifleman(int i, int j)
+        {
+            HumanList.Add(new Human(riflemanTexture, tileMap.GetEntityTile(i, j), 400, bulletTexture));
+        }
+
+        public static void SpawnZombie(int i, int j)
+        {
+            ZombieList.Add(new Zombie(zombieTexture, tileMap.GetEntityTile(i, j)));
         }
 
         protected override void Update(GameTime gameTime)
@@ -145,10 +159,7 @@ namespace GameBase
                     ZombieList[i].Update(HumanList, zombiePathfinder, Selection, tileMap);
                 }
 
-                if (input.KeyClicked(Keys.Z))
-                {
-                    ZombieList.Add(new Zombie(zombieTexture, Selection.GetSelectedTile(tileMap, input.TanslatedMousePos(camera))));
-                }
+
 
                 camera.Input(input);
                 Selection.Update(HumanList, camera, tileMap, pathFinder);

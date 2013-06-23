@@ -121,6 +121,8 @@
     <Compile Include="GUI\MainMenu.cs" />
     <Compile Include="GUI\Menu.cs" />
     <Compile Include="InputHandler.cs" />
+    <Compile Include="Particle.cs" />
+    <Compile Include="ParticleEngine.cs" />
     <Compile Include="PathFinder.cs" />
     <Compile Include="PerlinNoise2D.cs" />
     <Compile Include="PixelCollider.cs" />
