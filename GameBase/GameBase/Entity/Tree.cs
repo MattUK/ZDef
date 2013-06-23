@@ -13,6 +13,7 @@ namespace GameBase.Entity
         {
             Health = 50;
             Dead = false;
+            Built = true;
         }
 
         public override TileType GetTileType()
@@ -39,15 +40,12 @@ namespace GameBase.Entity
 
         public override void Update(TileMap map, int x, int y)
         {
-            //Console.WriteLine(Dead);
-
             if (Health <= 0)
             {
                 Dead = true;
             }
             if (Dead == true)
             {
-               // Console.WriteLine(Health);
                 map.SetSmallTile(x, y, new Tile(x, y, TileType.TREE_STUMP));
             }
         }

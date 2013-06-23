@@ -108,8 +108,6 @@ namespace GameBase
                 Position.Y = Max.Y - Height / 2;
             }
 
-      //      Console.WriteLine(Zoom);
-
             if (Zoom > 2f)
             {
                 Zoom = 2f;

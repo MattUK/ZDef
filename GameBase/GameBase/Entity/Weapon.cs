@@ -61,7 +61,6 @@ namespace GameBase.Entity
 
         public void Fire()
         {
-           // Console.WriteLine("A zombie has been shot!");
             Projectile Bullet = new Projectile(Position, Rotation, Damage, BulletTex, 5);
 
             BulletList.Add(Bullet);

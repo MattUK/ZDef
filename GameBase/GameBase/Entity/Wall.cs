@@ -83,7 +83,27 @@ namespace GameBase.Entity
 
         public override bool OnUserInteract(Building.EntityInteraction interaction)
         {
-            throw new NotImplementedException();
+            if (interaction.interaction == EntityInteraction.Interaction.DESTROYING)
+            {
+                Health -= interaction.modifier;
+                return true;
+            }
+            else if (interaction.interaction == EntityInteraction.Interaction.BUILDING)
+            {
+                if (ConstructionState >= 100)
+                {
+                    ConstructionState = 100;
+                    Health = 100;
+                    Built = true;
+                }
+                else
+                {
+                    ConstructionState += interaction.modifier;
+                }
+
+                return true;
+            }
+            return false;
         }
 
     }

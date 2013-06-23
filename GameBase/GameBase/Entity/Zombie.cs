@@ -25,6 +25,7 @@ namespace GameBase.Entity
 
 
 
+
         bool Colliding;
 
         public Zombie(Texture2D Tex, Tile ChosenTile)
@@ -108,21 +109,14 @@ namespace GameBase.Entity
                 }
                 else
                 {
-                    Colour = Color.White;
+                    Colour = ZDefGame.lightMap.GetLightColour(CurrentTile.TilePos().X, CurrentTile.TilePos().Y);
                 }
 
                 if (building != null)
                 {
-                    if (building.GetTileType().tileID == 80)
+                    if (building.GetName() == "WALL")
                     {
-                        Colliding = true;
-                        building.Health -= 1;
-
-                        if (building.Health == 0)
-                        {
-                            tileMap.ClearBuilding(CurrentTile.TilePos().X, (CurrentTile.TilePos().Y));
-                        }
-
+                        building.OnUserInteract(new GameBase.Entity.Building.EntityInteraction(Building.EntityInteraction.Interaction.DESTROYING, this, 1)); 
                     }
                 }
                 else
@@ -156,7 +150,6 @@ namespace GameBase.Entity
         {
             //Disabled the lighting to test "underwater"bies.
             spriteBatch.Draw(Texture, Position, null, Colour, Rotation, Origin, Scale, SpriteEffects.None, ZDefGame.HUMAN_DRAW_DEPTH);
-            // spriteBatch.Draw(Texture, Position, null,Colour ZDefGame.lightMap.GetLightColour((int)CurrentTile.TilePos().X, (int)CurrentTile.TilePos().Y), Rotation, Origin, Scale, SpriteEffects.None, ZDefGame.HUMAN_DRAW_DEPTH);
         }
     }
 }

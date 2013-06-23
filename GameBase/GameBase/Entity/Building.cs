@@ -31,6 +31,7 @@ namespace GameBase.Entity
 
         public int Health;
         public int ConstructionState;
+        public bool Built;
 
         public Building(int initialHealth, int initialConstructionState)
         {

@@ -28,7 +28,7 @@ namespace GameBase
                 ElaspedTime = 0;
             }
 
-            Console.WriteLine(FPS);
+            //Console.WriteLine(FPS);
             //FPS Counter
         }
 

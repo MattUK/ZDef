@@ -310,7 +310,6 @@ namespace GameBase
             // Only try to find a path if the start and end points are different.
             if (startPoint == endPoint)
             {
-                //Console.WriteLine("Points are equal");
                 return new List<Vector2>();
             }
 
@@ -327,7 +326,6 @@ namespace GameBase
 
             if (startNode == null)
             {
-                //Console.WriteLine("Startnode is null!");
                 return new List<Vector2>();
             }
 
@@ -363,7 +361,6 @@ namespace GameBase
                 /////////////////////////////////////////////////////////////////
                 if (currentNode == null)
                 {
-                    //Console.WriteLine("Current node is null!");
                     break;
                 }
 
@@ -448,7 +445,6 @@ namespace GameBase
             }
 
             // No path could be found.
-            //Console.WriteLine("No path found");
             return new List<Vector2>();
 
 

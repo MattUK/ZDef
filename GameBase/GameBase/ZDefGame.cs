@@ -136,8 +136,6 @@ namespace GameBase
 
             if (playing)
             {
-               // Console.WriteLine("Playing");
-
                 for (int i = 0; i < HumanList.Count; i++)
                 {
                     HumanList[i].Update(pathFinder, input, Selection, tileMap, ZombieList);
@@ -154,12 +152,12 @@ namespace GameBase
 
                 camera.Input(input);
                 Selection.Update(HumanList, camera, tileMap, pathFinder);
-               // lightMap.Update();
+                lightMap.Update();
                 tileMap.Update();
                 pathFinder.Update();
 
                 camera.Constraint(new Vector2(tileMap.GetWidth() * 64, tileMap.GetHeight() * 64));
-                utilityClass.TrapMouse(true, this);
+                //utilityClass.TrapMouse(true, this);
             }
             else
             {
