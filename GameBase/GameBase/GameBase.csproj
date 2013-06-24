@@ -112,12 +112,13 @@
     <Compile Include="Camera2D.cs" />
     <Compile Include="Entity\Building.cs" />
     <Compile Include="Entity\Human.cs" />
+    <Compile Include="Entity\LandingZone.cs" />
     <Compile Include="Entity\SelectionHandle.cs" />
     <Compile Include="Entity\Tree.cs" />
     <Compile Include="Entity\Wall.cs" />
     <Compile Include="Entity\Weapon.cs" />
-    <Compile Include="Entity\WoodenBarricade.cs" />
     <Compile Include="Entity\Zombie.cs" />
+    <Compile Include="GUI\InGame.cs" />
     <Compile Include="GUI\MainMenu.cs" />
     <Compile Include="GUI\Menu.cs" />
     <Compile Include="InputHandler.cs" />

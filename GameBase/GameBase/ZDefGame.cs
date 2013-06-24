@@ -53,6 +53,7 @@ namespace GameBase
         public static Texture2D zombieTexture;
         public static Texture2D shadowTexture;
 
+
         public static SpriteFont spriteFont;
         // =============================================
 
@@ -65,6 +66,11 @@ namespace GameBase
 
         private long LastUpdateFPS;
         private int fps, fpsCount;
+
+
+        //BUTTON TEST
+        Button button;
+        //BUTTON TEST
 
         public ZDefGame()
         {
@@ -113,7 +119,7 @@ namespace GameBase
             riflemanTexture = Content.Load<Texture2D>("Rifleman");
             mainMenuTexture = Content.Load<Texture2D>("main_menu_background");
             bulletTexture = Content.Load<Texture2D>("BulletTexture");
-            zombieTexture = Content.Load<Texture2D>("Zombee");
+            zombieTexture = Content.Load<Texture2D>("RiflemanZombie");
             shadowTexture = Content.Load<Texture2D>("shadow");
 
             spriteFont = Content.Load<SpriteFont>("font");
@@ -122,7 +128,8 @@ namespace GameBase
 
             ZombieList.Add(new Zombie(zombieTexture, tileMap.GetEntityTile(20, 12)));
 
-           
+            //BUTTONTEST
+            button = new Button(new Vector2(40, ScreenHeight-40), 40, 35, riflemanTexture);
         }
 
         public static void SpawnEngineer(int i, int j)
@@ -212,6 +219,10 @@ namespace GameBase
                 currentMenu.Update();
             }
 
+            //BUTTON TEST
+            button.Update(input);
+            //BUTTON TEST
+
             input.UpdateLastValues();
 
             base.Update(gameTime);
@@ -255,7 +266,13 @@ namespace GameBase
                 spriteBatch.DrawString(spriteFont, "FPS = " + fps, new Vector2(10.0f, 10.0f), Color.White);
                 spriteBatch.DrawString(spriteFont, "Mouse Pos = " + input.TanslatedMousePos(camera), new Vector2(10.0f, 30.0f), Color.White);
                 spriteBatch.DrawString(spriteFont, "Lights = " + lightMap.GetLightCount(), new Vector2(10.0f, 50.0f), Color.White);
+                
+                //BUTTON TEST
+                button.Draw(spriteBatch);
+                //BUTTON TEST
+
                 spriteBatch.End();
+
 
                 if (LastUpdateFPS + 1000 < Environment.TickCount)
                 {
