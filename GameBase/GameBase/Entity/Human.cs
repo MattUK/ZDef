@@ -166,15 +166,12 @@ namespace GameBase.Entity
             foreach (Vector2 v in shadowList)
             {
                 shadowCount++;
-                float shadowAlpha = MathHelper.Lerp(1, 0, ZDefGame.lightMap.GetLightLevel() - 0.3f);
 
-                if (ZDefGame.lightMap.GetLightLevel() > 0.7f)
-                {
-                    shadowAlpha /= 2.0f;
-                }
+                float amountPerLightLevel = 1 / (LightMap.MAXIMUM_LIGHT_LEVEL - LightMap.MINIMUM_LIGHT_LEVEL);
+                float currentAmount = 1 - (amountPerLightLevel * (ZDefGame.lightMap.GetLightLevel() - 0.3f));
 
                 float shadRotation = (float)Math.Atan2(humanPos.Y - v.Y, humanPos.X - v.X);
-                Color shadowColour = new Color(1.0f, 1.0f, 1.0f, shadowAlpha);
+                Color shadowColour = new Color(1.0f, 1.0f, 1.0f, currentAmount);
 
                 spriteBatch.Draw(ZDefGame.shadowTexture, Position, null, shadowColour, shadRotation, new Vector2(0.0f, 16.0f), 1.0f, SpriteEffects.None, ZDefGame.HUMAN_DRAW_DEPTH + 0.1f);
 
