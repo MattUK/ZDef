@@ -116,6 +116,7 @@
     <Compile Include="Entity\SelectionHandle.cs" />
     <Compile Include="Entity\Tree.cs" />
     <Compile Include="Entity\Wall.cs" />
+    <Compile Include="Entity\WatchTower.cs" />
     <Compile Include="Entity\Weapon.cs" />
     <Compile Include="Entity\Zombie.cs" />
     <Compile Include="GUI\InGame.cs" />

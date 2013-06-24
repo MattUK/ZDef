@@ -12,7 +12,7 @@ namespace GameBase.Entity
         public Wall(int health, int constructionState)
             : base(health, constructionState)
         {
-
+            Large = false;
         }
 
         public override Terrain.TileType GetTileType()

@@ -14,7 +14,8 @@ namespace GameBase.Entity
             public enum Interaction
             {
                 DESTROYING,
-                BUILDING
+                BUILDING,
+                USING
             }
 
             public Interaction interaction;
@@ -32,6 +33,7 @@ namespace GameBase.Entity
         public int Health;
         public int ConstructionState;
         public bool Built;
+        public bool Large;
 
         public Building(int initialHealth, int initialConstructionState)
         {

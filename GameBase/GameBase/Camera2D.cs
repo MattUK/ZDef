@@ -98,9 +98,9 @@ namespace GameBase
         {
             //Constrains the camera to the provided values, ensures it cannot move off screen.
 
-            if (Zoom > 2f)
+            if (Zoom > 1f)
             {
-                Zoom = 2f;
+                Zoom = 1f;
                 MinZoom = true;
             }
             if (Zoom < 0.3500001f)

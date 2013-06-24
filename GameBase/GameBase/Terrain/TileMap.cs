@@ -24,6 +24,12 @@ namespace GameBase
         private Heightmap heightmap;
         public bool WallChanged;
 
+        public Vector2 borderLarge;
+        public bool drawLargeBorder;
+
+        public Vector2 borderSmall;
+        public bool drawSmallBorder;
+
         public TileMap(int width, int height)
         {
             this.mapWidth = width;
@@ -111,11 +117,13 @@ namespace GameBase
                     smallBuildings[x, y] = null;
                     smallTiles[x, y] = new Tile(x, y, TileType.EMPTY_SMALL);
                     ZDefGame.pathFinder.EnvironmentChanged = true;
+                    ZDefGame.zombiePathfinder.EnvironmentChanged = true;
                 }
                 if (largeBuildings[(int)Math.Floor(x / 2.0f), (int)Math.Floor(y / 2.0f)] != null)
                 {
                     largeBuildings[(int)Math.Floor(x / 2.0f), (int)Math.Floor(y / 2.0f)] = null;
                     largeTiles[(int)Math.Floor(x / 2.0f), (int)Math.Floor(y / 2.0f)] = new Tile(x, y, TileType.EMPTY_LARGE);
+                    ZDefGame.pathFinder.EnvironmentChanged = true;
                     ZDefGame.pathFinder.EnvironmentChanged = true;
                 }
             }
@@ -315,6 +323,11 @@ namespace GameBase
                         largeTiles[transformedLargeX, transformedLargeY].Draw(i, j);
                     }
 
+                    if (ZDefGame.GameGUI.placing && ZDefGame.GameGUI.currentBuilding.Large && ZDefGame.Selection.SelectedTile.TilePos().X == i && ZDefGame.Selection.SelectedTile.TilePos().Y == j)
+                    {
+                        ZDefGame.spriteBatch.Draw(ZDefGame.humanBuildingTexture, new Rectangle(transformedLargeX * 64, transformedLargeY * 64, 64, 64), new Rectangle(96, 0, 64, 64), Color.White, 0.0f, Vector2.Zero, Microsoft.Xna.Framework.Graphics.SpriteEffects.None, 0);
+                    }
+
                     // Small tiles
                     if (smallTiles[i, j].GetTileType().tileID > 50)
                     {
@@ -322,6 +335,11 @@ namespace GameBase
                         {
                             smallBuildings[i, j].Draw(smallTiles[i, j], i, j);
                         }
+                    }
+
+                    if (ZDefGame.GameGUI.placing && !ZDefGame.GameGUI.currentBuilding.Large && ZDefGame.Selection.SelectedTile.TilePos().X == i && ZDefGame.Selection.SelectedTile.TilePos().Y == j)
+                    {
+                        ZDefGame.spriteBatch.Draw(ZDefGame.humanBuildingTexture, new Rectangle(i * 32, j * 32, 32, 32), new Rectangle(288, 0, 32, 32), Color.White, 0.0f, Vector2.Zero, Microsoft.Xna.Framework.Graphics.SpriteEffects.None, 0);
                     }
                     else
                     {

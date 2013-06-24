@@ -8,6 +8,7 @@ using Microsoft.Xna.Framework.GamerServices;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
+using GameBase.Entity;
 
 namespace GameBase.GUI
 {
@@ -18,14 +19,16 @@ namespace GameBase.GUI
         Texture2D ActiveTexture;
         Texture2D InactiveTexture;
         public bool Pressed;
+        public Building associatedBuilding;
 
-        public Button(Vector2 Pos, int width, int height, Texture2D IA, Texture2D A)
+        public Button(Vector2 Pos, int width, int height, Texture2D IA, Texture2D A, Building associatedBuilding)
         {
             Pressed = false;
             Texture = IA;
             ActiveTexture = A;
             InactiveTexture = IA;
             Box = new Rectangle((int)Pos.X, (int)Pos.Y, width, height);
+            this.associatedBuilding = associatedBuilding;
         }
 
         public void Update(InputHandler Input)
@@ -83,36 +86,48 @@ namespace GameBase.GUI
 
     public class InGame
     {
-        public bool PlacingWalls;
+        public Building currentBuilding;
+        public bool placing;
         List<Button> ButtonList;
 
-        public InGame(Texture2D WallButtonAct, Texture2D WallButtonInAct)
+        public InGame(ContentManager Content)
         {
-            PlacingWalls = false;
+            placing = false;
             ButtonList = new List<Button>();
-            Button WButton = new Button(new Vector2(0, 550), 50, 50, WallButtonAct, WallButtonInAct);
+            Button WButton = new Button(new Vector2(0, 550), 50, 50, Content.Load<Texture2D>("GuiBoxWALL"), Content.Load<Texture2D>("GuiBoxWALLInactive"), new Wall(100, 100));
+            Button WTButton = new Button(new Vector2(50, 550), 50, 50, Content.Load<Texture2D>("GuiBoxWATCHTOWER"), Content.Load<Texture2D>("GuiBoxWATCHTOWERInactive"), new WatchTower(100, 100));
             ButtonList.Add(WButton);
+            ButtonList.Add(WTButton);
         }
 
         public void Update(InputHandler Input)
         {
             for (int i = 0; i < ButtonList.Count; i++)
             {
+                bool active = false;
                 ButtonList[i].Update(Input);
+
+                if (ButtonList[i].Pressed)
+                {
+                    active = true;
+                    placing = true;
+                }
+
+                if (active || ButtonList[i].associatedBuilding == currentBuilding)
+                {
+                    ButtonList[i].ToggleTexture(true);
+                    currentBuilding = ButtonList[i].associatedBuilding;
+                    break;
+                }
+                else
+                {
+                    ButtonList[i].ToggleTexture(false);
+                }
             }
 
-            if (ButtonList[0].Pressed == true)
+            if (!placing)
             {
-                PlacingWalls = true;
-            }
-
-            if (PlacingWalls == true)
-            {
-                ButtonList[0].ToggleTexture(true);
-            }
-            else
-            {
-                ButtonList[0].ToggleTexture(false);
+                currentBuilding = null;
             }
         }
 

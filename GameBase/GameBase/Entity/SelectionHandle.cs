@@ -15,8 +15,8 @@ namespace GameBase.Entity
     public class SelectionHandle
     {
         InputHandler Input;
-        Human SelectedHuman;
-        Tile SelectedTile;
+        public Human SelectedHuman;
+        public Tile SelectedTile;
         bool TileValid;
 
         public SelectionHandle(InputHandler Input)
@@ -89,16 +89,19 @@ namespace GameBase.Entity
 
         void WallPlacement(InputHandler Input, Pathfinder pathFinder)
         {
-            if (ZDefGame.GameGUI.PlacingWalls == true)
+            if (ZDefGame.GameGUI.placing == true)
             {
                 if (SelectedTile != null)
                 {
                     if (Input.LeftDown() == true)
                     {
-                        Wall wall = new Wall(100, 100);
-                        wall.SpawnAt(ZDefGame.tileMap, SelectedTile.TilePos().X, SelectedTile.TilePos().Y);
-                        pathFinder.EnvironmentChanged = true;
-                        ZDefGame.tileMap.WallChanged = true;
+                        Building newBuilding = (Building)Activator.CreateInstance(ZDefGame.GameGUI.currentBuilding.GetType(), new object[] {100, 100});
+                        if (newBuilding.SpawnAt(ZDefGame.tileMap, SelectedTile.TilePos().X, SelectedTile.TilePos().Y))
+                        {
+                            pathFinder.EnvironmentChanged = true;
+                            ZDefGame.zombiePathfinder.EnvironmentChanged = true;
+                            ZDefGame.tileMap.WallChanged = true;
+                        }
                     }
 
                     //if (Input.KeyDown(Keys.D2))
@@ -109,7 +112,7 @@ namespace GameBase.Entity
 
                 if (Input.RightClick() == true)
                 {
-                    ZDefGame.GameGUI.PlacingWalls = false;
+                    ZDefGame.GameGUI.placing = false;
                 }
             }
         }

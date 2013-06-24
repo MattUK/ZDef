@@ -9,7 +9,7 @@ namespace GameBase.Terrain
 {
     public class LightMap
     {
-        public const float MINIMUM_LIGHT_LEVEL = 0.4f;
+        public const float MINIMUM_LIGHT_LEVEL = 0.2f;
         public const float MAXIMUM_LIGHT_LEVEL = 1.0f;
         public const float LIGHT_STEP = 0.01f;
 
@@ -114,64 +114,22 @@ namespace GameBase.Terrain
 
         public void Update()
         {
-            if (ZDefGame.input.KeyDown(Microsoft.Xna.Framework.Input.Keys.RightShift))
-            {
-                CycleLighting();
-            }
 
-            // UpdateForClockCycle(System.DateTime.Now.Millisecond / 100);
-
-            if (Timer == 0)
-            {
-                CycleLighting();
-                Timer = TimerMax;
-            }
-
-            if (Timer > 0)
-            {
-                Timer--;
-            }
         }
-
-
 
         public void UpdateForClockCycle(int time)
         {
-            int modTime = time % 100; // Get the time of the actual day (0-100)
+            int modTime = time % 200; // Get the time of the actual day (0-100)
             float incrementPerTick = (MAXIMUM_LIGHT_LEVEL - MINIMUM_LIGHT_LEVEL) / 100;
-            float calculatedLightLevel = incrementPerTick * modTime;
-            defaultLightValue = calculatedLightLevel;
-        }
 
-        public void CycleLighting()
-        {
-            if (defaultLightValue >= MAXIMUM_LIGHT_LEVEL)
+            if (modTime <= 100)
             {
-                lightDecreasing = true;
+                defaultLightValue -= incrementPerTick;
             }
-            if (defaultLightValue <= MINIMUM_LIGHT_LEVEL)
+            else if (modTime > 100)
             {
-                lightDecreasing = false;
+                defaultLightValue += incrementPerTick;
             }
-
-            if (lightDecreasing)
-            {
-                DecreaseGlobalLightLevel();
-            }
-            else
-            {
-                IncreaseGlobalLightLevel();
-            }
-        }
-
-        public void IncreaseGlobalLightLevel()
-        {
-            defaultLightValue += (defaultLightValue < MAXIMUM_LIGHT_LEVEL) ? LIGHT_STEP : 0.0f;
-        }
-
-        public void DecreaseGlobalLightLevel()
-        {
-            defaultLightValue -= (defaultLightValue > MINIMUM_LIGHT_LEVEL) ? LIGHT_STEP : 0.0f;
         }
 
     }

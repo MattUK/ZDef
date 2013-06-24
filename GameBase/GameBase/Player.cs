@@ -5,6 +5,7 @@ using System.Text;
 using GameBase.Entity;
 using GameBase.GUI;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework;
 
 namespace GameBase
 {
@@ -14,9 +15,14 @@ namespace GameBase
         public const int INITIAL_DAY_TIME = 0;
 
         private int dayTime;
-        private int lastTimeIncrement;
+        private TimeSpan lastTimeIncrement;
+
+        private bool pauseTime;
 
         private int resources;
+
+        private int waveCount;
+        private bool inWave;
 
         public Player()
         {
@@ -34,6 +40,26 @@ namespace GameBase
 
         }
 
+        public bool InWave()
+        {
+            return inWave;
+        }
+
+        public int GetWaveNumber()
+        {
+            return waveCount;
+        }
+
+        public void PauseTime()
+        {
+            pauseTime = true;
+        }
+
+        public void ResumeTime()
+        {
+            pauseTime = false;
+        }
+
         public int GetResourceCount()
         {
             return resources;
@@ -49,12 +75,23 @@ namespace GameBase
             resources += amount;
         }
 
-        public void Update()
+        public void Update(GameTime gameTime)
         {
             // Increment current time of day
-            if (lastTimeIncrement + 1 < Environment.TickCount)
+            if (lastTimeIncrement.Add(new TimeSpan(0, 0, 0, 0, 100)) < gameTime.TotalGameTime)
             {
                 dayTime++;
+                lastTimeIncrement = gameTime.TotalGameTime;
+
+                ZDefGame.lightMap.UpdateForClockCycle(dayTime);
+            }
+
+            // Pause at night
+            if (dayTime == 0)
+            {
+                PauseTime();
+                waveCount++;
+                inWave = true;
             }
         }
 

@@ -34,6 +34,8 @@ namespace GameBase
         public static TileMap tileMap;
         public static LightMap lightMap;
 
+        public static Player player;
+
         public static Texture2D terrainTexture;
         public static Texture2D humanBuildingTexture;
 
@@ -107,6 +109,8 @@ namespace GameBase
             utilityClass = new Utility();
             lightMap = new LightMap(tileMap.GetWidth(), tileMap.GetHeight(), 1.0f);
 
+            player = new Player();
+
             currentMenu = new MainMenu(ScreenWidth, ScreenHeight);
             playing = false;
 
@@ -134,7 +138,7 @@ namespace GameBase
             spriteFont = Content.Load<SpriteFont>("font");
 
             tileRenderTarget = new RenderTarget2D(GraphicsDevice, tileMap.GetWidth() * 64, tileMap.GetHeight() * 64);
-            GameGUI = new InGame(GuiWallTex, GuiWallTexIA);
+            GameGUI = new InGame(Content);
             SpawnEngieZombie(20, 20);
 
             //BUTTONTEST
@@ -217,13 +221,14 @@ namespace GameBase
                     BulletList[i].Update();
                 }
 
-
+                player.Update(gameTime);
 
                 camera.Input(input);
                 Selection.Update(HumanList, camera, tileMap, pathFinder);
                 lightMap.Update();
                 tileMap.Update();
                 pathFinder.Update();
+                zombiePathfinder.Update();
 
                 camera.Constraint(new Vector2(tileMap.GetWidth() * 64, tileMap.GetHeight() * 64));
                 utilityClass.TrapMouse(true, this);
@@ -278,6 +283,10 @@ namespace GameBase
                 spriteBatch.DrawString(spriteFont, "FPS = " + fps, new Vector2(10.0f, 10.0f), Color.White);
                 spriteBatch.DrawString(spriteFont, "Mouse Pos = " + input.TanslatedMousePos(camera), new Vector2(10.0f, 30.0f), Color.White);
                 spriteBatch.DrawString(spriteFont, "Lights = " + lightMap.GetLightCount(), new Vector2(10.0f, 50.0f), Color.White);
+                if (Selection.SelectedTile != null)
+                {
+                    spriteBatch.DrawString(spriteFont, "Small Tile = " + Selection.SelectedTile.TilePos(), new Vector2(10.0f, 70.0f), Color.White);
+                }
                 
                 //BUTTON TEST
                 GameGUI.Draw(spriteBatch);

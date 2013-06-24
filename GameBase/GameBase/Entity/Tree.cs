@@ -14,6 +14,7 @@ namespace GameBase.Entity
             Health = 50;
             Dead = false;
             Built = true;
+            Large = false;
         }
 
         public override TileType GetTileType()
