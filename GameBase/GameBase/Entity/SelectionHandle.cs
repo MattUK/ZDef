@@ -89,19 +89,27 @@ namespace GameBase.Entity
 
         void WallPlacement(InputHandler Input, Pathfinder pathFinder)
         {
-            if (SelectedTile != null)
+            if (ZDefGame.GameGUI.PlacingWalls == true)
             {
-                if (Input.KeyDown(Keys.D1))
+                if (SelectedTile != null)
                 {
-                    Wall wall = new Wall(100, 100);
-                    wall.SpawnAt(ZDefGame.tileMap, SelectedTile.TilePos().X, SelectedTile.TilePos().Y);
-                    pathFinder.EnvironmentChanged = true;
-                    ZDefGame.tileMap.WallChanged = true;
+                    if (Input.LeftDown() == true)
+                    {
+                        Wall wall = new Wall(100, 100);
+                        wall.SpawnAt(ZDefGame.tileMap, SelectedTile.TilePos().X, SelectedTile.TilePos().Y);
+                        pathFinder.EnvironmentChanged = true;
+                        ZDefGame.tileMap.WallChanged = true;
+                    }
+
+                    //if (Input.KeyDown(Keys.D2))
+                    //{
+                    //    ZDefGame.tileMap.ClearBuilding(SelectedTile.TilePos().X, SelectedTile.TilePos().Y);
+                    //}
                 }
 
-                if (Input.KeyDown(Keys.D2))
+                if (Input.RightClick() == true)
                 {
-                    ZDefGame.tileMap.ClearBuilding(SelectedTile.TilePos().X, SelectedTile.TilePos().Y);
+                    ZDefGame.GameGUI.PlacingWalls = false;
                 }
             }
         }

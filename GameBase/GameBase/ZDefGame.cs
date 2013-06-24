@@ -54,6 +54,9 @@ namespace GameBase
         public static Texture2D zombieEngineerTexture;
         public static Texture2D shadowTexture;
 
+        public static Texture2D GuiWallTex;
+        public static Texture2D GuiWallTexIA;
+
 
         public static SpriteFont spriteFont;
         // =============================================
@@ -70,7 +73,8 @@ namespace GameBase
 
 
         //BUTTON TEST
-        Button button;
+        public static InGame GameGUI;
+       // Button button;
         //BUTTON TEST
 
         public ZDefGame()
@@ -124,14 +128,17 @@ namespace GameBase
             zombieEngineerTexture = Content.Load<Texture2D>("EngineerZombie");
             shadowTexture = Content.Load<Texture2D>("shadow");
 
+            GuiWallTex = Content.Load<Texture2D>("GuiBoxWALL");
+            GuiWallTexIA = Content.Load<Texture2D>("GuiBoxWALLInactive");
+
             spriteFont = Content.Load<SpriteFont>("font");
 
             tileRenderTarget = new RenderTarget2D(GraphicsDevice, tileMap.GetWidth() * 64, tileMap.GetHeight() * 64);
-
+            GameGUI = new InGame(GuiWallTex, GuiWallTexIA);
             SpawnEngieZombie(20, 20);
 
             //BUTTONTEST
-            button = new Button(new Vector2(40, ScreenHeight-40), 40, 35, riflemanTexture);
+           // button = new Button(new Vector2(40, ScreenHeight-40), 40, 35, riflemanTexture);
         }
 
         public static void SpawnEngineer(int i, int j)
@@ -226,9 +233,7 @@ namespace GameBase
                 currentMenu.Update();
             }
 
-            //BUTTON TEST
-            button.Update(input);
-            //BUTTON TEST
+            GameGUI.Update(input);
 
             input.UpdateLastValues();
 
@@ -275,7 +280,7 @@ namespace GameBase
                 spriteBatch.DrawString(spriteFont, "Lights = " + lightMap.GetLightCount(), new Vector2(10.0f, 50.0f), Color.White);
                 
                 //BUTTON TEST
-                button.Draw(spriteBatch);
+                GameGUI.Draw(spriteBatch);
                 //BUTTON TEST
 
                 spriteBatch.End();
