@@ -18,6 +18,8 @@ namespace GameBase
         public float Rotation;
         int Height;
         int Width;
+        bool MaxZoom;
+        bool MinZoom;
 
         public Camera2D(Vector2 Pos, int W, int H)
         {
@@ -26,6 +28,9 @@ namespace GameBase
             Rotation = 0.0f; //Rotation value of the camera.
             Width = W;       //Camera view width  (screen width).
             Height = H;      //Camera view height (screen height).
+
+            MaxZoom = false;
+            MinZoom = false;
         }
 
         public void Input(InputHandler InputHandle)
@@ -76,20 +81,34 @@ namespace GameBase
                 Zoom -= 0.03f;
             }
 
-            if (InputHandle.ScrollIn() == true)
+            if (InputHandle.ScrollIn() == true && MinZoom == false)
             {
                 Zoom += 0.1f;
+                MaxZoom = false;
             }
 
-            if (InputHandle.ScrollOut() == true)
+            if (InputHandle.ScrollOut() == true && MaxZoom == false)
             {
                 Zoom -= 0.1f;
+                MinZoom = false;
             }
         }
 
         public void Constraint(Vector2 Max)
         {
             //Constrains the camera to the provided values, ensures it cannot move off screen.
+
+            if (Zoom > 2f)
+            {
+                Zoom = 2f;
+                MinZoom = true;
+            }
+            if (Zoom < 0.3500001f)
+            {
+                Zoom = 0.3500001f;
+                MaxZoom = true;
+            }
+
 
             Vector2 CamMin = Vector2.Transform(Vector2.Zero, Matrix.Invert(Transform()));
             Vector2 CamSize = new Vector2(Width, Height) / Zoom;
@@ -113,16 +132,7 @@ namespace GameBase
             //if (Position.Y + (Height / 2) > Max.Y)
             //{
             //    Position.Y = Max.Y - (Height / 2);
-            //}
-
-            if (Zoom > 2f)
-            {
-                Zoom = 2f;
-            }
-            if (Zoom < 0.3500001f)
-            {
-                Zoom = 0.3500001f;
-            }
+            //
         }
 
         public Matrix Transform()

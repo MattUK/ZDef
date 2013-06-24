@@ -164,7 +164,6 @@ namespace GameBase
                     {
                         for (int j = BulletList.Count; j-- > 0; )
                         {
-
                             if (Vector2.Distance(BulletList[j].Position, ZombieList[i].Position) < 17)
                             {
                                 BulletList.RemoveAt(j);
@@ -175,7 +174,15 @@ namespace GameBase
                                     ZombieList[i].Dead = true;
                                 }
                             }
+                        }
 
+                        for (int j = HumanList.Count; j-- > 0; )
+                        {
+                            if (Vector2.Distance(HumanList[j].Position, ZombieList[i].Position) < 30)
+                            {
+                                SpawnZombie(HumanList[j].CurrentTile.TilePos().X, HumanList[j].CurrentTile.TilePos().Y);
+                                HumanList.RemoveAt(j);
+                            }
                         }
                     }
                     else
@@ -198,7 +205,7 @@ namespace GameBase
                 pathFinder.Update();
 
                 camera.Constraint(new Vector2(tileMap.GetWidth() * 64, tileMap.GetHeight() * 64));
-                //utilityClass.TrapMouse(true, this);
+                utilityClass.TrapMouse(true, this);
             }
             else
             {
