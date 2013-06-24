@@ -289,7 +289,6 @@ namespace GameBase
 
                 spriteBatch.End();
 
-
                 if (LastUpdateFPS + 1000 < Environment.TickCount)
                 {
                     fps = fpsCount;

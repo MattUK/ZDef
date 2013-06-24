@@ -175,7 +175,7 @@ namespace GameBase.Entity
 
                 spriteBatch.Draw(ZDefGame.shadowTexture, Position, null, shadowColour, shadRotation, new Vector2(0.0f, 16.0f), 1.0f, SpriteEffects.None, ZDefGame.HUMAN_DRAW_DEPTH + 0.1f);
 
-                if (shadowCount == 5)
+                if (shadowCount == 3)
                 {
                     break;
                 }

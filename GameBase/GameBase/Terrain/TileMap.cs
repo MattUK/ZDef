@@ -323,9 +323,12 @@ namespace GameBase
                         largeTiles[transformedLargeX, transformedLargeY].Draw(i, j);
                     }
 
-                    if (ZDefGame.GameGUI.placing && ZDefGame.GameGUI.currentBuilding.Large && ZDefGame.Selection.SelectedTile.TilePos().X == i && ZDefGame.Selection.SelectedTile.TilePos().Y == j)
+                    if (ZDefGame.GameGUI.currentBuilding != null)
                     {
-                        ZDefGame.spriteBatch.Draw(ZDefGame.humanBuildingTexture, new Rectangle(transformedLargeX * 64, transformedLargeY * 64, 64, 64), new Rectangle(96, 0, 64, 64), Color.White, 0.0f, Vector2.Zero, Microsoft.Xna.Framework.Graphics.SpriteEffects.None, 0);
+                        if (ZDefGame.GameGUI.placing && ZDefGame.GameGUI.currentBuilding.Large && ZDefGame.Selection.SelectedTile != null && ZDefGame.Selection.SelectedTile.TilePos().X == i && ZDefGame.Selection.SelectedTile.TilePos().Y == j)
+                        {
+                            ZDefGame.spriteBatch.Draw(ZDefGame.humanBuildingTexture, new Rectangle(transformedLargeX * 64, transformedLargeY * 64, 64, 64), new Rectangle(96, 0, 64, 64), Color.White, 0.0f, Vector2.Zero, Microsoft.Xna.Framework.Graphics.SpriteEffects.None, 0);
+                        }
                     }
 
                     // Small tiles
@@ -336,14 +339,38 @@ namespace GameBase
                             smallBuildings[i, j].Draw(smallTiles[i, j], i, j);
                         }
                     }
-
-                    if (ZDefGame.GameGUI.placing && !ZDefGame.GameGUI.currentBuilding.Large && ZDefGame.Selection.SelectedTile.TilePos().X == i && ZDefGame.Selection.SelectedTile.TilePos().Y == j)
-                    {
-                        ZDefGame.spriteBatch.Draw(ZDefGame.humanBuildingTexture, new Rectangle(i * 32, j * 32, 32, 32), new Rectangle(288, 0, 32, 32), Color.White, 0.0f, Vector2.Zero, Microsoft.Xna.Framework.Graphics.SpriteEffects.None, 0);
-                    }
                     else
                     {
                         smallTiles[i, j].Draw(i, j);
+                    }
+
+                    if (ZDefGame.GameGUI.currentBuilding != null)
+                    {
+                        if (ZDefGame.GameGUI.placing && !ZDefGame.GameGUI.currentBuilding.Large && ZDefGame.Selection.SelectedTile != null && ZDefGame.Selection.SelectedTile.TilePos().X == i && ZDefGame.Selection.SelectedTile.TilePos().Y == j)
+                        {
+                            ZDefGame.spriteBatch.Draw(ZDefGame.humanBuildingTexture, new Rectangle(i * 32, j * 32, 32, 32), new Rectangle(288, 0, 32, 32), Color.White, 0.0f, Vector2.Zero, Microsoft.Xna.Framework.Graphics.SpriteEffects.None, 0);
+                        }
+                    }
+                }
+            }
+
+            if (ZDefGame.GameGUI.currentBuilding == null && ZDefGame.Selection.SelectedTile != null)
+            {
+                int SX = ZDefGame.Selection.SelectedTile.TilePos().X;
+                int SY = ZDefGame.Selection.SelectedTile.TilePos().Y;
+
+                Building b = GetBuildingAt(SX, SY);
+                if (b != null)
+                {
+                    if (b.Large)
+                    {
+                        Tile tile = largeTiles[(int)Math.Floor(SX / 2.0f), (int)Math.Floor(SY / 2.0f)];
+                        ZDefGame.spriteBatch.Draw(ZDefGame.humanBuildingTexture, new Rectangle((int)tile.GetPosition().X, (int)tile.GetPosition().Y, 64, 64), new Rectangle(96, 0, 64, 64), Color.White, 0.0f, Vector2.Zero, Microsoft.Xna.Framework.Graphics.SpriteEffects.None, 0);
+                    }
+                    else
+                    {
+                        Tile tile = smallTiles[SX, SY];
+                        ZDefGame.spriteBatch.Draw(ZDefGame.humanBuildingTexture, new Rectangle((int)tile.GetPosition().X, (int)tile.GetPosition().Y, 32, 32), new Rectangle(288, 0, 32, 32), Color.White, 0.0f, Vector2.Zero, Microsoft.Xna.Framework.Graphics.SpriteEffects.None, 0);
                     }
                 }
             }

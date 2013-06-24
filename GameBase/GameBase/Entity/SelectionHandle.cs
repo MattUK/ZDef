@@ -95,12 +95,21 @@ namespace GameBase.Entity
                 {
                     if (Input.LeftDown() == true)
                     {
-                        Building newBuilding = (Building)Activator.CreateInstance(ZDefGame.GameGUI.currentBuilding.GetType(), new object[] {100, 100});
-                        if (newBuilding.SpawnAt(ZDefGame.tileMap, SelectedTile.TilePos().X, SelectedTile.TilePos().Y))
+                        if (ZDefGame.GameGUI.deleting)
                         {
+                            ZDefGame.tileMap.ClearBuilding(SelectedTile.TilePos().X, SelectedTile.TilePos().Y);
                             pathFinder.EnvironmentChanged = true;
                             ZDefGame.zombiePathfinder.EnvironmentChanged = true;
-                            ZDefGame.tileMap.WallChanged = true;
+                        }
+                        else
+                        {
+                            Building newBuilding = (Building)Activator.CreateInstance(ZDefGame.GameGUI.currentBuilding.GetType(), new object[] { 100, 100 });
+                            if (newBuilding.SpawnAt(ZDefGame.tileMap, SelectedTile.TilePos().X, SelectedTile.TilePos().Y))
+                            {
+                                pathFinder.EnvironmentChanged = true;
+                                ZDefGame.zombiePathfinder.EnvironmentChanged = true;
+                                ZDefGame.tileMap.WallChanged = true;
+                            }
                         }
                     }
 
@@ -113,6 +122,7 @@ namespace GameBase.Entity
                 if (Input.RightClick() == true)
                 {
                     ZDefGame.GameGUI.placing = false;
+                    ZDefGame.GameGUI.deleting = false;
                 }
             }
         }

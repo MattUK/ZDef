@@ -92,6 +92,7 @@ namespace GameBase.GUI
         public Building currentBuilding;
         public bool placing;
         List<Button> ButtonList;
+        public bool deleting;
 
         public InGame(ContentManager Content)
         {
@@ -99,8 +100,10 @@ namespace GameBase.GUI
             ButtonList = new List<Button>();
             Button WButton = new Button(new Vector2(0, 550), 50, 50, Content.Load<Texture2D>("GuiBoxWALL"), Content.Load<Texture2D>("GuiBoxWALLInactive"), new Wall(100, 100));
             Button WTButton = new Button(new Vector2(50, 550), 50, 50, Content.Load<Texture2D>("GuiBoxWATCHTOWER"), Content.Load<Texture2D>("GuiBoxWATCHTOWERInactive"), new WatchTower(100, 100));
+            Button DButton = new Button(new Vector2(100, 550), 50, 50, Content.Load<Texture2D>("GuiBoxDELETE"), Content.Load<Texture2D>("GuiBoxDELETEInactive"), null);
             ButtonList.Add(WButton);
             ButtonList.Add(WTButton);
+            ButtonList.Add(DButton);
         }
 
         public void Update(InputHandler Input)
@@ -118,9 +121,14 @@ namespace GameBase.GUI
                     {
                         active = true;
                         placing = true;
+
+                        if (ButtonList[i].associatedBuilding == null)
+                        {
+                            deleting = true;
+                        }
                     }
 
-                    if (active || ButtonList[i].associatedBuilding == currentBuilding)
+                    if (active || (ButtonList[i].associatedBuilding == currentBuilding && deleting))
                     {
                         ButtonList[i].ToggleTexture(true);
                         currentBuilding = ButtonList[i].associatedBuilding;
@@ -141,6 +149,11 @@ namespace GameBase.GUI
                     {
                         placing = false;
                         currentBuilding = null;
+
+                        if (deleting)
+                        {
+                            deleting = false;
+                        }
                     }
                 }
             }
