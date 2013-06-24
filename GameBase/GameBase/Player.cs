@@ -24,10 +24,15 @@ namespace GameBase
         private int waveCount;
         private bool inWave;
 
+        public DateTime inGameTime;
+
         public Player()
         {
             dayTime = INITIAL_DAY_TIME;
             resources = INITIAL_RESOURCE_COUNT;
+
+            inGameTime = new DateTime();
+            dayTime = 90;
         }
 
         public void LoadFromSave(String saveName)
@@ -84,6 +89,10 @@ namespace GameBase
                 lastTimeIncrement = gameTime.TotalGameTime;
 
                 ZDefGame.lightMap.UpdateForClockCycle(dayTime);
+
+                inGameTime = inGameTime.AddSeconds(420);
+
+                Console.WriteLine(dayTime);
             }
 
             // Pause at night

@@ -20,6 +20,7 @@ namespace GameBase.GUI
         Texture2D InactiveTexture;
         public bool Pressed;
         public Building associatedBuilding;
+        public bool toggled;
 
         public Button(Vector2 Pos, int width, int height, Texture2D IA, Texture2D A, Building associatedBuilding)
         {
@@ -58,10 +59,12 @@ namespace GameBase.GUI
             if (Active == true)
             {
                 Texture = ActiveTexture;
+                toggled = true;
             }
             else
             {
                 Texture = InactiveTexture;
+                toggled = false;
             }
         }
 
@@ -102,32 +105,44 @@ namespace GameBase.GUI
 
         public void Update(InputHandler Input)
         {
-            for (int i = 0; i < ButtonList.Count; i++)
-            {
-                bool active = false;
-                ButtonList[i].Update(Input);
-
-                if (ButtonList[i].Pressed)
-                {
-                    active = true;
-                    placing = true;
-                }
-
-                if (active || ButtonList[i].associatedBuilding == currentBuilding)
-                {
-                    ButtonList[i].ToggleTexture(true);
-                    currentBuilding = ButtonList[i].associatedBuilding;
-                    break;
-                }
-                else
-                {
-                    ButtonList[i].ToggleTexture(false);
-                }
-            }
-
             if (!placing)
             {
                 currentBuilding = null;
+
+                for (int i = 0; i < ButtonList.Count; i++)
+                {
+                    bool active = false;
+                    ButtonList[i].Update(Input);
+
+                    if (ButtonList[i].Pressed)
+                    {
+                        active = true;
+                        placing = true;
+                    }
+
+                    if (active || ButtonList[i].associatedBuilding == currentBuilding)
+                    {
+                        ButtonList[i].ToggleTexture(true);
+                        currentBuilding = ButtonList[i].associatedBuilding;
+                        break;
+                    }
+                    else
+                    {
+                        ButtonList[i].ToggleTexture(false);
+                    }
+                }
+            }
+            else
+            {
+                for (int i = 0; i < ButtonList.Count; i++)
+                {
+                    ButtonList[i].Update(Input);
+                    if (ButtonList[i].Pressed && ButtonList[i].toggled)
+                    {
+                        placing = false;
+                        currentBuilding = null;
+                    }
+                }
             }
         }
 
@@ -137,6 +152,10 @@ namespace GameBase.GUI
             {
                 ButtonList[i].Draw(spriteBatch);
             }
+
+            spriteBatch.Draw(ZDefGame.guiStatus, new Vector2(0.0f, 0.0f), Color.White);
+            spriteBatch.DrawString(ZDefGame.spriteFont, "" + ZDefGame.player.GetResourceCount(), new Vector2(13, 4), Color.White);
+            spriteBatch.DrawString(ZDefGame.spriteFont, "" + ZDefGame.player.inGameTime.ToShortTimeString(), new Vector2(65, 4), Color.White);
         }
     }
 }

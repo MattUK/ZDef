@@ -55,10 +55,7 @@ namespace GameBase
         public static Texture2D zombieRiflemanTexture;
         public static Texture2D zombieEngineerTexture;
         public static Texture2D shadowTexture;
-
-        public static Texture2D GuiWallTex;
-        public static Texture2D GuiWallTexIA;
-
+        public static Texture2D guiStatus;
 
         public static SpriteFont spriteFont;
         // =============================================
@@ -107,7 +104,7 @@ namespace GameBase
             pathFinder = new Pathfinder(tileMap);
             zombiePathfinder = new Pathfinder(tileMap, true);
             utilityClass = new Utility();
-            lightMap = new LightMap(tileMap.GetWidth(), tileMap.GetHeight(), 1.0f);
+            lightMap = new LightMap(tileMap.GetWidth(), tileMap.GetHeight(), 0.4f);
 
             player = new Player();
 
@@ -131,9 +128,7 @@ namespace GameBase
             zombieRiflemanTexture = Content.Load<Texture2D>("RiflemanZombie");
             zombieEngineerTexture = Content.Load<Texture2D>("EngineerZombie");
             shadowTexture = Content.Load<Texture2D>("shadow");
-
-            GuiWallTex = Content.Load<Texture2D>("GuiBoxWALL");
-            GuiWallTexIA = Content.Load<Texture2D>("GuiBoxWALLInactive");
+            guiStatus = Content.Load<Texture2D>("GuiStatus");
 
             spriteFont = Content.Load<SpriteFont>("font");
 
@@ -280,12 +275,12 @@ namespace GameBase
                 spriteBatch.End();
 
                 spriteBatch.Begin();
-                spriteBatch.DrawString(spriteFont, "FPS = " + fps, new Vector2(10.0f, 10.0f), Color.White);
-                spriteBatch.DrawString(spriteFont, "Mouse Pos = " + input.TanslatedMousePos(camera), new Vector2(10.0f, 30.0f), Color.White);
-                spriteBatch.DrawString(spriteFont, "Lights = " + lightMap.GetLightCount(), new Vector2(10.0f, 50.0f), Color.White);
+                spriteBatch.DrawString(spriteFont, "FPS = " + fps, new Vector2(400.0f, 10.0f), Color.White);
+                spriteBatch.DrawString(spriteFont, "Mouse Pos = " + input.TanslatedMousePos(camera), new Vector2(400, 30.0f), Color.White);
+                spriteBatch.DrawString(spriteFont, "Lights = " + lightMap.GetLightCount(), new Vector2(400, 50.0f), Color.White);
                 if (Selection.SelectedTile != null)
                 {
-                    spriteBatch.DrawString(spriteFont, "Small Tile = " + Selection.SelectedTile.TilePos(), new Vector2(10.0f, 70.0f), Color.White);
+                    spriteBatch.DrawString(spriteFont, "Small Tile = " + Selection.SelectedTile.TilePos(), new Vector2(400, 70.0f), Color.White);
                 }
                 
                 //BUTTON TEST
