@@ -50,7 +50,8 @@ namespace GameBase
         public static Texture2D engieTexture;
         public static Texture2D riflemanTexture;
         public static Texture2D bulletTexture;
-        public static Texture2D zombieTexture;
+        public static Texture2D zombieRiflemanTexture;
+        public static Texture2D zombieEngineerTexture;
         public static Texture2D shadowTexture;
 
 
@@ -119,14 +120,15 @@ namespace GameBase
             riflemanTexture = Content.Load<Texture2D>("Rifleman");
             mainMenuTexture = Content.Load<Texture2D>("main_menu_background");
             bulletTexture = Content.Load<Texture2D>("BulletTexture");
-            zombieTexture = Content.Load<Texture2D>("RiflemanZombie");
+            zombieRiflemanTexture = Content.Load<Texture2D>("RiflemanZombie");
+            zombieEngineerTexture = Content.Load<Texture2D>("EngineerZombie");
             shadowTexture = Content.Load<Texture2D>("shadow");
 
             spriteFont = Content.Load<SpriteFont>("font");
 
             tileRenderTarget = new RenderTarget2D(GraphicsDevice, tileMap.GetWidth() * 64, tileMap.GetHeight() * 64);
 
-            ZombieList.Add(new Zombie(zombieTexture, tileMap.GetEntityTile(20, 12)));
+            SpawnEngieZombie(20, 20);
 
             //BUTTONTEST
             button = new Button(new Vector2(40, ScreenHeight-40), 40, 35, riflemanTexture);
@@ -142,9 +144,14 @@ namespace GameBase
             HumanList.Add(new Human(riflemanTexture, tileMap.GetEntityTile(i, j), 400, bulletTexture));
         }
 
-        public static void SpawnZombie(int i, int j)
+        public static void SpawnRifleZombie(int i, int j)
         {
-            ZombieList.Add(new Zombie(zombieTexture, tileMap.GetEntityTile(i, j)));
+            ZombieList.Add(new Zombie(zombieRiflemanTexture, tileMap.GetEntityTile(i, j)));
+        }
+
+        public static void SpawnEngieZombie(int i, int j)
+        {
+            ZombieList.Add(new Zombie(zombieEngineerTexture, tileMap.GetEntityTile(i, j)));
         }
 
         protected override void Update(GameTime gameTime)
@@ -187,7 +194,7 @@ namespace GameBase
                         {
                             if (Vector2.Distance(HumanList[j].Position, ZombieList[i].Position) < 30)
                             {
-                                SpawnZombie(HumanList[j].CurrentTile.TilePos().X, HumanList[j].CurrentTile.TilePos().Y);
+                                SpawnRifleZombie(HumanList[j].CurrentTile.TilePos().X, HumanList[j].CurrentTile.TilePos().Y);
                                 HumanList.RemoveAt(j);
                             }
                         }

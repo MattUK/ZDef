@@ -34,13 +34,17 @@ namespace GameBase.Entity
             {
                 if (Input.KeyClicked(Keys.Z))
                 {
-                    ZDefGame.SpawnZombie(SelectedTile.TilePos().X, SelectedTile.TilePos().Y);
+                    ZDefGame.SpawnRifleZombie(SelectedTile.TilePos().X, SelectedTile.TilePos().Y);
                 }
                 if (Input.KeyClicked(Keys.X))
                 {
-                    ZDefGame.SpawnRifleman(SelectedTile.TilePos().X, SelectedTile.TilePos().Y);
+                    ZDefGame.SpawnEngieZombie(SelectedTile.TilePos().X, SelectedTile.TilePos().Y);
                 }
                 if (Input.KeyClicked(Keys.C))
+                {
+                    ZDefGame.SpawnRifleman(SelectedTile.TilePos().X, SelectedTile.TilePos().Y);
+                }
+                if (Input.KeyClicked(Keys.V))
                 {
                     ZDefGame.SpawnEngineer(SelectedTile.TilePos().X, SelectedTile.TilePos().Y);
                 }
