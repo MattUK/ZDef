@@ -392,5 +392,12 @@ namespace GameBase
             //}
         }
 
+        public void RestoreTerrainTile(int x, int y)
+        {
+            int xx = (int)Math.Floor(x / 2.0f);
+            int yy = (int)Math.Floor(y / 2.0f);
+            largeTiles[xx, yy] = new Tile(xx, yy, heightmap.GetTypeAt(xx, yy));
+        }
+
     }
 }
