@@ -100,6 +100,7 @@ namespace GameBase.Entity
                             ZDefGame.tileMap.ClearBuilding(SelectedTile.TilePos().X, SelectedTile.TilePos().Y);
                             pathFinder.EnvironmentChanged = true;
                             ZDefGame.zombiePathfinder.EnvironmentChanged = true;
+                            ZDefGame.tileMap.WallChanged = true;
                         }
                         else
                         {

@@ -354,7 +354,7 @@ namespace GameBase
                 }
             }
 
-            if (ZDefGame.GameGUI.currentBuilding == null && ZDefGame.Selection.SelectedTile != null)
+            if (ZDefGame.GameGUI.currentBuilding == null && ZDefGame.Selection.SelectedTile != null && ZDefGame.GameGUI.deleting)
             {
                 int SX = ZDefGame.Selection.SelectedTile.TilePos().X;
                 int SY = ZDefGame.Selection.SelectedTile.TilePos().Y;
