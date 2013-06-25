@@ -114,10 +114,13 @@ namespace GameBase
             {
                 if (smallBuildings[x, y] != null)
                 {
-                    smallBuildings[x, y] = null;
-                    smallTiles[x, y] = new Tile(x, y, TileType.EMPTY_SMALL);
-                    ZDefGame.pathFinder.EnvironmentChanged = true;
-                    ZDefGame.zombiePathfinder.EnvironmentChanged = true;
+                    if (smallBuildings[x, y].GetName() != "TREE")
+                    {
+                        smallBuildings[x, y] = null;
+                        smallTiles[x, y] = new Tile(x, y, TileType.EMPTY_SMALL);
+                        ZDefGame.pathFinder.EnvironmentChanged = true;
+                        ZDefGame.zombiePathfinder.EnvironmentChanged = true;
+                    }
                 }
                 if (largeBuildings[(int)Math.Floor(x / 2.0f), (int)Math.Floor(y / 2.0f)] != null)
                 {
@@ -356,11 +359,12 @@ namespace GameBase
 
             if (ZDefGame.GameGUI.currentBuilding == null && ZDefGame.Selection.SelectedTile != null && ZDefGame.GameGUI.deleting)
             {
+
                 int SX = ZDefGame.Selection.SelectedTile.TilePos().X;
                 int SY = ZDefGame.Selection.SelectedTile.TilePos().Y;
 
                 Building b = GetBuildingAt(SX, SY);
-                if (b != null)
+                if (b != null && b.GetName() != "TREE")
                 {
                     if (b.Large)
                     {

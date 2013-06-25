@@ -38,20 +38,11 @@ namespace GameBase.GUI
 
             if (Input.LeftClick() == true)
             {
-                if(Contains(Input.MousePosition()))
+                if (Contains(Input.MousePosition()))
                 {
                     Pressed = true;
                 }
             }
-
-            //if (Pressed == true)
-            //{
-            //    Texture = ActiveTexture;
-            //}
-            //else
-            //{
-            //    Texture = InactiveTexture;
-            //}
         }
 
         public void ToggleTexture(bool Active)
