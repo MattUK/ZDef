@@ -226,7 +226,7 @@ namespace GameBase
                 zombiePathfinder.Update();
 
                 camera.Constraint(new Vector2(tileMap.GetWidth() * 64, tileMap.GetHeight() * 64));
-                utilityClass.TrapMouse(true, this);
+               // utilityClass.TrapMouse(true, this);
             }
             else
             {

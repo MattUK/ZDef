@@ -91,7 +91,7 @@ namespace GameBase.GUI
             ButtonList = new List<Button>();
             Button WButton = new Button(new Vector2(0, 550), 50, 50, Content.Load<Texture2D>("GuiBoxWALL"), Content.Load<Texture2D>("GuiBoxWALLInactive"), new Wall(100, 100));
             Button WTButton = new Button(new Vector2(50, 550), 50, 50, Content.Load<Texture2D>("GuiBoxWATCHTOWER"), Content.Load<Texture2D>("GuiBoxWATCHTOWERInactive"), new WatchTower(100, 100));
-            Button DButton = new Button(new Vector2(100, 550), 50, 50, Content.Load<Texture2D>("GuiBoxDELETE"), Content.Load<Texture2D>("GuiBoxDELETEInactive"), null);
+            Button DButton = new Button(new Vector2(750, 550), 50, 50, Content.Load<Texture2D>("GuiBoxDELETE"), Content.Load<Texture2D>("GuiBoxDELETEInactive"), null);
             ButtonList.Add(WButton);
             ButtonList.Add(WTButton);
             ButtonList.Add(DButton);
